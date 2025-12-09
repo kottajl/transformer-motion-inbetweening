@@ -1,0 +1,31 @@
+{
+    "config_name": "alpha03",
+    "description": "Alpha 0.3 model with increased hole frames and deeper encoder. Adjusted learning rate and loss weights for better performance.",
+
+    "context_frames": 10,
+    "hole_frames": 5,
+    "target_frames": 5,
+
+    "batch_size": 32,
+    "n_epochs": 64,
+    "patience": 10,
+    "val_ratio": 0.15,
+    "window_step": 4,
+
+    "optimizer_lr": 0.00015,
+
+    "loss_weights": {
+        "rot_6d": 0.8,
+        "pos": 0.2
+    },
+
+    "joint_embedding_size": 32,
+    "root_embedding_size": 32,
+
+    "num_encoder_layers": 4,
+    "num_decoder_layers": 2,
+    "num_heads": 8,
+    "dropout": 0.05,
+
+    "interpolate_before_prediction": true
+}

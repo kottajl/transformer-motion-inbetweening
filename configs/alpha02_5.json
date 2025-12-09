@@ -1,0 +1,28 @@
+{
+    "config_name": "alpha02_5",
+    "description": "Alpha 0.2 model with basic transformer architecture. Trying to make fast and stable training. Added interpolation before prediction.",
+    
+    "context_frames": 10,
+    "hole_frames": 2,
+    "target_frames": 1,
+
+    "batch_size": 32,
+    "n_epochs": 5,
+    "patience": 8,
+    "val_ratio": 0.2,
+    "window_step": 8,
+    "optimizer_lr": 0.0001,
+    "loss_weights": {
+        "rot_6d": 0.7,
+        "pos": 0.3
+    },
+
+    "joint_embedding_size": 16,
+    "root_embedding_size": 16,
+    "num_encoder_layers": 2,
+    "num_decoder_layers": 2,
+    "num_heads": 8,
+    "dropout": 0.1,
+
+    "interpolate_before_prediction": true
+}

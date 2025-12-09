@@ -1,3 +1,27 @@
 # System trash files
 desktop.ini
 .DS_Store
+
+# Datasets
+datasets/
+
+# Evaluation outputs
+eval/
+
+# Generated models
+*.pt
+generated_models/*.pt
+
+# First logs
+generated_models/alpha01_1.log
+generated_models/alpha01.log
+generated_models/alpha02_1.log
+generated_models/alpha02_5.log
+generated_models/alpha02.log
+
+# General log
+train_log.txt
+
+# Python cache files
+__pycache__/
+*.pyc

@@ -1,0 +1,23 @@
+{
+    "config_name": "alpha00",
+    "description": "Alpha 0.0 model with basic transformer architecture and default hyperparameters.",
+    
+    "context_frames": 10,
+    "hole_frames": 2,
+    "target_frames": 1,
+
+    "batch_size": 16,
+    "n_epochs": 32,
+    "patience": 8,
+    "val_ratio": 0.2,
+    "window_step": 4,
+    "optimizer_lr": 0.0001,
+
+    "joint_embedding_size": 16,
+    "root_embedding_size": 32,
+    "num_encoder_layers": 3,
+    "num_decoder_layers": 3,
+    "num_heads": 8,
+    "dropout": 0.1,
+    "max_len": 32
+}

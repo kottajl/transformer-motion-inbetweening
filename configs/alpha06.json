@@ -1,0 +1,32 @@
+{
+    "config_name": "alpha06",
+    "description": "Alpha 0.6 model. Back to smaller batch size and slightly lowered learning rate. Adjusted loss weights to prioritize FK more.",
+
+    "context_frames": 10,
+    "hole_frames": 5,
+    "target_frames": 5,
+
+    "batch_size": 32,
+    "n_epochs": 128,
+    "patience": 16,
+    "val_ratio": 0.15,
+    "window_step": 4,
+
+    "optimizer_lr": 0.00007,
+
+    "loss_weights": {
+        "rot_6d": 0.55,
+        "pos": 0.25,
+        "fk": 0.20
+    },
+
+    "joint_embedding_size": 48,
+    "root_embedding_size": 48,
+
+    "num_encoder_layers": 4,
+    "num_decoder_layers": 2,
+    "num_heads": 8,
+    "dropout": 0.05,
+
+    "interpolate_before_prediction": true
+}
