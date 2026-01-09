@@ -3,9 +3,70 @@ import torch
 import os
 
 from torch.utils.data import Dataset
-from animation import Animation
 from bvh_parser import load_anim_from_npz
 from utils import to_tensor
+from typing import Literal
+
+
+def get_data_subset_paths(
+    data_dir: str, 
+    subset_type: Literal['all', 'selected-subjects', 'selected-moves', 'selected-subjects-and-moves', 'selected-files'] = 'all', 
+    **kwargs
+) -> list:
+    """
+    Get subset of data (following the subset_type and additional parameters in **kwargs).
+    """
+
+    if subset_type == 'all':
+        return [os.path.join(data_dir, f) for f in os.listdir(data_dir)]
+    paths = []
+
+    if subset_type == 'selected-subjects':
+        try:
+            subjects_indices = kwargs['subjects_indices']
+        except KeyError:
+            raise ValueError("subjects_indices must be provided when subset_type is 'selected-subjects'")
+        for f in os.listdir(data_dir):
+            for sub_idx in subjects_indices:
+                if f"subject{sub_idx}" in f:
+                    paths.append(os.path.join(data_dir, f))
+
+    elif subset_type == 'selected-moves':
+        try:
+            moves_names = kwargs['moves_names']
+        except KeyError:
+            raise ValueError("moves_names must be provided when subset_type is 'selected-moves'")
+        for f in os.listdir(data_dir):
+            for move_name in moves_names:
+                if move_name in f:
+                    paths.append(os.path.join(data_dir, f))
+    
+    elif subset_type == 'selected-subjects-and-moves':
+        try:
+            subjects_indices = kwargs['subjects_indices']
+            moves_names = kwargs['moves_names']
+        except KeyError:
+            raise ValueError("subjects_indices and moves_names must be provided when subset_type is 'selected-subjects-and-moves'")
+        for f in os.listdir(data_dir):
+            for sub_idx in subjects_indices:
+                for move_name in moves_names:
+                    if (f"subject{sub_idx}" in f) and (move_name in f):
+                        paths.append(os.path.join(data_dir, f))
+
+    elif subset_type == 'selected-files':
+        try:
+            files_names = kwargs['files_names']
+        except KeyError:
+            raise ValueError("files_names must be provided when subset_type is 'selected-files'")
+        for f in os.listdir(data_dir):
+            if f in files_names:
+                paths.append(os.path.join(data_dir, f))
+    
+    else:
+        raise ValueError(f"Unknown subset_type: {subset_type}")
+
+    return paths
+#get_data_subset_paths
 
 
 class BvhDataset(Dataset):
@@ -15,7 +76,9 @@ class BvhDataset(Dataset):
         window: int,
         step: int,
         device: str,
-        interpolate_missing: bool = False
+        interpolate_missing: bool = False,
+        subset_type: str = 'all',
+        **subset_kwargs
     ):
         self.window = window
         self.step = step
@@ -27,8 +90,10 @@ class BvhDataset(Dataset):
         self.parents = None
         self.offsets = None
 
-        for f in os.listdir(data_dir):
-            path = os.path.join(data_dir, f)
+        data_paths = get_data_subset_paths(data_dir, subset_type, **subset_kwargs)
+        print(f"DATASET: Loading {len(data_paths)} animations from {data_dir}...")
+
+        for path in data_paths:
             animation = load_anim_from_npz(path)
             self.positions.append(to_tensor(animation.positions, device=device))
             self.rotations_6d.append(to_tensor(animation.rotations_6d, device=device))

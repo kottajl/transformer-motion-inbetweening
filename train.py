@@ -15,7 +15,7 @@ import datetime
 from utils import load_params_from_json    
 
 
-def train(params: dict):
+def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', **subset_kwargs):
     CONFIG_NAME = params.get("config_name", "new_config")
 
     CONTEXT_FRAMES = params["context_frames"]
@@ -55,7 +55,9 @@ def train(params: dict):
         window=WINDOW_SIZE,
         step=WINDOW_STEP,
         device=DEVICE,
-        interpolate_missing=INTERPOLATE_BEFORE_PREDICTION
+        interpolate_missing=INTERPOLATE_BEFORE_PREDICTION,
+        subset_type=data_subset_type,
+        **subset_kwargs
     )
 
     fk_loss_fn = FKLoss(dataset.parents).to(DEVICE)
@@ -157,6 +159,11 @@ def train(params: dict):
                 LOSS_WEIGHTS["pos"] * loss_pos + 
                 LOSS_WEIGHTS["fk"] * fk_loss
             )
+            train_loss_coponents = {
+                "loss_rot": loss_rot.item(),
+                "loss_pos": loss_pos.item(),
+                "fk_loss": fk_loss.item()
+            }
             
             loss.backward()
             optimizer.step()
@@ -231,18 +238,34 @@ def train(params: dict):
                     LOSS_WEIGHTS["pos"] * loss_pos + 
                     LOSS_WEIGHTS["fk"] * fk_loss
                 )
+                test_loss_coponents = {
+                    "loss_rot": loss_rot.item(),
+                    "loss_pos": loss_pos.item(),
+                    "fk_loss": fk_loss.item()
+                }
 
                 total_val_loss += loss.item()
 
         val_loss = total_val_loss / len(val_loader)
 
+        # Generate log string
+        log_epoch_str = f"Epoch {epoch+1} | Train Loss: {avg_train_loss:.5f} | Val Loss: {val_loss:.5f}\n"
+        if full_log:    # add concreate loss components
+            log_epoch_str += "Train Loss Components:\n"
+            for key, value in train_loss_coponents.items():
+                log_epoch_str += f"  |- {key}: {value:.5f}\n"
+            log_epoch_str += "Val Loss Components:\n"
+            for key, value in test_loss_coponents.items():
+                log_epoch_str += f"  |- {key}: {value:.5f}\n"
+            log_epoch_str += "\n"
+        
         # Print results
-        print(f"Epoch {epoch+1} | Train Loss: {avg_train_loss:.5f} | Val Loss: {val_loss:.5f}")
+        print(log_epoch_str)
         with open('train_log.txt', 'a') as file:
-            file.write(f'Epoch {epoch+1} | Train Loss: {avg_train_loss:.5f} | Val Loss: {val_loss:.5f}\n')
+            file.write(log_epoch_str)
         with open(f'generated_models/{CONFIG_NAME}.log', 'a') as file:
-            file.write(f'Epoch {epoch+1} | Train Loss: {avg_train_loss:.5f} | Val Loss: {val_loss:.5f}\n')
-
+            file.write(log_epoch_str)        
+        
         # Early stopping
         if val_loss < best_val_loss:
             best_val_loss = val_loss
@@ -259,11 +282,16 @@ def train(params: dict):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '--params', 
-        type=str, 
-        required=True,
+        '--params', type=str, required=True,
         help='Name of the JSON file with training parameters (without .json extension, must be in the config/ folder)'
     )
+    parser.add_argument('--full_log', action='store_true', help='Enable full logging during training (default: False)')
+    # parser.add_argument('--data_subset_type', type=str, default='all', help='Subset of data to use for training (e.g., "all", "selected-moves", etc.)')
+
+    # v Literal['all', 'selected-subjects', 'selected-moves', 'selected-subjects-and-moves', 'selected-files'] v
+    data_subset_type = 'all'
+    moves_names: list = ['fallAndGetUp', 'jumps1']
+    
     args = parser.parse_args()
     try:
         params = load_params_from_json("configs/" + args.params + ".json")
@@ -271,4 +299,4 @@ if __name__ == "__main__":
         print(f"Error: The file '{args.params}.json' was not found in the config/ folder.")
         exit(1)
 
-    train(params)
+    train(params, full_log=args.full_log, data_subset_type=data_subset_type, moves_names=moves_names)

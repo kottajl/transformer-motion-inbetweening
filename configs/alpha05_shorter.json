@@ -1,0 +1,32 @@
+{
+    "config_name": "alpha05_shorter",
+    "description": "Alpha 0.5 model, but shorter. n_epochs and patience with smaller values. Increased window step to reduce number of training samples.",
+
+    "context_frames": 10,
+    "hole_frames": 5,
+    "target_frames": 5,
+
+    "batch_size": 128,
+    "n_epochs": 32,
+    "patience": 4,
+    "val_ratio": 0.15,
+    "window_step": 8,
+
+    "optimizer_lr": 0.00008,
+
+    "loss_weights": {
+        "rot_6d": 0.65,
+        "pos": 0.25,
+        "fk": 0.1
+    },
+
+    "joint_embedding_size": 48,
+    "root_embedding_size": 48,
+
+    "num_encoder_layers": 4,
+    "num_decoder_layers": 2,
+    "num_heads": 8,
+    "dropout": 0.05,
+
+    "interpolate_before_prediction": true
+}
