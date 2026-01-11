@@ -1,0 +1,1050 @@
+Epoch 1 | Train Loss: 58.86389 | Val Loss: 57.08824
+Train Loss Components:
+  |- loss_rot: 0.39711
+  |- loss_pos: 192.48560
+  |- fk_loss: 158.93794
+Val Loss Components:
+  |- loss_rot: 0.40103
+  |- loss_pos: 172.80081
+  |- fk_loss: 140.69635
+
+Epoch 2 | Train Loss: 55.38165 | Val Loss: 52.91144
+Train Loss Components:
+  |- loss_rot: 0.37141
+  |- loss_pos: 151.87320
+  |- fk_loss: 123.87473
+Val Loss Components:
+  |- loss_rot: 0.38124
+  |- loss_pos: 161.55447
+  |- fk_loss: 131.06056
+
+Epoch 3 | Train Loss: 50.40351 | Val Loss: 47.17406
+Train Loss Components:
+  |- loss_rot: 0.36070
+  |- loss_pos: 139.08952
+  |- fk_loss: 112.92298
+Val Loss Components:
+  |- loss_rot: 0.36641
+  |- loss_pos: 145.79065
+  |- fk_loss: 118.53069
+
+Epoch 4 | Train Loss: 44.42516 | Val Loss: 41.60146
+Train Loss Components:
+  |- loss_rot: 0.34603
+  |- loss_pos: 98.83860
+  |- fk_loss: 79.04743
+Val Loss Components:
+  |- loss_rot: 0.35534
+  |- loss_pos: 129.61476
+  |- fk_loss: 105.81030
+
+Epoch 5 | Train Loss: 39.45988 | Val Loss: 36.81580
+Train Loss Components:
+  |- loss_rot: 0.33340
+  |- loss_pos: 104.94012
+  |- fk_loss: 85.67918
+Val Loss Components:
+  |- loss_rot: 0.34239
+  |- loss_pos: 115.39383
+  |- fk_loss: 94.14079
+
+Epoch 6 | Train Loss: 34.70017 | Val Loss: 32.03373
+Train Loss Components:
+  |- loss_rot: 0.32756
+  |- loss_pos: 100.08134
+  |- fk_loss: 82.00595
+Val Loss Components:
+  |- loss_rot: 0.33078
+  |- loss_pos: 101.67698
+  |- fk_loss: 82.66360
+
+Epoch 7 | Train Loss: 29.66368 | Val Loss: 26.71435
+Train Loss Components:
+  |- loss_rot: 0.30471
+  |- loss_pos: 61.88330
+  |- fk_loss: 48.14389
+Val Loss Components:
+  |- loss_rot: 0.31364
+  |- loss_pos: 87.51556
+  |- fk_loss: 69.55724
+
+Epoch 8 | Train Loss: 24.22201 | Val Loss: 21.09988
+Train Loss Components:
+  |- loss_rot: 0.28113
+  |- loss_pos: 65.53008
+  |- fk_loss: 51.54449
+Val Loss Components:
+  |- loss_rot: 0.29806
+  |- loss_pos: 71.64776
+  |- fk_loss: 56.19926
+
+Epoch 9 | Train Loss: 18.90368 | Val Loss: 16.17629
+Train Loss Components:
+  |- loss_rot: 0.27603
+  |- loss_pos: 48.18363
+  |- fk_loss: 36.89331
+Val Loss Components:
+  |- loss_rot: 0.28358
+  |- loss_pos: 56.56966
+  |- fk_loss: 43.89429
+
+Epoch 10 | Train Loss: 14.41804 | Val Loss: 12.22153
+Train Loss Components:
+  |- loss_rot: 0.24588
+  |- loss_pos: 39.37738
+  |- fk_loss: 32.23507
+Val Loss Components:
+  |- loss_rot: 0.26106
+  |- loss_pos: 43.03307
+  |- fk_loss: 33.78116
+
+Epoch 11 | Train Loss: 10.91423 | Val Loss: 9.02471
+Train Loss Components:
+  |- loss_rot: 0.20609
+  |- loss_pos: 16.74893
+  |- fk_loss: 13.71793
+Val Loss Components:
+  |- loss_rot: 0.23879
+  |- loss_pos: 32.21355
+  |- fk_loss: 25.21376
+
+Epoch 12 | Train Loss: 8.20511 | Val Loss: 6.74528
+Train Loss Components:
+  |- loss_rot: 0.22007
+  |- loss_pos: 24.03084
+  |- fk_loss: 19.07206
+Val Loss Components:
+  |- loss_rot: 0.21822
+  |- loss_pos: 24.39619
+  |- fk_loss: 19.73279
+
+Epoch 13 | Train Loss: 6.06162 | Val Loss: 4.93593
+Train Loss Components:
+  |- loss_rot: 0.21215
+  |- loss_pos: 18.27864
+  |- fk_loss: 13.41431
+Val Loss Components:
+  |- loss_rot: 0.20502
+  |- loss_pos: 18.81326
+  |- fk_loss: 15.46520
+
+Epoch 14 | Train Loss: 4.50082 | Val Loss: 3.74336
+Train Loss Components:
+  |- loss_rot: 0.18584
+  |- loss_pos: 12.05163
+  |- fk_loss: 9.43550
+Val Loss Components:
+  |- loss_rot: 0.19029
+  |- loss_pos: 14.78251
+  |- fk_loss: 11.91493
+
+Epoch 15 | Train Loss: 3.45702 | Val Loss: 3.24756
+Train Loss Components:
+  |- loss_rot: 0.17528
+  |- loss_pos: 8.89611
+  |- fk_loss: 7.97439
+Val Loss Components:
+  |- loss_rot: 0.18184
+  |- loss_pos: 12.78347
+  |- fk_loss: 10.31144
+
+Epoch 16 | Train Loss: 2.76741 | Val Loss: 2.37254
+Train Loss Components:
+  |- loss_rot: 0.17218
+  |- loss_pos: 6.72267
+  |- fk_loss: 5.96456
+Val Loss Components:
+  |- loss_rot: 0.17384
+  |- loss_pos: 9.62273
+  |- fk_loss: 8.16422
+
+Epoch 17 | Train Loss: 2.32903 | Val Loss: 1.97717
+Train Loss Components:
+  |- loss_rot: 0.15925
+  |- loss_pos: 4.67121
+  |- fk_loss: 5.29956
+Val Loss Components:
+  |- loss_rot: 0.16648
+  |- loss_pos: 7.36818
+  |- fk_loss: 6.52325
+
+Epoch 18 | Train Loss: 2.04422 | Val Loss: 1.91817
+Train Loss Components:
+  |- loss_rot: 0.16388
+  |- loss_pos: 5.22212
+  |- fk_loss: 5.91054
+Val Loss Components:
+  |- loss_rot: 0.15698
+  |- loss_pos: 6.97325
+  |- fk_loss: 6.46953
+
+Epoch 19 | Train Loss: 1.82681 | Val Loss: 1.55856
+Train Loss Components:
+  |- loss_rot: 0.13954
+  |- loss_pos: 3.84977
+  |- fk_loss: 4.40172
+Val Loss Components:
+  |- loss_rot: 0.15296
+  |- loss_pos: 5.73479
+  |- fk_loss: 5.45449
+
+Epoch 20 | Train Loss: 1.71085 | Val Loss: 1.62181
+Train Loss Components:
+  |- loss_rot: 0.14456
+  |- loss_pos: 4.07249
+  |- fk_loss: 4.96275
+Val Loss Components:
+  |- loss_rot: 0.14676
+  |- loss_pos: 5.49721
+  |- fk_loss: 5.42299
+
+Epoch 21 | Train Loss: 1.60113 | Val Loss: 1.71145
+Train Loss Components:
+  |- loss_rot: 0.13155
+  |- loss_pos: 3.26230
+  |- fk_loss: 4.40225
+Val Loss Components:
+  |- loss_rot: 0.14225
+  |- loss_pos: 5.86901
+  |- fk_loss: 5.60117
+
+Epoch 22 | Train Loss: 1.52672 | Val Loss: 1.45617
+Train Loss Components:
+  |- loss_rot: 0.12897
+  |- loss_pos: 3.19339
+  |- fk_loss: 4.13570
+Val Loss Components:
+  |- loss_rot: 0.13593
+  |- loss_pos: 4.81180
+  |- fk_loss: 4.77108
+
+Epoch 23 | Train Loss: 1.44988 | Val Loss: 1.36936
+Train Loss Components:
+  |- loss_rot: 0.13022
+  |- loss_pos: 3.33108
+  |- fk_loss: 4.17890
+Val Loss Components:
+  |- loss_rot: 0.13324
+  |- loss_pos: 4.53138
+  |- fk_loss: 4.60452
+
+Epoch 24 | Train Loss: 1.40641 | Val Loss: 1.20336
+Train Loss Components:
+  |- loss_rot: 0.13826
+  |- loss_pos: 4.51970
+  |- fk_loss: 4.82433
+Val Loss Components:
+  |- loss_rot: 0.12871
+  |- loss_pos: 3.90734
+  |- fk_loss: 4.16812
+
+Epoch 25 | Train Loss: 1.35027 | Val Loss: 1.32194
+Train Loss Components:
+  |- loss_rot: 0.11562
+  |- loss_pos: 2.96944
+  |- fk_loss: 4.09118
+Val Loss Components:
+  |- loss_rot: 0.12522
+  |- loss_pos: 4.36034
+  |- fk_loss: 4.43546
+
+Epoch 26 | Train Loss: 1.31260 | Val Loss: 1.22498
+Train Loss Components:
+  |- loss_rot: 0.12936
+  |- loss_pos: 5.67029
+  |- fk_loss: 5.23408
+Val Loss Components:
+  |- loss_rot: 0.12210
+  |- loss_pos: 4.00709
+  |- fk_loss: 4.25227
+
+Epoch 27 | Train Loss: 1.28262 | Val Loss: 1.42246
+Train Loss Components:
+  |- loss_rot: 0.12962
+  |- loss_pos: 3.72183
+  |- fk_loss: 4.28544
+Val Loss Components:
+  |- loss_rot: 0.11937
+  |- loss_pos: 4.36680
+  |- fk_loss: 4.44496
+
+Epoch 28 | Train Loss: 1.26778 | Val Loss: 1.30524
+Train Loss Components:
+  |- loss_rot: 0.10874
+  |- loss_pos: 2.44921
+  |- fk_loss: 3.46001
+Val Loss Components:
+  |- loss_rot: 0.11664
+  |- loss_pos: 4.26907
+  |- fk_loss: 4.40426
+
+Epoch 29 | Train Loss: 1.22747 | Val Loss: 1.45316
+Train Loss Components:
+  |- loss_rot: 0.11469
+  |- loss_pos: 3.02652
+  |- fk_loss: 3.88555
+Val Loss Components:
+  |- loss_rot: 0.11608
+  |- loss_pos: 4.53784
+  |- fk_loss: 4.63678
+
+Epoch 30 | Train Loss: 1.18740 | Val Loss: 1.08438
+Train Loss Components:
+  |- loss_rot: 0.11617
+  |- loss_pos: 2.42042
+  |- fk_loss: 3.49907
+Val Loss Components:
+  |- loss_rot: 0.11088
+  |- loss_pos: 3.24054
+  |- fk_loss: 3.66049
+
+Epoch 31 | Train Loss: 1.16382 | Val Loss: 1.20753
+Train Loss Components:
+  |- loss_rot: 0.10693
+  |- loss_pos: 4.04231
+  |- fk_loss: 3.88596
+Val Loss Components:
+  |- loss_rot: 0.11068
+  |- loss_pos: 3.81782
+  |- fk_loss: 3.92543
+
+Epoch 32 | Train Loss: 1.15004 | Val Loss: 1.00733
+Train Loss Components:
+  |- loss_rot: 0.09882
+  |- loss_pos: 2.76897
+  |- fk_loss: 3.57044
+Val Loss Components:
+  |- loss_rot: 0.10740
+  |- loss_pos: 3.21919
+  |- fk_loss: 3.52356
+
+Epoch 33 | Train Loss: 1.12741 | Val Loss: 1.02107
+Train Loss Components:
+  |- loss_rot: 0.10189
+  |- loss_pos: 2.95915
+  |- fk_loss: 3.14868
+Val Loss Components:
+  |- loss_rot: 0.10605
+  |- loss_pos: 3.11866
+  |- fk_loss: 3.41960
+
+Epoch 34 | Train Loss: 1.10119 | Val Loss: 0.97034
+Train Loss Components:
+  |- loss_rot: 0.10430
+  |- loss_pos: 2.70985
+  |- fk_loss: 3.35721
+Val Loss Components:
+  |- loss_rot: 0.10208
+  |- loss_pos: 3.09595
+  |- fk_loss: 3.35980
+
+Epoch 35 | Train Loss: 1.09669 | Val Loss: 0.89836
+Train Loss Components:
+  |- loss_rot: 0.09717
+  |- loss_pos: 1.77340
+  |- fk_loss: 2.84602
+Val Loss Components:
+  |- loss_rot: 0.10048
+  |- loss_pos: 2.92278
+  |- fk_loss: 3.28427
+
+Epoch 36 | Train Loss: 1.05704 | Val Loss: 1.00589
+Train Loss Components:
+  |- loss_rot: 0.10562
+  |- loss_pos: 3.11945
+  |- fk_loss: 3.47338
+Val Loss Components:
+  |- loss_rot: 0.09789
+  |- loss_pos: 3.16579
+  |- fk_loss: 3.38680
+
+Epoch 37 | Train Loss: 1.04195 | Val Loss: 0.86845
+Train Loss Components:
+  |- loss_rot: 0.10399
+  |- loss_pos: 4.09640
+  |- fk_loss: 4.07331
+Val Loss Components:
+  |- loss_rot: 0.09669
+  |- loss_pos: 2.66608
+  |- fk_loss: 3.16681
+
+Epoch 38 | Train Loss: 1.03364 | Val Loss: 0.97720
+Train Loss Components:
+  |- loss_rot: 0.09861
+  |- loss_pos: 2.64811
+  |- fk_loss: 3.38766
+Val Loss Components:
+  |- loss_rot: 0.09510
+  |- loss_pos: 2.81405
+  |- fk_loss: 3.11371
+
+Epoch 39 | Train Loss: 1.02241 | Val Loss: 1.01236
+Train Loss Components:
+  |- loss_rot: 0.09206
+  |- loss_pos: 3.46478
+  |- fk_loss: 3.85015
+Val Loss Components:
+  |- loss_rot: 0.09355
+  |- loss_pos: 3.01209
+  |- fk_loss: 3.35859
+
+Epoch 40 | Train Loss: 0.99879 | Val Loss: 0.90523
+Train Loss Components:
+  |- loss_rot: 0.09019
+  |- loss_pos: 2.11626
+  |- fk_loss: 2.78086
+Val Loss Components:
+  |- loss_rot: 0.09195
+  |- loss_pos: 2.83455
+  |- fk_loss: 3.32799
+
+Epoch 41 | Train Loss: 0.97578 | Val Loss: 0.83118
+Train Loss Components:
+  |- loss_rot: 0.09471
+  |- loss_pos: 2.23046
+  |- fk_loss: 2.94587
+Val Loss Components:
+  |- loss_rot: 0.08928
+  |- loss_pos: 2.41250
+  |- fk_loss: 2.73078
+
+Epoch 42 | Train Loss: 0.99369 | Val Loss: 0.86873
+Train Loss Components:
+  |- loss_rot: 0.09199
+  |- loss_pos: 2.60441
+  |- fk_loss: 3.07011
+Val Loss Components:
+  |- loss_rot: 0.08836
+  |- loss_pos: 2.67106
+  |- fk_loss: 2.97737
+
+Epoch 43 | Train Loss: 0.95592 | Val Loss: 0.92056
+Train Loss Components:
+  |- loss_rot: 0.09343
+  |- loss_pos: 3.54428
+  |- fk_loss: 3.81183
+Val Loss Components:
+  |- loss_rot: 0.08655
+  |- loss_pos: 2.88147
+  |- fk_loss: 3.20811
+
+Epoch 44 | Train Loss: 0.95190 | Val Loss: 0.85926
+Train Loss Components:
+  |- loss_rot: 0.09131
+  |- loss_pos: 2.57037
+  |- fk_loss: 3.08894
+Val Loss Components:
+  |- loss_rot: 0.08488
+  |- loss_pos: 2.62651
+  |- fk_loss: 2.90960
+
+Epoch 45 | Train Loss: 0.93469 | Val Loss: 0.91927
+Train Loss Components:
+  |- loss_rot: 0.08341
+  |- loss_pos: 2.10295
+  |- fk_loss: 2.67250
+Val Loss Components:
+  |- loss_rot: 0.08633
+  |- loss_pos: 2.84833
+  |- fk_loss: 3.13947
+
+Epoch 46 | Train Loss: 0.91176 | Val Loss: 0.82536
+Train Loss Components:
+  |- loss_rot: 0.08891
+  |- loss_pos: 2.72217
+  |- fk_loss: 3.01966
+Val Loss Components:
+  |- loss_rot: 0.08216
+  |- loss_pos: 2.54238
+  |- fk_loss: 2.81661
+
+Epoch 47 | Train Loss: 0.91620 | Val Loss: 0.80122
+Train Loss Components:
+  |- loss_rot: 0.08910
+  |- loss_pos: 2.22588
+  |- fk_loss: 2.93055
+Val Loss Components:
+  |- loss_rot: 0.08194
+  |- loss_pos: 2.47583
+  |- fk_loss: 2.85227
+
+Epoch 48 | Train Loss: 0.89868 | Val Loss: 0.95877
+Train Loss Components:
+  |- loss_rot: 0.07719
+  |- loss_pos: 2.19865
+  |- fk_loss: 2.85974
+Val Loss Components:
+  |- loss_rot: 0.08126
+  |- loss_pos: 2.72778
+  |- fk_loss: 3.08943
+
+Epoch 49 | Train Loss: 0.88776 | Val Loss: 0.98808
+Train Loss Components:
+  |- loss_rot: 0.07751
+  |- loss_pos: 1.83803
+  |- fk_loss: 2.58162
+Val Loss Components:
+  |- loss_rot: 0.08165
+  |- loss_pos: 2.90810
+  |- fk_loss: 3.17927
+
+Epoch 50 | Train Loss: 0.87647 | Val Loss: 0.95580
+Train Loss Components:
+  |- loss_rot: 0.08637
+  |- loss_pos: 3.60640
+  |- fk_loss: 3.76660
+Val Loss Components:
+  |- loss_rot: 0.07809
+  |- loss_pos: 2.87165
+  |- fk_loss: 3.00699
+
+Epoch 51 | Train Loss: 0.86675 | Val Loss: 0.95574
+Train Loss Components:
+  |- loss_rot: 0.07610
+  |- loss_pos: 1.70196
+  |- fk_loss: 2.39644
+Val Loss Components:
+  |- loss_rot: 0.07797
+  |- loss_pos: 2.97033
+  |- fk_loss: 2.99163
+
+Epoch 52 | Train Loss: 0.86256 | Val Loss: 0.85614
+Train Loss Components:
+  |- loss_rot: 0.07483
+  |- loss_pos: 1.82742
+  |- fk_loss: 2.57884
+Val Loss Components:
+  |- loss_rot: 0.07890
+  |- loss_pos: 2.67037
+  |- fk_loss: 2.92849
+
+Epoch 53 | Train Loss: 0.83844 | Val Loss: 0.81706
+Train Loss Components:
+  |- loss_rot: 0.07919
+  |- loss_pos: 1.77289
+  |- fk_loss: 2.48900
+Val Loss Components:
+  |- loss_rot: 0.07611
+  |- loss_pos: 2.51839
+  |- fk_loss: 2.76059
+
+Epoch 54 | Train Loss: 0.83084 | Val Loss: 0.92992
+Train Loss Components:
+  |- loss_rot: 0.07411
+  |- loss_pos: 1.91071
+  |- fk_loss: 2.65301
+Val Loss Components:
+  |- loss_rot: 0.07484
+  |- loss_pos: 2.85002
+  |- fk_loss: 2.96119
+
+Epoch 55 | Train Loss: 0.83719 | Val Loss: 0.85913
+Train Loss Components:
+  |- loss_rot: 0.08273
+  |- loss_pos: 2.19999
+  |- fk_loss: 2.75269
+Val Loss Components:
+  |- loss_rot: 0.07406
+  |- loss_pos: 2.61381
+  |- fk_loss: 2.79594
+
+Epoch 56 | Train Loss: 0.82049 | Val Loss: 1.11986
+Train Loss Components:
+  |- loss_rot: 0.07393
+  |- loss_pos: 2.33785
+  |- fk_loss: 3.05114
+Val Loss Components:
+  |- loss_rot: 0.07366
+  |- loss_pos: 3.32998
+  |- fk_loss: 3.45840
+
+Epoch 57 | Train Loss: 0.81215 | Val Loss: 0.75137
+Train Loss Components:
+  |- loss_rot: 0.06880
+  |- loss_pos: 2.62356
+  |- fk_loss: 2.97908
+Val Loss Components:
+  |- loss_rot: 0.07418
+  |- loss_pos: 2.35447
+  |- fk_loss: 2.55230
+
+Epoch 58 | Train Loss: 0.80123 | Val Loss: 0.82713
+Train Loss Components:
+  |- loss_rot: 0.07839
+  |- loss_pos: 1.93815
+  |- fk_loss: 2.53476
+Val Loss Components:
+  |- loss_rot: 0.07311
+  |- loss_pos: 2.52867
+  |- fk_loss: 2.67994
+
+Epoch 59 | Train Loss: 0.79228 | Val Loss: 1.04147
+Train Loss Components:
+  |- loss_rot: 0.07095
+  |- loss_pos: 2.39933
+  |- fk_loss: 2.64172
+Val Loss Components:
+  |- loss_rot: 0.07192
+  |- loss_pos: 3.20787
+  |- fk_loss: 3.26584
+
+Epoch 60 | Train Loss: 0.77710 | Val Loss: 0.96697
+Train Loss Components:
+  |- loss_rot: 0.07553
+  |- loss_pos: 1.93274
+  |- fk_loss: 2.50572
+Val Loss Components:
+  |- loss_rot: 0.06986
+  |- loss_pos: 2.90170
+  |- fk_loss: 2.92124
+
+Epoch 61 | Train Loss: 0.77517 | Val Loss: 0.91851
+Train Loss Components:
+  |- loss_rot: 0.07374
+  |- loss_pos: 1.48641
+  |- fk_loss: 2.51429
+Val Loss Components:
+  |- loss_rot: 0.06902
+  |- loss_pos: 2.97061
+  |- fk_loss: 3.04452
+
+Epoch 62 | Train Loss: 0.76911 | Val Loss: 0.76407
+Train Loss Components:
+  |- loss_rot: 0.07251
+  |- loss_pos: 1.71969
+  |- fk_loss: 2.31113
+Val Loss Components:
+  |- loss_rot: 0.06903
+  |- loss_pos: 2.30819
+  |- fk_loss: 2.51845
+
+Epoch 63 | Train Loss: 0.77289 | Val Loss: 0.94000
+Train Loss Components:
+  |- loss_rot: 0.06605
+  |- loss_pos: 1.31776
+  |- fk_loss: 2.10440
+Val Loss Components:
+  |- loss_rot: 0.06880
+  |- loss_pos: 2.95611
+  |- fk_loss: 3.02859
+
+Epoch 64 | Train Loss: 0.75128 | Val Loss: 0.93635
+Train Loss Components:
+  |- loss_rot: 0.06828
+  |- loss_pos: 1.59832
+  |- fk_loss: 2.27815
+Val Loss Components:
+  |- loss_rot: 0.06836
+  |- loss_pos: 2.84093
+  |- fk_loss: 2.85450
+
+Epoch 65 | Train Loss: 0.74903 | Val Loss: 0.82927
+Train Loss Components:
+  |- loss_rot: 0.06936
+  |- loss_pos: 1.75696
+  |- fk_loss: 2.43246
+Val Loss Components:
+  |- loss_rot: 0.06848
+  |- loss_pos: 2.64946
+  |- fk_loss: 2.79160
+
+Epoch 66 | Train Loss: 0.73556 | Val Loss: 0.92449
+Train Loss Components:
+  |- loss_rot: 0.06481
+  |- loss_pos: 1.45519
+  |- fk_loss: 2.10027
+Val Loss Components:
+  |- loss_rot: 0.06668
+  |- loss_pos: 2.95755
+  |- fk_loss: 2.97347
+
+Epoch 67 | Train Loss: 0.73578 | Val Loss: 0.86209
+Train Loss Components:
+  |- loss_rot: 0.07100
+  |- loss_pos: 2.38840
+  |- fk_loss: 2.58513
+Val Loss Components:
+  |- loss_rot: 0.06658
+  |- loss_pos: 2.59726
+  |- fk_loss: 2.77238
+
+Epoch 68 | Train Loss: 0.72088 | Val Loss: 0.80428
+Train Loss Components:
+  |- loss_rot: 0.06602
+  |- loss_pos: 1.74646
+  |- fk_loss: 2.27770
+Val Loss Components:
+  |- loss_rot: 0.06585
+  |- loss_pos: 2.43177
+  |- fk_loss: 2.50174
+
+Epoch 69 | Train Loss: 0.72048 | Val Loss: 0.89289
+Train Loss Components:
+  |- loss_rot: 0.06061
+  |- loss_pos: 1.12170
+  |- fk_loss: 1.94212
+Val Loss Components:
+  |- loss_rot: 0.06461
+  |- loss_pos: 2.77999
+  |- fk_loss: 2.80544
+
+Epoch 70 | Train Loss: 0.71651 | Val Loss: 0.91489
+Train Loss Components:
+  |- loss_rot: 0.06848
+  |- loss_pos: 2.76518
+  |- fk_loss: 3.02444
+Val Loss Components:
+  |- loss_rot: 0.06458
+  |- loss_pos: 2.67325
+  |- fk_loss: 2.80868
+
+Epoch 71 | Train Loss: 0.71132 | Val Loss: 0.72393
+Train Loss Components:
+  |- loss_rot: 0.07217
+  |- loss_pos: 2.55267
+  |- fk_loss: 2.84123
+Val Loss Components:
+  |- loss_rot: 0.06374
+  |- loss_pos: 2.44246
+  |- fk_loss: 2.63561
+
+Epoch 72 | Train Loss: 0.69210 | Val Loss: 0.78768
+Train Loss Components:
+  |- loss_rot: 0.06231
+  |- loss_pos: 1.74281
+  |- fk_loss: 2.24771
+Val Loss Components:
+  |- loss_rot: 0.06302
+  |- loss_pos: 2.48935
+  |- fk_loss: 2.59052
+
+Epoch 73 | Train Loss: 0.70237 | Val Loss: 0.88288
+Train Loss Components:
+  |- loss_rot: 0.06601
+  |- loss_pos: 1.81255
+  |- fk_loss: 2.22402
+Val Loss Components:
+  |- loss_rot: 0.06238
+  |- loss_pos: 2.63225
+  |- fk_loss: 2.76728
+
+Epoch 74 | Train Loss: 0.68388 | Val Loss: 0.91294
+Train Loss Components:
+  |- loss_rot: 0.06504
+  |- loss_pos: 1.38724
+  |- fk_loss: 2.08493
+Val Loss Components:
+  |- loss_rot: 0.06313
+  |- loss_pos: 2.78114
+  |- fk_loss: 2.90000
+
+Epoch 75 | Train Loss: 0.68111 | Val Loss: 0.72088
+Train Loss Components:
+  |- loss_rot: 0.06654
+  |- loss_pos: 1.26699
+  |- fk_loss: 2.09612
+Val Loss Components:
+  |- loss_rot: 0.06209
+  |- loss_pos: 2.27501
+  |- fk_loss: 2.41683
+
+Epoch 76 | Train Loss: 0.67689 | Val Loss: 0.74527
+Train Loss Components:
+  |- loss_rot: 0.06134
+  |- loss_pos: 1.20644
+  |- fk_loss: 1.86023
+Val Loss Components:
+  |- loss_rot: 0.06157
+  |- loss_pos: 2.27667
+  |- fk_loss: 2.49053
+
+Epoch 77 | Train Loss: 0.66526 | Val Loss: 0.88042
+Train Loss Components:
+  |- loss_rot: 0.06048
+  |- loss_pos: 1.69726
+  |- fk_loss: 2.29012
+Val Loss Components:
+  |- loss_rot: 0.06080
+  |- loss_pos: 2.69650
+  |- fk_loss: 2.75325
+
+Epoch 78 | Train Loss: 0.65852 | Val Loss: 0.91799
+Train Loss Components:
+  |- loss_rot: 0.06191
+  |- loss_pos: 1.51522
+  |- fk_loss: 2.23325
+Val Loss Components:
+  |- loss_rot: 0.06213
+  |- loss_pos: 2.60048
+  |- fk_loss: 2.70389
+
+Epoch 79 | Train Loss: 0.65849 | Val Loss: 0.68216
+Train Loss Components:
+  |- loss_rot: 0.05410
+  |- loss_pos: 1.09659
+  |- fk_loss: 1.74871
+Val Loss Components:
+  |- loss_rot: 0.06041
+  |- loss_pos: 2.12205
+  |- fk_loss: 2.28805
+
+Epoch 80 | Train Loss: 0.65114 | Val Loss: 0.76040
+Train Loss Components:
+  |- loss_rot: 0.06406
+  |- loss_pos: 1.32464
+  |- fk_loss: 2.04788
+Val Loss Components:
+  |- loss_rot: 0.06000
+  |- loss_pos: 2.29560
+  |- fk_loss: 2.44293
+
+Epoch 81 | Train Loss: 0.65090 | Val Loss: 0.86508
+Train Loss Components:
+  |- loss_rot: 0.05916
+  |- loss_pos: 1.31619
+  |- fk_loss: 1.94280
+Val Loss Components:
+  |- loss_rot: 0.05878
+  |- loss_pos: 2.60685
+  |- fk_loss: 2.67307
+
+Epoch 82 | Train Loss: 0.64554 | Val Loss: 0.82020
+Train Loss Components:
+  |- loss_rot: 0.05949
+  |- loss_pos: 1.70627
+  |- fk_loss: 2.12290
+Val Loss Components:
+  |- loss_rot: 0.05936
+  |- loss_pos: 2.55622
+  |- fk_loss: 2.74810
+
+Epoch 83 | Train Loss: 0.63908 | Val Loss: 0.89433
+Train Loss Components:
+  |- loss_rot: 0.06288
+  |- loss_pos: 1.50732
+  |- fk_loss: 2.10026
+Val Loss Components:
+  |- loss_rot: 0.05915
+  |- loss_pos: 2.52289
+  |- fk_loss: 2.74703
+
+Epoch 84 | Train Loss: 0.62421 | Val Loss: 0.84415
+Train Loss Components:
+  |- loss_rot: 0.05691
+  |- loss_pos: 1.23931
+  |- fk_loss: 1.74826
+Val Loss Components:
+  |- loss_rot: 0.05817
+  |- loss_pos: 2.48206
+  |- fk_loss: 2.55380
+
+Epoch 85 | Train Loss: 0.62486 | Val Loss: 0.81383
+Train Loss Components:
+  |- loss_rot: 0.05774
+  |- loss_pos: 1.45168
+  |- fk_loss: 2.09152
+Val Loss Components:
+  |- loss_rot: 0.05705
+  |- loss_pos: 2.31655
+  |- fk_loss: 2.45735
+
+Epoch 86 | Train Loss: 0.62783 | Val Loss: 0.93272
+Train Loss Components:
+  |- loss_rot: 0.06854
+  |- loss_pos: 1.59665
+  |- fk_loss: 2.29756
+Val Loss Components:
+  |- loss_rot: 0.05927
+  |- loss_pos: 2.59722
+  |- fk_loss: 2.83527
+
+Epoch 87 | Train Loss: 0.61394 | Val Loss: 0.80086
+Train Loss Components:
+  |- loss_rot: 0.05877
+  |- loss_pos: 1.31831
+  |- fk_loss: 1.97412
+Val Loss Components:
+  |- loss_rot: 0.05750
+  |- loss_pos: 2.25607
+  |- fk_loss: 2.45058
+
+Epoch 88 | Train Loss: 0.61115 | Val Loss: 0.70231
+Train Loss Components:
+  |- loss_rot: 0.05907
+  |- loss_pos: 1.31521
+  |- fk_loss: 2.02304
+Val Loss Components:
+  |- loss_rot: 0.05731
+  |- loss_pos: 2.10970
+  |- fk_loss: 2.39003
+
+Epoch 89 | Train Loss: 0.61331 | Val Loss: 0.62910
+Train Loss Components:
+  |- loss_rot: 0.05456
+  |- loss_pos: 1.22853
+  |- fk_loss: 1.77344
+Val Loss Components:
+  |- loss_rot: 0.05708
+  |- loss_pos: 1.97742
+  |- fk_loss: 2.21880
+
+Epoch 90 | Train Loss: 0.59797 | Val Loss: 0.89491
+Train Loss Components:
+  |- loss_rot: 0.05925
+  |- loss_pos: 2.33810
+  |- fk_loss: 2.56636
+Val Loss Components:
+  |- loss_rot: 0.05632
+  |- loss_pos: 2.66399
+  |- fk_loss: 2.77268
+
+Epoch 91 | Train Loss: 0.59533 | Val Loss: 0.73915
+Train Loss Components:
+  |- loss_rot: 0.06009
+  |- loss_pos: 1.92040
+  |- fk_loss: 2.09915
+Val Loss Components:
+  |- loss_rot: 0.05666
+  |- loss_pos: 2.06854
+  |- fk_loss: 2.29056
+
+Epoch 92 | Train Loss: 0.58706 | Val Loss: 0.82181
+Train Loss Components:
+  |- loss_rot: 0.06321
+  |- loss_pos: 1.96732
+  |- fk_loss: 2.19982
+Val Loss Components:
+  |- loss_rot: 0.05579
+  |- loss_pos: 2.61946
+  |- fk_loss: 2.67512
+
+Epoch 93 | Train Loss: 0.58764 | Val Loss: 0.77270
+Train Loss Components:
+  |- loss_rot: 0.05210
+  |- loss_pos: 0.94102
+  |- fk_loss: 1.60612
+Val Loss Components:
+  |- loss_rot: 0.05480
+  |- loss_pos: 2.22389
+  |- fk_loss: 2.43285
+
+Epoch 94 | Train Loss: 0.58313 | Val Loss: 0.81280
+Train Loss Components:
+  |- loss_rot: 0.05286
+  |- loss_pos: 1.32912
+  |- fk_loss: 1.80345
+Val Loss Components:
+  |- loss_rot: 0.05472
+  |- loss_pos: 2.32543
+  |- fk_loss: 2.53194
+
+Epoch 95 | Train Loss: 0.58669 | Val Loss: 0.85849
+Train Loss Components:
+  |- loss_rot: 0.05970
+  |- loss_pos: 1.08745
+  |- fk_loss: 1.86705
+Val Loss Components:
+  |- loss_rot: 0.05493
+  |- loss_pos: 2.41348
+  |- fk_loss: 2.60514
+
+Epoch 96 | Train Loss: 0.58102 | Val Loss: 0.71891
+Train Loss Components:
+  |- loss_rot: 0.05482
+  |- loss_pos: 1.23733
+  |- fk_loss: 1.86441
+Val Loss Components:
+  |- loss_rot: 0.05420
+  |- loss_pos: 2.12621
+  |- fk_loss: 2.35447
+
+Epoch 97 | Train Loss: 0.56757 | Val Loss: 0.82597
+Train Loss Components:
+  |- loss_rot: 0.05176
+  |- loss_pos: 1.19357
+  |- fk_loss: 1.84317
+Val Loss Components:
+  |- loss_rot: 0.05391
+  |- loss_pos: 2.39652
+  |- fk_loss: 2.56897
+
+Epoch 98 | Train Loss: 0.56640 | Val Loss: 0.76659
+Train Loss Components:
+  |- loss_rot: 0.05540
+  |- loss_pos: 1.07806
+  |- fk_loss: 1.79412
+Val Loss Components:
+  |- loss_rot: 0.05432
+  |- loss_pos: 2.22775
+  |- fk_loss: 2.40609
+
+Epoch 99 | Train Loss: 0.56734 | Val Loss: 0.83268
+Train Loss Components:
+  |- loss_rot: 0.05904
+  |- loss_pos: 1.34528
+  |- fk_loss: 2.03163
+Val Loss Components:
+  |- loss_rot: 0.05278
+  |- loss_pos: 2.43481
+  |- fk_loss: 2.55749
+
+Epoch 100 | Train Loss: 0.55816 | Val Loss: 0.70420
+Train Loss Components:
+  |- loss_rot: 0.05792
+  |- loss_pos: 1.33921
+  |- fk_loss: 1.94794
+Val Loss Components:
+  |- loss_rot: 0.05337
+  |- loss_pos: 2.07893
+  |- fk_loss: 2.24617
+
+Epoch 101 | Train Loss: 0.55636 | Val Loss: 0.70194
+Train Loss Components:
+  |- loss_rot: 0.05633
+  |- loss_pos: 1.59867
+  |- fk_loss: 2.04514
+Val Loss Components:
+  |- loss_rot: 0.05419
+  |- loss_pos: 2.02402
+  |- fk_loss: 2.26950
+
+Epoch 102 | Train Loss: 0.55361 | Val Loss: 0.65787
+Train Loss Components:
+  |- loss_rot: 0.05243
+  |- loss_pos: 1.06943
+  |- fk_loss: 1.75529
+Val Loss Components:
+  |- loss_rot: 0.05334
+  |- loss_pos: 2.07265
+  |- fk_loss: 2.33776
+
+Epoch 103 | Train Loss: 0.55235 | Val Loss: 0.81858
+Train Loss Components:
+  |- loss_rot: 0.05681
+  |- loss_pos: 1.27574
+  |- fk_loss: 1.90641
+Val Loss Components:
+  |- loss_rot: 0.05275
+  |- loss_pos: 2.21244
+  |- fk_loss: 2.45832
+
+Epoch 104 | Train Loss: 0.54899 | Val Loss: 0.79400
+Train Loss Components:
+  |- loss_rot: 0.06163
+  |- loss_pos: 2.76354
+  |- fk_loss: 2.63153
+Val Loss Components:
+  |- loss_rot: 0.05290
+  |- loss_pos: 2.21354
+  |- fk_loss: 2.51149
+
+Epoch 105 | Train Loss: 0.53707 | Val Loss: 0.72599
+Train Loss Components:
+  |- loss_rot: 0.05082
+  |- loss_pos: 1.08116
+  |- fk_loss: 1.73453
+Val Loss Components:
+  |- loss_rot: 0.05144
+  |- loss_pos: 2.16677
+  |- fk_loss: 2.37887
+

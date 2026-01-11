@@ -160,13 +160,24 @@ class MotionTransformer(nn.Module):
         self.dim_model = num_joints * joint_embedding_size + root_embedding_size
         assert self.dim_model % num_heads == 0, "dim_model must be divisible by num_heads"
 
-        self.transformer = nn.Transformer(
+        # self.transformer = nn.Transformer(
+        #     d_model=self.dim_model,
+        #     nhead=num_heads,
+        #     num_encoder_layers=num_encoder_layers,
+        #     num_decoder_layers=num_decoder_layers,
+        #     dropout=dropout,
+        #     batch_first=True
+        # )
+
+        encoder_layer = nn.TransformerEncoderLayer(
             d_model=self.dim_model,
             nhead=num_heads,
-            num_encoder_layers=num_encoder_layers,
-            num_decoder_layers=num_decoder_layers,
             dropout=dropout,
             batch_first=True
+        )
+        self.transformer = nn.TransformerEncoder(
+            encoder_layer,
+            num_layers=num_encoder_layers
         )
 
         self.pos_encoder = SinusoidalPositionalEncoding(
@@ -176,36 +187,52 @@ class MotionTransformer(nn.Module):
 
         # self.mask_token = nn.Parameter(torch.randn(1, 1, self.dim_model) * 0.02)
     
+    # OLD VERSION OF TRANSFORMER TRAINING - MASKED FRAME PREDICTION, encoder-decoder structure
+    # def forward(
+    #     self,
+    #     src_rot: torch.Tensor,
+    #     src_pos: torch.Tensor,
+    #     # tgt_rot: Optional[torch.Tensor] = None,
+    #     # tgt_pos: Optional[torch.Tensor] = None,
+    #     fixed_points: List[int] = []
+    # ) -> Tuple[torch.Tensor, torch.Tensor]:
+    #     # assert (tgt_rot is None and tgt_pos is None) or type(tgt_rot) == torch.Tensor and type(tgt_pos) == torch.Tensor, "tgt_rot and tgt_pos must be both None or both Tensors"
+
+    #     # Encoding
+    #     enc_seq = self.input_encoder(src_rot, src_pos)
+    #     B, T, _ = enc_seq.shape
+
+    #     enc_h = self.pos_encoder(enc_seq)
+    #     dec_h = enc_h.clone()
+
+    #     # mask_bool = torch.ones(T, dtype=torch.bool, device=enc_seq.device)
+    #     # mask_bool[fixed_points] = False     # True = masked, False = available
+    #     # mask_token_exp = self.mask_token.expand(B, T, self.dim_model)
+    #     # dec_seq = torch.where(mask_bool.view(1, T, 1), mask_token_exp.to(dec_seq.dtype), dec_seq)
+
+    #     # dec_h = self.pos_encoder(dec_seq)
+
+    #     tgt_mask = torch.full((T, T), float("-inf"), device=enc_h.device, dtype=enc_h.dtype)
+    #     for j in fixed_points:
+    #         tgt_mask[:, j] = 0.0
+    #     tgt_mask = tgt_mask.to(enc_h.device).to(enc_h.dtype)
+
+    #     out = self.transformer(enc_h, dec_h, tgt_mask=tgt_mask)
+
+    #     pred_rot, pred_pos = self.output_decoder(out)
+    #     return pred_rot, pred_pos
+
     def forward(
         self,
         src_rot: torch.Tensor,
-        src_pos: torch.Tensor,
-        # tgt_rot: Optional[torch.Tensor] = None,
-        # tgt_pos: Optional[torch.Tensor] = None,
-        fixed_points: List[int] = []
+        src_pos: torch.Tensor
     ) -> Tuple[torch.Tensor, torch.Tensor]:
-        # assert (tgt_rot is None and tgt_pos is None) or type(tgt_rot) == torch.Tensor and type(tgt_pos) == torch.Tensor, "tgt_rot and tgt_pos must be both None or both Tensors"
-
         # Encoding
         enc_seq = self.input_encoder(src_rot, src_pos)
-        B, T, _ = enc_seq.shape
-
+        # B, T, _ = enc_seq.shape
         enc_h = self.pos_encoder(enc_seq)
-        dec_h = enc_h.clone()
 
-        # mask_bool = torch.ones(T, dtype=torch.bool, device=enc_seq.device)
-        # mask_bool[fixed_points] = False     # True = masked, False = available
-        # mask_token_exp = self.mask_token.expand(B, T, self.dim_model)
-        # dec_seq = torch.where(mask_bool.view(1, T, 1), mask_token_exp.to(dec_seq.dtype), dec_seq)
-
-        # dec_h = self.pos_encoder(dec_seq)
-
-        tgt_mask = torch.full((T, T), float("-inf"), device=enc_h.device, dtype=enc_h.dtype)
-        for j in fixed_points:
-            tgt_mask[:, j] = 0.0
-        tgt_mask = tgt_mask.to(enc_h.device).to(enc_h.dtype)
-
-        out = self.transformer(enc_h, dec_h, tgt_mask=tgt_mask)
+        out = self.transformer(enc_h)
 
         pred_rot, pred_pos = self.output_decoder(out)
         return pred_rot, pred_pos

@@ -135,7 +135,7 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
             pred_rot, pred_pos = model(
                 src_rot, src_pos,
                 # src_rot.clone(), src_pos.clone(),
-                fixed_points=fixed_points
+                # fixed_points=fixed_points
             )
 
             # Compute loss - only on predicted frames in hole
@@ -149,8 +149,8 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
             loss_pos = F.l1_loss(pred_pos[mask_pos], pos[mask_pos])
 
             fk_loss = fk_loss_fn(
-                rot, pos,
-                pred_rot, pred_pos,
+                rot[:, hole_start:hole_end, :, :], pos[:, hole_start:hole_end, :],
+                pred_rot[:, hole_start:hole_end, :, :], pred_pos[:, hole_start:hole_end, :],
                 offsets=offsets_tensor
             )
 
@@ -214,7 +214,7 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
                 pred_rot, pred_pos = model(
                     src_rot, src_pos,
                     # src_rot.clone(), src_pos.clone(),
-                    fixed_points=fixed_points
+                    # fixed_points=fixed_points
                 )
 
                 # Compute loss - only on predicted frames in hole
@@ -228,8 +228,8 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
                 loss_pos = F.l1_loss(pred_pos[mask_pos], pos[mask_pos])
 
                 fk_loss = fk_loss_fn(
-                    rot, pos,
-                    pred_rot, pred_pos,
+                    rot[:, hole_start:hole_end, :, :], pos[:, hole_start:hole_end, :],
+                    pred_rot[:, hole_start:hole_end, :, :], pred_pos[:, hole_start:hole_end, :],
                     offsets=offsets_tensor
                 )
 
@@ -299,4 +299,4 @@ if __name__ == "__main__":
         print(f"Error: The file '{args.params}.json' was not found in the config/ folder.")
         exit(1)
 
-    train(params, full_log=args.full_log, data_subset_type=data_subset_type, moves_names=moves_names)
+    train(params, full_log=args.full_log, data_subset_type=data_subset_type)
