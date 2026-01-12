@@ -1,6 +1,7 @@
 from tqdm import tqdm
 from torch.utils.data import DataLoader
 
+from model.loss.FKVelocityBoundaryLoss import FKVelocityBoundaryLoss, root_pos_velocity_boundary_loss
 from model.model import MotionTransformer
 from model.loss.FKLoss import FKLoss
 from dataset import BvhDataset
@@ -39,7 +40,7 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
     INTERPOLATE_BEFORE_PREDICTION = params.get("interpolate_before_prediction", False)
 
     LOSS_WEIGHTS = params["loss_weights"]
-    assert abs(sum(LOSS_WEIGHTS.values()) - 1.0) < 1e-6, f"LOSS_WEIGHTS values must sum to 1.0: got {sum(LOSS_WEIGHTS.values())}"
+    # assert abs(sum(LOSS_WEIGHTS.values()) - 1.0) < 1e-6, f"LOSS_WEIGHTS values must sum to 1.0: got {sum(LOSS_WEIGHTS.values())}"
     assert "rot_6d" in LOSS_WEIGHTS and "pos" in LOSS_WEIGHTS, "LOSS_WEIGHTS must contain 'rot_6d' and 'pos' keys."
 
     DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -61,6 +62,7 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
     )
 
     fk_loss_fn = FKLoss(dataset.parents).to(DEVICE)
+    fk_vel_bnd_loss_fn = FKVelocityBoundaryLoss(dataset.parents).to(DEVICE)
     offsets_tensor = torch.tensor(dataset.offsets, device=DEVICE)
 
     val_dataset_size = int(len(dataset) * VAL_RATIO)
@@ -154,15 +156,33 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
                 offsets=offsets_tensor
             )
 
+            pos_vel_bnd_loss = root_pos_velocity_boundary_loss(
+                pos, pred_pos,
+                hole_start=hole_start,
+                hole_end=hole_end
+            )
+
+            fk_vel_bnd_loss = fk_vel_bnd_loss_fn(
+                rot, pos,
+                pred_rot, pred_pos,
+                offsets=offsets_tensor,
+                hole_start=hole_start,
+                hole_end=hole_end
+            )
+
             loss = (
                 LOSS_WEIGHTS["rot_6d"] * loss_rot + 
                 LOSS_WEIGHTS["pos"] * loss_pos + 
-                LOSS_WEIGHTS["fk"] * fk_loss
+                LOSS_WEIGHTS["fk"] * fk_loss + 
+                LOSS_WEIGHTS["pos_vel_bnd"] * pos_vel_bnd_loss +
+                LOSS_WEIGHTS["fk_vel_bnd"] * fk_vel_bnd_loss
             )
             train_loss_coponents = {
                 "loss_rot": loss_rot.item(),
                 "loss_pos": loss_pos.item(),
-                "fk_loss": fk_loss.item()
+                "fk_loss": fk_loss.item(),
+                "pos_vel_bnd_loss": pos_vel_bnd_loss.item(),
+                "fk_vel_bnd_loss": fk_vel_bnd_loss.item()
             }
             
             loss.backward()
@@ -233,15 +253,33 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
                     offsets=offsets_tensor
                 )
 
+                pos_vel_bnd_loss = root_pos_velocity_boundary_loss(
+                    pos, pred_pos,
+                    hole_start=hole_start,
+                    hole_end=hole_end
+                )
+
+                fk_vel_bnd_loss = fk_vel_bnd_loss_fn(
+                    rot, pos,
+                    pred_rot, pred_pos,
+                    offsets=offsets_tensor,
+                    hole_start=hole_start,
+                    hole_end=hole_end
+                )
+
                 loss = (
                     LOSS_WEIGHTS["rot_6d"] * loss_rot + 
                     LOSS_WEIGHTS["pos"] * loss_pos + 
-                    LOSS_WEIGHTS["fk"] * fk_loss
+                    LOSS_WEIGHTS["fk"] * fk_loss +
+                    LOSS_WEIGHTS["pos_vel_bnd"] * pos_vel_bnd_loss +
+                    LOSS_WEIGHTS["fk_vel_bnd"] * fk_vel_bnd_loss
                 )
                 test_loss_coponents = {
                     "loss_rot": loss_rot.item(),
                     "loss_pos": loss_pos.item(),
-                    "fk_loss": fk_loss.item()
+                    "fk_loss": fk_loss.item(),
+                    "pos_vel_bnd_loss": pos_vel_bnd_loss.item(),
+                    "fk_vel_bnd_loss": fk_vel_bnd_loss.item()
                 }
 
                 total_val_loss += loss.item()

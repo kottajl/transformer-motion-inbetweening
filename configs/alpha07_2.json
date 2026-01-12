@@ -1,6 +1,6 @@
 {
-    "config_name": "alpha07",
-    "description": "Alpha 0.7 model. Encoder-only model.",
+    "config_name": "alpha07_2",
+    "description": "Alpha 0.7 model with root_pos/FK velocity boundary loss added.",
 
     "context_frames": 10,
     "hole_frames": 5,
@@ -10,14 +10,16 @@
     "n_epochs": 128,
     "patience": 16,
     "val_ratio": 0.15,
-    "window_step": 8,
+    "window_step": 4,
 
     "optimizer_lr": 0.00007,
 
     "loss_weights": {
         "rot_6d": 0.65,
         "pos": 0.25,
-        "fk": 0.1
+        "fk": 0.1,
+        "pos_vel_bnd": 0.02,
+        "fk_vel_bnd": 0.05
     },
 
     "joint_embedding_size": 48,

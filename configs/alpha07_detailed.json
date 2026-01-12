@@ -1,16 +1,16 @@
 {
-    "config_name": "alpha07",
-    "description": "Alpha 0.7 model. Encoder-only model.",
+    "config_name": "alpha07_detailed",
+    "description": "Alpha 0.7 detailed model. Like 0.7 but with smaller batch_size and smaller window_step.",
 
     "context_frames": 10,
     "hole_frames": 5,
     "target_frames": 5,
 
-    "batch_size": 64,
+    "batch_size": 32,
     "n_epochs": 128,
     "patience": 16,
     "val_ratio": 0.15,
-    "window_step": 8,
+    "window_step": 4,
 
     "optimizer_lr": 0.00007,
 

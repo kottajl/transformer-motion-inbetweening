@@ -124,3 +124,43 @@ def rot6d_to_mat_torch(rot_6d: torch.Tensor, eps=1e-8) -> torch.Tensor:
 
     mats = torch.stack([b1, b2, b3], dim=-1)  # (...,3,3)
     return mats
+
+
+'''
+Forward Kinematics
+'''
+
+def forward_kinematics(
+    rot_mats: torch.Tensor,
+    root_pos: torch.Tensor,
+    parents: list,
+    offsets: torch.Tensor
+) -> torch.Tensor:
+    """
+    rot_mats: (B,T,J,3,3)
+    root_pos: (B,T,3)
+    offsets: (J,3)
+
+    Returns:
+        joint_positions: (B,T,J,3) - joint world positions
+    """
+    B, T, J, _, _ = rot_mats.shape
+    device = rot_mats.device
+
+    joint_positions = torch.zeros((B, T, J, 3), device=device)
+    joint_positions[:, :, 0, :] = root_pos
+
+    for j in range(1, J):
+        parent_idx = parents[j]
+        parent_pos = joint_positions[:, :, parent_idx, :]   # (B,T,3)
+        parent_rot = rot_mats[:, :, parent_idx, :, :]       # (B,T,3,3)
+        
+        # Local offset of this joint
+        offset = offsets[j].to(device)                      # (3,)
+        rotated_offset = torch.matmul(parent_rot, offset.view(3, 1)).squeeze(-1)  # (B,T,3)
+        world_pos = parent_pos + rotated_offset    # (B,T,3)
+        
+        joint_positions[:, :, j, :] = world_pos
+
+    return joint_positions
+#forward_kinematics

@@ -140,10 +140,13 @@ def predict_bvh(
         # Fixed points (context_frames and target_frames indices)
         fixed_points: List[int] = list(range(0, context_frames)) + list(range(T_win - target_frames, T_win))
         
+        # pred_rot, pred_pos = model(
+        #     src_rot, src_pos,
+        #     src_rot.clone(), src_pos.clone(),
+        #     fixed_points=fixed_points
+        # )
         pred_rot, pred_pos = model(
-            src_rot, src_pos,
-            src_rot.clone(), src_pos.clone(),
-            fixed_points=fixed_points
+            src_rot, src_pos
         )
 
     pred_rot = pred_rot.cpu().numpy()[0]    # (T_win, J, 6)
@@ -244,9 +247,9 @@ def predict_bvh(
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--bvh-in', type=str, default="eval/run1_subject5.bvh")
-    parser.add_argument('--bvh-out', default="eval/run1_subject5_predicted.bvh")
-    parser.add_argument('--start', type=int, default=335)      # Line in .bvh = <start> + 135
+    parser.add_argument('--bvh-in', type=str, default="eval/dance2_subject5_predicted.bvh")
+    parser.add_argument('--bvh-out', default="eval/dance2_subject5_predicted.bvh")
+    parser.add_argument('--start', type=int, default=320)      # Line in .bvh = <start> + 135
     parser.add_argument('--weights', default="best_model.pt", help='Path to model weights (.pt)')
     parser.add_argument('--config', type=str, required=True, help='Path to JSON config file')
     args = parser.parse_args()
@@ -263,6 +266,7 @@ if __name__ == '__main__':
     num_encoder_layers = params["num_encoder_layers"]
     num_decoder_layers = params["num_decoder_layers"]
     num_heads = params["num_heads"]
+    dropout = params["dropout"]
     context_frames = params["context_frames"]
     target_frames = params["target_frames"]
     WINDOW_SIZE = params["context_frames"] + params["hole_frames"] + params["target_frames"]
@@ -281,6 +285,7 @@ if __name__ == '__main__':
         num_encoder_layers=num_encoder_layers,
         num_decoder_layers=num_decoder_layers,
         num_heads=num_heads,
+        dropout=dropout,
         max_len=max_len
     )
 
