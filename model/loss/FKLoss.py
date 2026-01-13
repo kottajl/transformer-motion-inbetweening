@@ -1,3 +1,4 @@
+import math
 from typing import Tuple, List, Optional
 
 import torch
@@ -8,9 +9,10 @@ from utils import rot6d_to_mat_torch, forward_kinematics
 
 
 class FKLoss(nn.Module):
-    def __init__(self, parents):
+    def __init__(self, parents, weighted: bool = False):
         super(FKLoss, self).__init__()
         self.parents = parents
+        self.weighted = weighted
 
     # def _forward_kinematics(
     #     self,
@@ -46,6 +48,21 @@ class FKLoss(nn.Module):
 
     #     return joint_positions
     # #_forward_kinematics
+
+    def _get_weights(self, hole_length: int, device: str) -> torch.Tensor:
+        """
+        Returns:
+            
+        """
+        w = torch.ones(hole_length, device=device)
+
+        for t in range(hole_length):
+            dist_to_nearest_boundary = min(t, hole_length - 1 - t)
+            w[t] = 1.0 + 2.0 * math.exp(-dist_to_nearest_boundary / 2.0)
+        
+        return w
+    #_get_weights
+
     
     def forward(
         self,
@@ -64,6 +81,8 @@ class FKLoss(nn.Module):
             fk_loss: L1 scalar
         """
 
+        _, T, _ = gt_pos.shape
+
         gt_rot_mats = rot6d_to_mat_torch(gt_rot6d)      # (B,T,J,3,3)
         pred_rot_mats = rot6d_to_mat_torch(pred_rot6d)  # (B,T,J,3,3)
 
@@ -80,7 +99,14 @@ class FKLoss(nn.Module):
             offsets=offsets
         )   # (B,T,J,3)
 
-        fk_loss = F.l1_loss(pred_joint_pos, gt_joint_pos)
+        if self.weighted:
+            weights = self._get_weights(hole_length=T, device=gt_pos.device)  # (T,)
+            weights = weights.view(1, T, 1, 1)    # (1,T,1,1)
+            fk_loss = F.l1_loss(pred_joint_pos, gt_joint_pos, reduction='none')
+            fk_loss = (fk_loss * weights).mean()
+        else:
+            fk_loss = F.l1_loss(pred_joint_pos, gt_joint_pos)
+        
         return fk_loss
     #forward
 

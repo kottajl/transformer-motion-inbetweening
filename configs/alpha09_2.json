@@ -1,0 +1,34 @@
+{
+    "config_name": "alpha09_2",
+    "description": "Alpha 0.9_2 model. Smoothness loss weight lowered to 0.02.",
+
+    "context_frames": 10,
+    "hole_frames": 5,
+    "target_frames": 5,
+
+    "batch_size": 64,
+    "n_epochs": 128,
+    "patience": 16,
+    "val_ratio": 0.15,
+    "window_step": 8,
+
+    "optimizer_lr": 0.00007,
+
+    "loss_weights": {
+        "rot_6d": 0.65,
+        "pos": 0.25,
+        "fk": 0.1,
+        "smoothness": 0.02
+    },
+    "fk_weighted": true,
+
+    "joint_embedding_size": 48,
+    "root_embedding_size": 48,
+
+    "num_encoder_layers": 6,
+    "num_decoder_layers": 2,
+    "num_heads": 8,
+    "dropout": 0.05,
+
+    "interpolate_before_prediction": true
+}

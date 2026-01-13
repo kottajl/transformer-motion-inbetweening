@@ -2,6 +2,7 @@ from tqdm import tqdm
 from torch.utils.data import DataLoader
 
 from model.loss.FKVelocityBoundaryLoss import FKVelocityBoundaryLoss, root_pos_velocity_boundary_loss
+from model.loss.SmoothnessLoss import SmoothnessLoss
 from model.model import MotionTransformer
 from model.loss.FKLoss import FKLoss
 from dataset import BvhDataset
@@ -61,8 +62,12 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
         **subset_kwargs
     )
 
-    fk_loss_fn = FKLoss(dataset.parents).to(DEVICE)
+    fk_loss_fn = FKLoss(
+        dataset.parents, 
+        weighted=params.get("fk_weighted", False)
+    ).to(DEVICE)
     fk_vel_bnd_loss_fn = FKVelocityBoundaryLoss(dataset.parents).to(DEVICE)
+    smoothness_loss_fn = SmoothnessLoss(dataset.parents).to(DEVICE)
     offsets_tensor = torch.tensor(dataset.offsets, device=DEVICE)
 
     val_dataset_size = int(len(dataset) * VAL_RATIO)
@@ -156,33 +161,41 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
                 offsets=offsets_tensor
             )
 
-            pos_vel_bnd_loss = root_pos_velocity_boundary_loss(
-                pos, pred_pos,
-                hole_start=hole_start,
-                hole_end=hole_end
+            smoothness_loss = smoothness_loss_fn(
+                pred_rot[:, hole_start-1:hole_end+1, :, :], pred_pos[:, hole_start-1:hole_end+1, :], 
+                offsets=offsets_tensor
             )
 
-            fk_vel_bnd_loss = fk_vel_bnd_loss_fn(
-                rot, pos,
-                pred_rot, pred_pos,
-                offsets=offsets_tensor,
-                hole_start=hole_start,
-                hole_end=hole_end
-            )
+            # pos_vel_bnd_loss = root_pos_velocity_boundary_loss(
+            #     pos, pred_pos,
+            #     hole_start=hole_start,
+            #     hole_end=hole_end
+            # )
+
+            # fk_vel_bnd_loss = fk_vel_bnd_loss_fn(
+            #     rot, pos,
+            #     pred_rot, pred_pos,
+            #     offsets=offsets_tensor,
+            #     hole_start=hole_start,
+            #     hole_end=hole_end
+            # )
 
             loss = (
                 LOSS_WEIGHTS["rot_6d"] * loss_rot + 
                 LOSS_WEIGHTS["pos"] * loss_pos + 
-                LOSS_WEIGHTS["fk"] * fk_loss + 
-                LOSS_WEIGHTS["pos_vel_bnd"] * pos_vel_bnd_loss +
-                LOSS_WEIGHTS["fk_vel_bnd"] * fk_vel_bnd_loss
+                LOSS_WEIGHTS["fk"] * fk_loss +
+                LOSS_WEIGHTS.get("smoothness", 0.0) * smoothness_loss
+
+                # LOSS_WEIGHTS["pos_vel_bnd"] * pos_vel_bnd_loss +
+                # LOSS_WEIGHTS["fk_vel_bnd"] * fk_vel_bnd_loss
             )
             train_loss_coponents = {
                 "loss_rot": loss_rot.item(),
                 "loss_pos": loss_pos.item(),
                 "fk_loss": fk_loss.item(),
-                "pos_vel_bnd_loss": pos_vel_bnd_loss.item(),
-                "fk_vel_bnd_loss": fk_vel_bnd_loss.item()
+                "smoothness_loss": smoothness_loss.item(),
+                # "pos_vel_bnd_loss": pos_vel_bnd_loss.item(),
+                # "fk_vel_bnd_loss": fk_vel_bnd_loss.item()
             }
             
             loss.backward()
@@ -253,33 +266,41 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
                     offsets=offsets_tensor
                 )
 
-                pos_vel_bnd_loss = root_pos_velocity_boundary_loss(
-                    pos, pred_pos,
-                    hole_start=hole_start,
-                    hole_end=hole_end
+                smoothness_loss = smoothness_loss_fn(
+                    pred_rot[:, hole_start-1:hole_end+1, :, :], pred_pos[:, hole_start-1:hole_end+1, :], 
+                    offsets=offsets_tensor
                 )
 
-                fk_vel_bnd_loss = fk_vel_bnd_loss_fn(
-                    rot, pos,
-                    pred_rot, pred_pos,
-                    offsets=offsets_tensor,
-                    hole_start=hole_start,
-                    hole_end=hole_end
-                )
+                # pos_vel_bnd_loss = root_pos_velocity_boundary_loss(
+                #     pos, pred_pos,
+                #     hole_start=hole_start,
+                #     hole_end=hole_end
+                # )
+
+                # fk_vel_bnd_loss = fk_vel_bnd_loss_fn(
+                #     rot, pos,
+                #     pred_rot, pred_pos,
+                #     offsets=offsets_tensor,
+                #     hole_start=hole_start,
+                #     hole_end=hole_end
+                # )
 
                 loss = (
                     LOSS_WEIGHTS["rot_6d"] * loss_rot + 
                     LOSS_WEIGHTS["pos"] * loss_pos + 
-                    LOSS_WEIGHTS["fk"] * fk_loss +
-                    LOSS_WEIGHTS["pos_vel_bnd"] * pos_vel_bnd_loss +
-                    LOSS_WEIGHTS["fk_vel_bnd"] * fk_vel_bnd_loss
+                    LOSS_WEIGHTS["fk"] * fk_loss + 
+                    LOSS_WEIGHTS.get("smoothness", 0.0) * smoothness_loss
+
+                    # LOSS_WEIGHTS["pos_vel_bnd"] * pos_vel_bnd_loss +
+                    # LOSS_WEIGHTS["fk_vel_bnd"] * fk_vel_bnd_loss
                 )
                 test_loss_coponents = {
                     "loss_rot": loss_rot.item(),
                     "loss_pos": loss_pos.item(),
                     "fk_loss": fk_loss.item(),
-                    "pos_vel_bnd_loss": pos_vel_bnd_loss.item(),
-                    "fk_vel_bnd_loss": fk_vel_bnd_loss.item()
+                    "smoothness_loss": smoothness_loss.item(), 
+                    # "pos_vel_bnd_loss": pos_vel_bnd_loss.item(),
+                    # "fk_vel_bnd_loss": fk_vel_bnd_loss.item()
                 }
 
                 total_val_loss += loss.item()

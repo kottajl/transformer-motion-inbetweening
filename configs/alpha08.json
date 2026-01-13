@@ -1,16 +1,16 @@
 {
-    "config_name": "alpha07_detailed",
-    "description": "Alpha 0.7 detailed model. Like 0.7 but with smaller batch_size and smaller window_step.",
+    "config_name": "alpha08",
+    "description": "Alpha 0.8 model. FK loss with weighting over the hole frames.",
 
     "context_frames": 10,
     "hole_frames": 5,
     "target_frames": 5,
 
-    "batch_size": 32,
+    "batch_size": 64,
     "n_epochs": 128,
     "patience": 16,
     "val_ratio": 0.15,
-    "window_step": 4,
+    "window_step": 8,
 
     "optimizer_lr": 0.00007,
 
@@ -19,6 +19,7 @@
         "pos": 0.25,
         "fk": 0.1
     },
+    "fk_weighted": true,
 
     "joint_embedding_size": 48,
     "root_embedding_size": 48,
