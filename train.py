@@ -46,6 +46,8 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
 
     DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {DEVICE}")
+    if torch.cuda.is_available():
+        torch.set_float32_matmul_precision('high')
 
     with open(f'generated_models/{CONFIG_NAME}.log', 'w') as file:
         file.write('')
@@ -56,7 +58,8 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
         "datasets/lafan1/processed/",
         window=WINDOW_SIZE,
         step=WINDOW_STEP,
-        device=DEVICE,
+        # device=DEVICE,
+        device='cpu',   # keep data on CPU, move to GPU in training loop
         interpolate_missing=INTERPOLATE_BEFORE_PREDICTION,
         subset_type=data_subset_type,
         **subset_kwargs
@@ -76,8 +79,20 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
         dataset, 
         [train_dataset_size, val_dataset_size]
     )
-    train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
-    val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False)
+    train_loader = DataLoader(
+        train_dataset, 
+        batch_size=BATCH_SIZE, 
+        shuffle=True,
+        # num_workers=2,
+        pin_memory=True
+    )
+    val_loader = DataLoader(
+        val_dataset, 
+        batch_size=BATCH_SIZE, 
+        shuffle=False,
+        # num_workers=2,
+        pin_memory=True
+    )
     
     model = MotionTransformer(
         num_joints=len(dataset.parents),
@@ -89,7 +104,11 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
         dropout=DROPOUT,
         max_len=MAX_LEN
     ).to(DEVICE)
+    # if torch.cuda.is_available():
+        # model = torch.compile(model, backend="cudagraphs")
+        # model = torch.compile(model)
 
+    scaler = torch.amp.GradScaler('cuda')
     optimizer = optim.Adam(model.parameters(), lr=OPTIMIZER_LR)
 
     # List of context + target frames indices
@@ -139,111 +158,8 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
                     )
 
             optimizer.zero_grad()
-            pred_rot, pred_pos = model(
-                src_rot, src_pos,
-                # src_rot.clone(), src_pos.clone(),
-                # fixed_points=fixed_points
-            )
 
-            # Compute loss - only on predicted frames in hole
-            mask = torch.ones(T, dtype=torch.bool, device=DEVICE)
-            mask[fixed_points] = False
-            
-            mask_rot = mask.view(1, T, 1, 1).expand(B, T, J, D)
-            loss_rot = F.l1_loss(pred_rot[mask_rot], rot[mask_rot])
-
-            mask_pos = mask.view(1, T, 1).expand(B, T, 3)
-            loss_pos = F.l1_loss(pred_pos[mask_pos], pos[mask_pos])
-
-            fk_loss = fk_loss_fn(
-                rot[:, hole_start:hole_end, :, :], pos[:, hole_start:hole_end, :],
-                pred_rot[:, hole_start:hole_end, :, :], pred_pos[:, hole_start:hole_end, :],
-                offsets=offsets_tensor
-            )
-
-            smoothness_loss = smoothness_loss_fn(
-                pred_rot[:, hole_start-1:hole_end+1, :, :], pred_pos[:, hole_start-1:hole_end+1, :], 
-                offsets=offsets_tensor
-            )
-
-            # pos_vel_bnd_loss = root_pos_velocity_boundary_loss(
-            #     pos, pred_pos,
-            #     hole_start=hole_start,
-            #     hole_end=hole_end
-            # )
-
-            # fk_vel_bnd_loss = fk_vel_bnd_loss_fn(
-            #     rot, pos,
-            #     pred_rot, pred_pos,
-            #     offsets=offsets_tensor,
-            #     hole_start=hole_start,
-            #     hole_end=hole_end
-            # )
-
-            loss = (
-                LOSS_WEIGHTS["rot_6d"] * loss_rot + 
-                LOSS_WEIGHTS["pos"] * loss_pos + 
-                LOSS_WEIGHTS["fk"] * fk_loss +
-                LOSS_WEIGHTS.get("smoothness", 0.0) * smoothness_loss
-
-                # LOSS_WEIGHTS["pos_vel_bnd"] * pos_vel_bnd_loss +
-                # LOSS_WEIGHTS["fk_vel_bnd"] * fk_vel_bnd_loss
-            )
-            train_loss_coponents = {
-                "loss_rot": loss_rot.item(),
-                "loss_pos": loss_pos.item(),
-                "fk_loss": fk_loss.item(),
-                "smoothness_loss": smoothness_loss.item(),
-                # "pos_vel_bnd_loss": pos_vel_bnd_loss.item(),
-                # "fk_vel_bnd_loss": fk_vel_bnd_loss.item()
-            }
-            
-            loss.backward()
-            optimizer.step()
-
-            running_loss += loss.item()
-            loop.set_postfix(loss=f"{loss.item():.2f}")
-
-        avg_train_loss = running_loss / len(train_loader)
-
-        # Validation
-        model.eval()
-        total_val_loss = 0
-
-        loop = tqdm(
-            val_loader,
-            desc=f"Epoch {epoch+1}/{N_EPOCHS} - validation", 
-            leave=False
-        )
-        with torch.no_grad():
-            for batch in loop:
-                rot = batch["rotations"].to(DEVICE)
-                pos = batch["positions"].to(DEVICE)
-                B, T, J, D = rot.shape    # batches, frames(time), joints, data_dimension
-
-                # Make a hole
-                src_rot = rot.clone()
-                src_pos = pos.clone()
-                hole_start, hole_end = CONTEXT_FRAMES, T - TARGET_FRAMES
-                assert hole_end > hole_start, f"Hole length is 0 or less [{hole_start}, {hole_end})"
-                src_rot[:, hole_start:hole_end, :, :] = 0.0
-                src_pos[:, hole_start:hole_end, :] = 0.0
-
-                if INTERPOLATE_BEFORE_PREDICTION:
-                    src_rot_q = batch["rotations_quat"].to(DEVICE)
-                    src_rot_q[:, hole_start:hole_end, :, :] = 0.0
-                    src_rot, _ = interpolate_rotations(
-                        src_rot,
-                        src_rot_q,
-                        hole_start,
-                        hole_end
-                    )
-                    src_pos = interpolate_positions(
-                        src_pos,
-                        hole_start,
-                        hole_end
-                    )
-
+            with torch.amp.autocast('cuda', dtype=torch.bfloat16):
                 pred_rot, pred_pos = model(
                     src_rot, src_pos,
                     # src_rot.clone(), src_pos.clone(),
@@ -288,12 +204,121 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
                 loss = (
                     LOSS_WEIGHTS["rot_6d"] * loss_rot + 
                     LOSS_WEIGHTS["pos"] * loss_pos + 
-                    LOSS_WEIGHTS["fk"] * fk_loss + 
+                    LOSS_WEIGHTS["fk"] * fk_loss +
                     LOSS_WEIGHTS.get("smoothness", 0.0) * smoothness_loss
 
                     # LOSS_WEIGHTS["pos_vel_bnd"] * pos_vel_bnd_loss +
                     # LOSS_WEIGHTS["fk_vel_bnd"] * fk_vel_bnd_loss
                 )
+                train_loss_coponents = {
+                    "loss_rot": loss_rot.item(),
+                    "loss_pos": loss_pos.item(),
+                    "fk_loss": fk_loss.item(),
+                    "smoothness_loss": smoothness_loss.item(),
+                    # "pos_vel_bnd_loss": pos_vel_bnd_loss.item(),
+                    # "fk_vel_bnd_loss": fk_vel_bnd_loss.item()
+                }
+            
+            # loss.backward()
+            # optimizer.step()
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
+            
+            running_loss += loss.item()
+            loop.set_postfix(loss=f"{loss.item():.2f}")
+
+        avg_train_loss = running_loss / len(train_loader)
+
+        # Validation
+        model.eval()
+        total_val_loss = 0
+
+        loop = tqdm(
+            val_loader,
+            desc=f"Epoch {epoch+1}/{N_EPOCHS} - validation", 
+            leave=False
+        )
+        with torch.no_grad():
+            for batch in loop:
+                rot = batch["rotations"].to(DEVICE)
+                pos = batch["positions"].to(DEVICE)
+                B, T, J, D = rot.shape    # batches, frames(time), joints, data_dimension
+
+                # Make a hole
+                src_rot = rot.clone()
+                src_pos = pos.clone()
+                hole_start, hole_end = CONTEXT_FRAMES, T - TARGET_FRAMES
+                assert hole_end > hole_start, f"Hole length is 0 or less [{hole_start}, {hole_end})"
+                src_rot[:, hole_start:hole_end, :, :] = 0.0
+                src_pos[:, hole_start:hole_end, :] = 0.0
+
+                if INTERPOLATE_BEFORE_PREDICTION:
+                    src_rot_q = batch["rotations_quat"].to(DEVICE)
+                    src_rot_q[:, hole_start:hole_end, :, :] = 0.0
+                    src_rot, _ = interpolate_rotations(
+                        src_rot,
+                        src_rot_q,
+                        hole_start,
+                        hole_end
+                    )
+                    src_pos = interpolate_positions(
+                        src_pos,
+                        hole_start,
+                        hole_end
+                    )
+                with torch.amp.autocast('cuda', dtype=torch.bfloat16):
+                    pred_rot, pred_pos = model(
+                        src_rot, src_pos,
+                        # src_rot.clone(), src_pos.clone(),
+                        # fixed_points=fixed_points
+                    )
+
+                    # Compute loss - only on predicted frames in hole
+                    mask = torch.ones(T, dtype=torch.bool, device=DEVICE)
+                    mask[fixed_points] = False
+                    
+                    mask_rot = mask.view(1, T, 1, 1).expand(B, T, J, D)
+                    loss_rot = F.l1_loss(pred_rot[mask_rot], rot[mask_rot])
+
+                    mask_pos = mask.view(1, T, 1).expand(B, T, 3)
+                    loss_pos = F.l1_loss(pred_pos[mask_pos], pos[mask_pos])
+
+                    fk_loss = fk_loss_fn(
+                        rot[:, hole_start:hole_end, :, :], pos[:, hole_start:hole_end, :],
+                        pred_rot[:, hole_start:hole_end, :, :], pred_pos[:, hole_start:hole_end, :],
+                        offsets=offsets_tensor
+                    )
+
+                    smoothness_loss = smoothness_loss_fn(
+                        pred_rot[:, hole_start-1:hole_end+1, :, :], pred_pos[:, hole_start-1:hole_end+1, :], 
+                        offsets=offsets_tensor
+                    )
+
+                    # pos_vel_bnd_loss = root_pos_velocity_boundary_loss(
+                    #     pos, pred_pos,
+                    #     hole_start=hole_start,
+                    #     hole_end=hole_end
+                    # )
+
+                    # fk_vel_bnd_loss = fk_vel_bnd_loss_fn(
+                    #     rot, pos,
+                    #     pred_rot, pred_pos,
+                    #     offsets=offsets_tensor,
+                    #     hole_start=hole_start,
+                    #     hole_end=hole_end
+                    # )
+
+                    loss = (
+                        LOSS_WEIGHTS["rot_6d"] * loss_rot + 
+                        LOSS_WEIGHTS["pos"] * loss_pos + 
+                        LOSS_WEIGHTS["fk"] * fk_loss + 
+                        LOSS_WEIGHTS.get("smoothness", 0.0) * smoothness_loss
+
+                        # LOSS_WEIGHTS["pos_vel_bnd"] * pos_vel_bnd_loss +
+                        # LOSS_WEIGHTS["fk_vel_bnd"] * fk_vel_bnd_loss
+                    )
+
                 test_loss_coponents = {
                     "loss_rot": loss_rot.item(),
                     "loss_pos": loss_pos.item(),
@@ -349,7 +374,7 @@ if __name__ == "__main__":
 
     # v Literal['all', 'selected-subjects', 'selected-moves', 'selected-subjects-and-moves', 'selected-files'] v
     data_subset_type = 'all'
-    moves_names: list = ['fallAndGetUp', 'jumps1']
+    # moves_names: list = ['fallAndGetUp', 'jumps1']
     
     args = parser.parse_args()
     try:
