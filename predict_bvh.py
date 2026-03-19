@@ -43,26 +43,13 @@ def sixd_to_matrix(sixd: np.ndarray) -> np.ndarray:
 
 
 def stable_euler_from_matrix(mats, order="zyx", degrees=True):
-    T, _, _ = mats.shape
-    out = np.zeros((T, 3))
-
-    prev = R.from_matrix(mats[0]).as_euler(order, degrees=degrees)
-    out[0] = prev
-
-    for i in range(1, T):
-        curr = R.from_matrix(mats[i]).as_euler(order, degrees=degrees)
-        # choose the equivalent euler angle set closest to prev
-        candidates = [
-            curr,
-            curr + 360,
-            curr - 360
-        ]
-        dists = [np.linalg.norm(c - prev) for c in candidates]
-        best = candidates[np.argmin(dists)]
-        out[i] = best
-        prev = best
-
-    return out
+    # mats: (F, 3, 3)
+    raw_eulers = R.from_matrix(mats).as_euler(order, degrees=degrees) # (F, 3)
+    
+    rads = np.radians(raw_eulers) if degrees else raw_eulers
+    unwrapped_rads = np.unwrap(rads, axis=0)
+    
+    return np.degrees(unwrapped_rads) if degrees else unwrapped_rads
 #stable_euler_from_matrix
 
 

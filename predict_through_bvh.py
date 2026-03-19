@@ -124,6 +124,12 @@ def predict_bvh_loop(
         # final_rot6d[start_hole:end_hole, :, :] = pred_rot[hole_start_in_win:hole_end_in_win, :, :]
         # final_pos[start_hole:end_hole, :] = pred_pos[hole_start_in_win:hole_end_in_win, :]
 
+        # Ensure the rotations are correctly normalized
+        for t_idx in range(hole_start_in_win, hole_end_in_win):
+            m = sixd_to_matrix(pred_rot[t_idx])  # (J, 3, 3)
+            pred_rot[t_idx, :, :3] = m[:, :, 0]
+            pred_rot[t_idx, :, 3:] = m[:, :, 1]
+
         rot6d[start_hole:end_hole, :, :] = pred_rot[hole_start_in_win:hole_end_in_win, :, :]
         positions[start_hole:end_hole, :] = pred_pos[hole_start_in_win:hole_end_in_win, :]
 
