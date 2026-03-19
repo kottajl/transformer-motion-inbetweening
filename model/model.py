@@ -234,7 +234,12 @@ class MotionTransformer(nn.Module):
 
         out = self.transformer(enc_h)
 
-        pred_rot, pred_pos = self.output_decoder(out)
+        pred_rot_delta, pred_pos_delta = self.output_decoder(out)
+
+        # Residual connection
+        pred_rot = src_rot + pred_rot_delta
+        pred_pos = src_pos + pred_pos_delta
+
         return pred_rot, pred_pos
     
 #MotionTransformer

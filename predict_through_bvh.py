@@ -80,6 +80,10 @@ def predict_bvh_loop(
         rot = torch.from_numpy(win_rot).unsqueeze(0).to(device)  # (1, T_win, J, 6)
         pos = torch.from_numpy(win_pos).unsqueeze(0).to(device)  # (1, T_win, 3)
 
+        # Center positions around root joint
+        root_offset = pos[:, 0:1, :].clone()   # (B, T, 1, 3)
+        pos -= root_offset
+
         with torch.no_grad():
             src_rot = rot.clone()
             src_pos = pos.clone()
@@ -115,6 +119,9 @@ def predict_bvh_loop(
             pred_rot, pred_pos = model(
                 src_rot, src_pos
             )
+
+            # Return to original position space
+            pred_pos += root_offset
 
         pred_rot = pred_rot.cpu().numpy()[0]    # (T_win, J, 6)
         pred_pos = pred_pos.cpu().numpy()[0]    # (T_win, 3)

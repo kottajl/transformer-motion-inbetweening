@@ -133,6 +133,10 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
             B, T, J, D = rot.shape      # batches, frames(time), joints, data_dimension
             assert T == WINDOW_SIZE, f"Expected window size {WINDOW_SIZE}, but got {T}"
 
+            # Center positions around root joint
+            root_offset = pos[:, 0:1, :].clone()   # (B, T, 3)
+            pos -= root_offset
+
             # Make a hole
             src_rot = rot.clone()
             src_pos = pos.clone()
@@ -244,6 +248,10 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
                 rot = batch["rotations"].to(DEVICE)
                 pos = batch["positions"].to(DEVICE)
                 B, T, J, D = rot.shape    # batches, frames(time), joints, data_dimension
+
+                # Center positions around root joint
+                root_offset = pos[:, 0:1, :].clone()   # (B, T, 1, 3)
+                pos -= root_offset
 
                 # Make a hole
                 src_rot = rot.clone()

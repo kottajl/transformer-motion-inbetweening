@@ -1,0 +1,34 @@
+{
+    "config_name": "alpha10",
+    "description": "Alpha 0.10 model. Added residual connection from input to output. Increased hole frames to 10 and reduced target frames to 1. Increased batch size to 1024 and epochs to 2048. Reduced window step to 4. Increased learning rate to 0.0001. FK loss no longer weighted.",
+
+    "context_frames": 10,
+    "hole_frames": 10,
+    "target_frames": 1,
+
+    "batch_size": 1024,
+    "n_epochs": 2048,
+    "patience": 16,
+    "val_ratio": 0.16,
+    "window_step": 4,
+
+    "optimizer_lr": 0.0001,
+
+    "loss_weights": {
+        "rot_6d": 0.65,
+        "pos": 0.25,
+        "fk": 0.1,
+        "smoothness": 0.05
+    },
+    "fk_weighted": false,
+
+    "joint_embedding_size": 48,
+    "root_embedding_size": 48,
+
+    "num_encoder_layers": 6,
+    "num_decoder_layers": 2,
+    "num_heads": 8,
+    "dropout": 0.05,
+
+    "interpolate_before_prediction": true
+}
