@@ -6,7 +6,7 @@ logging.getLogger('matplotlib.font_manager').setLevel(logging.ERROR)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--log', type=str, default="generated_models/alpha11.log")
+    parser.add_argument('--log', type=str, default="generated_models/alpha12.log")
     args = parser.parse_args()
 
     with open(args.log, "r") as f:
