@@ -1,0 +1,34 @@
+{
+    "config_name": "alpha11",
+    "description": "Alpha 0.11 model. Added dynamic LR. Increased smoothness loss weight to 0.2 and reduced batch size to 256.",
+
+    "context_frames": 10,
+    "hole_frames": 10,
+    "target_frames": 1,
+
+    "batch_size": 256,
+    "n_epochs": 512,
+    "patience": 16,
+    "val_ratio": 0.16,
+    "window_step": 4,
+
+    "optimizer_lr": 0.0001,
+
+    "loss_weights": {
+        "rot_6d": 0.65,
+        "pos": 0.25,
+        "fk": 0.1,
+        "smoothness": 0.2
+    },
+    "fk_weighted": false,
+
+    "joint_embedding_size": 48,
+    "root_embedding_size": 48,
+
+    "num_encoder_layers": 6,
+    "num_decoder_layers": 2,
+    "num_heads": 8,
+    "dropout": 0.05,
+
+    "interpolate_before_prediction": true
+}

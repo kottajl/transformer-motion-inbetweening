@@ -110,6 +110,7 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
 
     scaler = torch.amp.GradScaler('cuda')
     optimizer = optim.Adam(model.parameters(), lr=OPTIMIZER_LR)
+    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=5)
 
     # List of context + target frames indices
     fixed_points = list(range(0, CONTEXT_FRAMES))
@@ -349,8 +350,9 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
             log_epoch_str += "Val Loss Components:\n"
             for key, value in test_loss_coponents.items():
                 log_epoch_str += f"  |- {key}: {value:.5f}\n"
+            log_epoch_str += f"LR: {optimizer.param_groups[0]['lr']:.6f}\n"
             log_epoch_str += "\n"
-        
+
         # Print results
         print(log_epoch_str)
         with open('train_log.txt', 'a') as file:
@@ -369,6 +371,9 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
             if epochs_no_improve >= PATIENCE:
                 print(f"Early stopping at epoch {epoch+1}")
                 break
+
+        # Update learning rate scheduler based on validation loss
+        scheduler.step(val_loss)
 
 
 if __name__ == "__main__":
