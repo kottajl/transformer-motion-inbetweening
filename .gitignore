@@ -25,3 +25,10 @@ train_log.txt
 # Python cache files
 __pycache__/
 *.pyc
+
+# VS Code
+.vscode/
+
+# Test configs & results
+configs/ae*.json
+generated_models/ae*.log

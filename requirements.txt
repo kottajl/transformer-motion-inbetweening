@@ -1,0 +1,14 @@
+# torch
+# torchvision
+# torchaudio
+scikit-learn
+scipy
+numpy
+networkx
+sympy
+bvh
+tqdm
+pillow
+joblib
+colorama
+matplotlib

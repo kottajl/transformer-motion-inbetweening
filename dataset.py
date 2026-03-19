@@ -123,7 +123,7 @@ class BvhDataset(Dataset):
         Get one motion window from animation.
         """
         anim_idx, start, end = self.window_indices[idx]
-        positions = self.positions[anim_idx][start:end]     # [T, J, 3]
+        positions = self.positions[anim_idx][start:end]     # [T, 3]
         rotations = self.rotations_6d[anim_idx][start:end]  # [T, J, 6]
 
         assert rotations is not None, f"rotations is None for anim {anim_idx}"
