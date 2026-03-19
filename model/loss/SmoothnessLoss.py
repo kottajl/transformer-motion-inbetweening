@@ -34,9 +34,10 @@ class SmoothnessLoss(nn.Module):
         )   # (B,T,J,3)
 
         vel = pred_joint_pos[:, 1:, :, :] - pred_joint_pos[:, :-1, :, :]   # (B,T-1,J,3)
-        # maybe weights there?
+        acc = vel[:, 1:, :, :] - vel[:, :-1, :, :]   # (B,T-2,J,3)
 
-        loss = torch.mean(torch.abs(vel))
+        # loss = torch.mean(torch.abs(vel))
+        loss = torch.mean(acc ** 2)
         return loss
     
 #SmoothnessLoss
