@@ -181,11 +181,13 @@ def predict_bvh_loop(
             # Euler order string (e.g. 'zyx') from channel names
             rot_ch_names = [channels[i] for i in rot_channel_indices]
             euler_order = ''.join([r[0].lower() for r in rot_ch_names])
+            euler_order = euler_order[::-1]
 
             # Convert 6D -> matrices -> euler angles
             joint_sixd = rot6d[:, j, :]   # (F, 6)
             mats = sixd_to_matrix(joint_sixd)  # (F, 3, 3)
             eulers = stable_euler_from_matrix(mats, euler_order, degrees=True)  # (F, 3)
+            eulers = eulers[:, ::-1]
             # eulers = R.from_matrix(mats).as_euler(euler_order, degrees=True)
 
             for local_rot_idx, ch_idx in enumerate(rot_channel_indices):
@@ -233,9 +235,9 @@ def predict_bvh_loop(
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--bvh-in', type=str, default="eval/dance2_subject5.bvh")
-    parser.add_argument('--bvh-out', default="eval/dance2_subject5_predicted_07_2.bvh")
-    parser.add_argument('--period', type=int, default=50)
+    parser.add_argument('--bvh-in', type=str, default="eval/jumps1_subject5.bvh")
+    parser.add_argument('--bvh-out', default="eval/jumps1_subject5_predicted_alpha14.bvh")
+    parser.add_argument('--period', type=int, default=25)
     parser.add_argument('--weights', default="best_model.pt", help='Path to model weights (.pt)')
     parser.add_argument('--config', type=str, required=True, help='Path to JSON config file')
     args = parser.parse_args()

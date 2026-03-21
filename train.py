@@ -13,6 +13,7 @@ import torch.optim as optim
 import torch.nn.functional as F
 import argparse
 import datetime
+import time
 
 from utils import load_params_from_json    
 
@@ -395,5 +396,16 @@ if __name__ == "__main__":
     except FileNotFoundError:
         print(f"Error: The file '{args.params}.json' was not found in the config/ folder.")
         exit(1)
+    
+    if not args.full_log:
+        print(f"{'\033[93m'}WARNING: Full logging is disabled! This means that detailed loss components and learning rate information will not be logged. Enable full logging with the --full_log flag for more insights during training.")     
+        for _ in range(3):
+            time.sleep(0.7)
+            print(".", flush=True)
+        time.sleep(0.5)
+        for _ in range(5):
+            print(".", end='', flush=True)
+            time.sleep(0.2)
+        print(f"{'\033[0m'}")
 
     train(params, full_log=args.full_log, data_subset_type=data_subset_type)

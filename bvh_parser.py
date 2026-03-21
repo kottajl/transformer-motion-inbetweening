@@ -58,6 +58,7 @@ def load_bvh(bvh_path) -> Animation:
         
         # Extract euler order (e.g.: ["Zrotation", "Yrotation", "Xrotation"] -> "zyx")
         euler_order = "".join([rot_ch[0].lower() for rot_ch in rot_channels])
+        euler_order = euler_order[::-1]
 
         # Get indices of rot_channels columns 
         joint_idx_start = mocap.get_joint_channels_index(joint_name) 
@@ -66,6 +67,8 @@ def load_bvh(bvh_path) -> Animation:
 
         # Get rotations of this joint for every frame
         eulers = frames[:, rot_indices]     # (-> [num_frames, 3])
+        eulers = eulers[:, ::-1]
+
         rotations_quat[:, j, :] = euler_to_quat(eulers, euler_order)
         rotations_6d[:, j, :] = euler_to_6d(eulers, euler_order)
 

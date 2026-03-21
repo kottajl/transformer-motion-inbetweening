@@ -150,16 +150,24 @@ def forward_kinematics(
     joint_positions = torch.zeros((B, T, J, 3), device=device)
     joint_positions[:, :, 0, :] = root_pos
 
+    global_rot_mats = rot_mats.clone()
+
     for j in range(1, J):
         parent_idx = parents[j]
         parent_pos = joint_positions[:, :, parent_idx, :]   # (B,T,3)
-        parent_rot = rot_mats[:, :, parent_idx, :, :]       # (B,T,3,3)
         
-        # Local offset of this joint
+        # Get global rotation
+        parent_global_rot = global_rot_mats[:, :, parent_idx, :, :]       # (B,T,3,3)
+        local_rot = rot_mats[:, :, j, :, :]
+        global_rot = torch.matmul(parent_global_rot, local_rot)  # (B,T,3,3)
+        global_rot_mats[:, :, j, :, :] = global_rot
+        
+        # Get offset and rotate it
         offset = offsets[j].to(device)                      # (3,)
-        rotated_offset = torch.matmul(parent_rot, offset.view(3, 1)).squeeze(-1)  # (B,T,3)
-        world_pos = parent_pos + rotated_offset    # (B,T,3)
+        rotated_offset = torch.matmul(parent_global_rot, offset.view(3, 1)).squeeze(-1)  # (B,T,3)
         
+        # Compute world position
+        world_pos = parent_pos + rotated_offset    # (B,T,3)
         joint_positions[:, :, j, :] = world_pos
 
     return joint_positions

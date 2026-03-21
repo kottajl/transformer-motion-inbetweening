@@ -32,3 +32,6 @@ __pycache__/
 # Test configs & results
 configs/ae*.json
 generated_models/ae*.log
+
+# Temporary files
+temp/
