@@ -239,6 +239,7 @@ class MotionTransformer(nn.Module):
         # Residual connection
         pred_rot = src_rot + pred_rot_delta
         pred_pos = src_pos + pred_pos_delta
+        # pred_rot, pred_pos = pred_rot_delta, pred_pos_delta
 
         return pred_rot, pred_pos
     
