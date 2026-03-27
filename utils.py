@@ -147,20 +147,18 @@ def forward_kinematics(
     B, T, J, _, _ = rot_mats.shape
     device = rot_mats.device
 
-    joint_positions = torch.zeros((B, T, J, 3), device=device)
-    joint_positions[:, :, 0, :] = root_pos
-
-    global_rot_mats = rot_mats.clone()
+    global_rot_mats = [rot_mats[:, :, 0, :, :]]
+    joint_positions = [root_pos]
 
     for j in range(1, J):
         parent_idx = parents[j]
-        parent_pos = joint_positions[:, :, parent_idx, :]   # (B,T,3)
+        parent_pos = joint_positions[parent_idx]    # (B,T,3)
         
         # Get global rotation
-        parent_global_rot = global_rot_mats[:, :, parent_idx, :, :]       # (B,T,3,3)
+        parent_global_rot = global_rot_mats[parent_idx]
         local_rot = rot_mats[:, :, j, :, :]
         global_rot = torch.matmul(parent_global_rot, local_rot)  # (B,T,3,3)
-        global_rot_mats[:, :, j, :, :] = global_rot
+        global_rot_mats.append(global_rot)
         
         # Get offset and rotate it
         offset = offsets[j].to(device)                      # (3,)
@@ -168,7 +166,7 @@ def forward_kinematics(
         
         # Compute world position
         world_pos = parent_pos + rotated_offset    # (B,T,3)
-        joint_positions[:, :, j, :] = world_pos
+        joint_positions.append(world_pos)
 
-    return joint_positions
+    return torch.stack(joint_positions, dim=2)
 #forward_kinematics

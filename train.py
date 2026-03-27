@@ -135,7 +135,7 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
             B, T, J, D = rot.shape      # batches, frames(time), joints, data_dimension
             assert T == WINDOW_SIZE, f"Expected window size {WINDOW_SIZE}, but got {T}"
 
-            # Center positions around root joint
+            # Center root position to the first frame of the window
             root_offset = pos[:, 0:1, :].clone()   # (B, T, 3)
             pos -= root_offset
 
@@ -172,58 +172,58 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
                     # fixed_points=fixed_points
                 )
 
-                # Compute loss - only on predicted frames in hole
-                mask = torch.ones(T, dtype=torch.bool, device=DEVICE)
-                mask[fixed_points] = False
-                
-                mask_rot = mask.view(1, T, 1, 1).expand(B, T, J, D)
-                loss_rot = F.l1_loss(pred_rot[mask_rot], rot[mask_rot])
+            # Compute loss - only on predicted frames in hole
+            mask = torch.ones(T, dtype=torch.bool, device=DEVICE)
+            mask[fixed_points] = False
+            
+            mask_rot = mask.view(1, T, 1, 1).expand(B, T, J, D)
+            loss_rot = F.l1_loss(pred_rot[mask_rot], rot[mask_rot])
 
-                mask_pos = mask.view(1, T, 1).expand(B, T, 3)
-                loss_pos = F.l1_loss(pred_pos[mask_pos], pos[mask_pos])
+            mask_pos = mask.view(1, T, 1).expand(B, T, 3)
+            loss_pos = F.l1_loss(pred_pos[mask_pos], pos[mask_pos])
 
-                fk_loss = fk_loss_fn(
-                    rot[:, hole_start:hole_end, :, :], pos[:, hole_start:hole_end, :],
-                    pred_rot[:, hole_start:hole_end, :, :], pred_pos[:, hole_start:hole_end, :],
-                    offsets=offsets_tensor
-                )
+            fk_loss = fk_loss_fn(
+                rot[:, hole_start:hole_end, :, :], pos[:, hole_start:hole_end, :],
+                pred_rot[:, hole_start:hole_end, :, :], pred_pos[:, hole_start:hole_end, :],
+                offsets=offsets_tensor
+            )
 
-                smoothness_loss = smoothness_loss_fn(
-                    pred_rot[:, hole_start-1:hole_end+1, :, :], pred_pos[:, hole_start-1:hole_end+1, :], 
-                    offsets=offsets_tensor
-                )
+            smoothness_loss = smoothness_loss_fn(
+                pred_rot[:, hole_start-1:hole_end+1, :, :], pred_pos[:, hole_start-1:hole_end+1, :], 
+                offsets=offsets_tensor
+            )
 
-                # pos_vel_bnd_loss = root_pos_velocity_boundary_loss(
-                #     pos, pred_pos,
-                #     hole_start=hole_start,
-                #     hole_end=hole_end
-                # )
+            # pos_vel_bnd_loss = root_pos_velocity_boundary_loss(
+            #     pos, pred_pos,
+            #     hole_start=hole_start,
+            #     hole_end=hole_end
+            # )
 
-                # fk_vel_bnd_loss = fk_vel_bnd_loss_fn(
-                #     rot, pos,
-                #     pred_rot, pred_pos,
-                #     offsets=offsets_tensor,
-                #     hole_start=hole_start,
-                #     hole_end=hole_end
-                # )
+            # fk_vel_bnd_loss = fk_vel_bnd_loss_fn(
+            #     rot, pos,
+            #     pred_rot, pred_pos,
+            #     offsets=offsets_tensor,
+            #     hole_start=hole_start,
+            #     hole_end=hole_end
+            # )
 
-                loss = (
-                    LOSS_WEIGHTS["rot_6d"] * loss_rot + 
-                    LOSS_WEIGHTS["pos"] * loss_pos + 
-                    LOSS_WEIGHTS["fk"] * fk_loss +
-                    LOSS_WEIGHTS.get("smoothness", 0.0) * smoothness_loss
+            loss = (
+                LOSS_WEIGHTS["rot_6d"] * loss_rot + 
+                LOSS_WEIGHTS["pos"] * loss_pos + 
+                LOSS_WEIGHTS["fk"] * fk_loss +
+                LOSS_WEIGHTS.get("smoothness", 0.0) * smoothness_loss
 
-                    # LOSS_WEIGHTS["pos_vel_bnd"] * pos_vel_bnd_loss +
-                    # LOSS_WEIGHTS["fk_vel_bnd"] * fk_vel_bnd_loss
-                )
-                train_loss_coponents = {
-                    "loss_rot": loss_rot.item(),
-                    "loss_pos": loss_pos.item(),
-                    "fk_loss": fk_loss.item(),
-                    "smoothness_loss": smoothness_loss.item(),
-                    # "pos_vel_bnd_loss": pos_vel_bnd_loss.item(),
-                    # "fk_vel_bnd_loss": fk_vel_bnd_loss.item()
-                }
+                # LOSS_WEIGHTS["pos_vel_bnd"] * pos_vel_bnd_loss +
+                # LOSS_WEIGHTS["fk_vel_bnd"] * fk_vel_bnd_loss
+            )
+            train_loss_coponents = {
+                "loss_rot": loss_rot.item(),
+                "loss_pos": loss_pos.item(),
+                "fk_loss": fk_loss.item(),
+                "smoothness_loss": smoothness_loss.item(),
+                # "pos_vel_bnd_loss": pos_vel_bnd_loss.item(),
+                # "fk_vel_bnd_loss": fk_vel_bnd_loss.item()
+            }
             
             # loss.backward()
             # optimizer.step()
@@ -284,50 +284,50 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
                         # fixed_points=fixed_points
                     )
 
-                    # Compute loss - only on predicted frames in hole
-                    mask = torch.ones(T, dtype=torch.bool, device=DEVICE)
-                    mask[fixed_points] = False
-                    
-                    mask_rot = mask.view(1, T, 1, 1).expand(B, T, J, D)
-                    loss_rot = F.l1_loss(pred_rot[mask_rot], rot[mask_rot])
+                # Compute loss - only on predicted frames in hole
+                mask = torch.ones(T, dtype=torch.bool, device=DEVICE)
+                mask[fixed_points] = False
+                
+                mask_rot = mask.view(1, T, 1, 1).expand(B, T, J, D)
+                loss_rot = F.l1_loss(pred_rot[mask_rot], rot[mask_rot])
 
-                    mask_pos = mask.view(1, T, 1).expand(B, T, 3)
-                    loss_pos = F.l1_loss(pred_pos[mask_pos], pos[mask_pos])
+                mask_pos = mask.view(1, T, 1).expand(B, T, 3)
+                loss_pos = F.l1_loss(pred_pos[mask_pos], pos[mask_pos])
 
-                    fk_loss = fk_loss_fn(
-                        rot[:, hole_start:hole_end, :, :], pos[:, hole_start:hole_end, :],
-                        pred_rot[:, hole_start:hole_end, :, :], pred_pos[:, hole_start:hole_end, :],
-                        offsets=offsets_tensor
-                    )
+                fk_loss = fk_loss_fn(
+                    rot[:, hole_start:hole_end, :, :], pos[:, hole_start:hole_end, :],
+                    pred_rot[:, hole_start:hole_end, :, :], pred_pos[:, hole_start:hole_end, :],
+                    offsets=offsets_tensor
+                )
 
-                    smoothness_loss = smoothness_loss_fn(
-                        pred_rot[:, hole_start-1:hole_end+1, :, :], pred_pos[:, hole_start-1:hole_end+1, :], 
-                        offsets=offsets_tensor
-                    )
+                smoothness_loss = smoothness_loss_fn(
+                    pred_rot[:, hole_start-1:hole_end+1, :, :], pred_pos[:, hole_start-1:hole_end+1, :], 
+                    offsets=offsets_tensor
+                )
 
-                    # pos_vel_bnd_loss = root_pos_velocity_boundary_loss(
-                    #     pos, pred_pos,
-                    #     hole_start=hole_start,
-                    #     hole_end=hole_end
-                    # )
+                # pos_vel_bnd_loss = root_pos_velocity_boundary_loss(
+                #     pos, pred_pos,
+                #     hole_start=hole_start,
+                #     hole_end=hole_end
+                # )
 
-                    # fk_vel_bnd_loss = fk_vel_bnd_loss_fn(
-                    #     rot, pos,
-                    #     pred_rot, pred_pos,
-                    #     offsets=offsets_tensor,
-                    #     hole_start=hole_start,
-                    #     hole_end=hole_end
-                    # )
+                # fk_vel_bnd_loss = fk_vel_bnd_loss_fn(
+                #     rot, pos,
+                #     pred_rot, pred_pos,
+                #     offsets=offsets_tensor,
+                #     hole_start=hole_start,
+                #     hole_end=hole_end
+                # )
 
-                    loss = (
-                        LOSS_WEIGHTS["rot_6d"] * loss_rot + 
-                        LOSS_WEIGHTS["pos"] * loss_pos + 
-                        LOSS_WEIGHTS["fk"] * fk_loss + 
-                        LOSS_WEIGHTS.get("smoothness", 0.0) * smoothness_loss
+                loss = (
+                    LOSS_WEIGHTS["rot_6d"] * loss_rot + 
+                    LOSS_WEIGHTS["pos"] * loss_pos + 
+                    LOSS_WEIGHTS["fk"] * fk_loss + 
+                    LOSS_WEIGHTS.get("smoothness", 0.0) * smoothness_loss
 
-                        # LOSS_WEIGHTS["pos_vel_bnd"] * pos_vel_bnd_loss +
-                        # LOSS_WEIGHTS["fk_vel_bnd"] * fk_vel_bnd_loss
-                    )
+                    # LOSS_WEIGHTS["pos_vel_bnd"] * pos_vel_bnd_loss +
+                    # LOSS_WEIGHTS["fk_vel_bnd"] * fk_vel_bnd_loss
+                )
 
                 test_loss_coponents = {
                     "loss_rot": loss_rot.item(),
