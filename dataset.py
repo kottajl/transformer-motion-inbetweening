@@ -118,6 +118,9 @@ class BvhDataset(Dataset):
     def __len__(self):
         return len(self.window_indices)
 
+    def get_num_of_joints(self):
+        return self.parents.shape[0]
+
     def __getitem__(self, idx):
         """
         Get one motion window from animation.
