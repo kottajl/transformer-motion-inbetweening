@@ -80,6 +80,7 @@ def test_and_get_scores(
 
     total_l2p = 0.0
     total_l2q = 0.0
+    total_npss = 0.0
     total_samples = 0
 
     loop = tqdm(
@@ -168,7 +169,7 @@ def test_and_get_scores(
             # - l2 position error (L2P)
             # mask_pos = mask.view(1, T, 1).expand(B, T, 3)
             # batch_l2p = metrics.l2p(pred_pos[mask_pos], pos[mask_pos])
-            batch_l2p = metrics.l2p(pred_pos_fk[:, hole_start:hole_end, :], gt_pos_fk[:, hole_start:hole_end, :])
+            batch_l2p = metrics.l2p(pred_pos_fk[:, hole_start:hole_end, :, :], gt_pos_fk[:, hole_start:hole_end, :, :])
             
             # - l2 quaternion error (L2Q)
             # mask_rot_q = mask.view(1, T, 1, 1).expand(B, T, J, 4)
@@ -176,13 +177,21 @@ def test_and_get_scores(
             # batch_l2q = metrics.l2q(pred_rot_q[mask_rot_q], rot_q[mask_rot_q])
             batch_l2q = metrics.l2q(pred_rot_q[:, hole_start:hole_end, :, :], gt_rot_q[:, hole_start:hole_end, :, :])
 
+            # - npss (Normalized Power Spectrum Similarity) - on joint positions
+            batch_npss = metrics.npss(
+                pred_pos_fk[:, hole_start:hole_end, :, :].reshape(B, hole_end - hole_start, n_joints * 3),
+                gt_pos_fk[:, hole_start:hole_end, :, :].reshape(B, hole_end - hole_start, n_joints * 3)
+            )
+
             # Aggregate scores
             total_l2p += batch_l2p * B
             total_l2q += batch_l2q * B
+            total_npss += batch_npss * B
             total_samples += B
     
     scores['l2p'] = total_l2p / total_samples
     scores['l2q'] = total_l2q / total_samples
+    scores['npss'] = total_npss / total_samples
 
     return scores
 #test_and_get_scores
