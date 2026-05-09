@@ -12,7 +12,6 @@ from torch.utils.data import DataLoader
 from scipy.spatial.transform import Rotation as R
 from utils import rot6d_to_mat_torch
 
-import torch_geometric
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
@@ -46,6 +45,7 @@ def test_and_get_scores(
     model: MotionTransformer,
     dataset: BvhDataset,
     params: dict,
+    hole_frames: int,
     window_step: int,
     data_subset_type: str,
     # moves_names: list
@@ -55,17 +55,19 @@ def test_and_get_scores(
     # Get params
     try:
         CONTEXT_FRAMES = params["context_frames"]
-        HOLE_FRAMES = params["hole_frames"]
+        HOLE_FRAMES = hole_frames
         TARGET_FRAMES = params["target_frames"]
         BATCH_SIZE = params["batch_size"]
         INTERPOLATE_BEFORE_PREDICTION = params.get("interpolate_before_prediction", False)
         WINDOW_SIZE = CONTEXT_FRAMES + HOLE_FRAMES + TARGET_FRAMES
+    
     except KeyError as e:
         print(f"Error: Missing key in parameters: {e}")
         exit(-1)
     
     hole_start = CONTEXT_FRAMES
     hole_end = CONTEXT_FRAMES + HOLE_FRAMES
+    print(f"Operating on hole size: {hole_end - hole_start} frames (from {hole_start} to {hole_end-1} in the window)")
     
     # List of context + target frames indices
     fixed_points = list(range(0, CONTEXT_FRAMES))
@@ -202,11 +204,13 @@ if __name__ == "__main__":
     parser.add_argument('--weights', default="best_model.pt", help='Path to model weights (.pt)')
     parser.add_argument('--config', type=str, required=True, help='Path to JSON config file')
     parser.add_argument('--window_step', type=int, default=-1, help='Step size for sliding window over the data')
+    parser.add_argument('--hole_size', type=int, default=-1, help='Hole size to test (overrides config if set)')
     # parser.add_argument('--data_subset_type', type=str, default='all', help='Subset of data to use for training (e.g., "all", "selected-moves", etc.)')
     args = parser.parse_args()
 
     # v Literal['all', 'selected-subjects', 'selected-moves', 'selected-subjects-and-moves', 'selected-files'] v
     data_subset_type = 'all'
+    # subjects_indices = [5]
     # moves_names: list = ['fallAndGetUp', 'jumps1']
 
     # Load model parameters from JSON
@@ -223,7 +227,18 @@ if __name__ == "__main__":
     
     # Create dataset and extract number of joints for model initialization
     try:
-        WINDOW_SIZE = params["context_frames"] + params["hole_frames"] + params["target_frames"]
+        if args.hole_size != -1:
+            HOLE_FRAMES = args.hole_size
+        else:
+            if isinstance(args.hole_size, int):
+                HOLE_FRAMES = args.hole_size
+            elif isinstance(args.hole_size, list) and len(args.hole_size) == 2:
+                HOLE_FRAMES = args.hole_size[1]
+            else:
+                raise ValueError("Invalid hole_size argument. Must be an integer or a list of two integers.")
+            print(f"'hole_size' parameter not specified. Using hole_frames: {HOLE_FRAMES}")
+        
+        WINDOW_SIZE = params["context_frames"] + HOLE_FRAMES + params["target_frames"]
 
         dataset = BvhDataset(
             "datasets/lafan1/test_processed/",
@@ -232,7 +247,7 @@ if __name__ == "__main__":
             device=DEVICE,
             interpolate_missing=params["interpolate_before_prediction"],
             subset_type=data_subset_type,
-            # **subset_kwargs
+            # subjects_indices=subjects_indices
         )
         n_joints = dataset.get_num_of_joints()
         print(f"Number of joints: {n_joints}")
@@ -254,6 +269,7 @@ if __name__ == "__main__":
         params=params,
         window_step=window_step,
         data_subset_type=data_subset_type,
+        hole_frames=HOLE_FRAMES
         # moves_names=moves_names
     )
     print("Testing completed.")

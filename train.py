@@ -22,13 +22,11 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
     CONFIG_NAME = params.get("config_name", "new_config")
 
     CONTEXT_FRAMES = params["context_frames"]
-    HOLE_FRAMES = params["hole_frames"]
     TARGET_FRAMES = params["target_frames"]
     BATCH_SIZE = params["batch_size"]
     N_EPOCHS = params["n_epochs"]
     PATIENCE = params["patience"]
     VAL_RATIO = params["val_ratio"]
-    WINDOW_SIZE = CONTEXT_FRAMES + HOLE_FRAMES + TARGET_FRAMES
     WINDOW_STEP = params["window_step"]
     OPTIMIZER_LR = params["optimizer_lr"]
     JOINT_EMBEDDING_SIZE = params["joint_embedding_size"]
@@ -37,6 +35,20 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
     NUM_DECODER_LAYERS = params["num_decoder_layers"]
     NUM_HEADS = params["num_heads"]
     DROPOUT = params["dropout"]
+
+    # Get hole frames (check if fixed or variable)
+    HOLE_FRAMES = params["hole_frames"]
+    if isinstance(HOLE_FRAMES, int):
+        min_hole_frames = HOLE_FRAMES
+        max_hole_frames = HOLE_FRAMES
+        print(f"Using fixed hole size of {max_hole_frames} frames.")
+    elif isinstance(HOLE_FRAMES, list) and len(HOLE_FRAMES) == 2:
+        min_hole_frames = HOLE_FRAMES[0]
+        max_hole_frames = HOLE_FRAMES[1]
+        print(f"Using variable hole size with values between {min_hole_frames} and {max_hole_frames} frames.")
+    else:
+        raise ValueError("Invalid 'hole_frames' parameter. Must be either an integer or a list of two integers [min, max].")
+    WINDOW_SIZE = CONTEXT_FRAMES + max_hole_frames + TARGET_FRAMES
     MAX_LEN = max(64, WINDOW_SIZE)
 
     INTERPOLATE_BEFORE_PREDICTION = params.get("interpolate_before_prediction", False)
@@ -113,9 +125,9 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
     optimizer = optim.Adam(model.parameters(), lr=OPTIMIZER_LR)
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=5)
 
-    # List of context + target frames indices
-    fixed_points = list(range(0, CONTEXT_FRAMES))
-    fixed_points.extend(list(range(WINDOW_SIZE - TARGET_FRAMES, WINDOW_SIZE)))
+    # List of context + target frames indices   -- REMOVED FOR VARIABLE HOLE SIZE, COMPUTED IN TRAINING LOOP INSTEAD
+    # fixed_points = list(range(0, CONTEXT_FRAMES))
+    # fixed_points.extend(list(range(WINDOW_SIZE - TARGET_FRAMES, WINDOW_SIZE)))
 
     best_val_loss = float("inf")
     epochs_no_improve = 0
@@ -124,16 +136,31 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
         model.train()
         running_loss = 0
 
+        EPOCH_HOLE_SIZE_MULTIPLIER = 2
+        START_HOLE_SIZE = 2
+        epoch_max_hole_frames = min(
+            min_hole_frames + START_HOLE_SIZE + EPOCH_HOLE_SIZE_MULTIPLIER * epoch,
+            max_hole_frames
+        )   # If hole size is fixed, this will still work ok.
+
         loop = tqdm(
             train_loader,
             desc=f"Epoch {epoch+1}/{N_EPOCHS} - training", 
             leave=False
         )
         for batch in loop:
-            rot = batch["rotations"].to(DEVICE)
-            pos = batch["positions"].to(DEVICE)
+            # Get random hole size for this batch
+            batch_hole_frames = torch.randint(min_hole_frames, epoch_max_hole_frames + 1, (1,)).item()
+            BATCH_WINDOW_SIZE = CONTEXT_FRAMES + batch_hole_frames + TARGET_FRAMES
+
+            rot = batch["rotations"][:, :BATCH_WINDOW_SIZE, :, :].to(DEVICE)
+            pos = batch["positions"][:, :BATCH_WINDOW_SIZE, :].to(DEVICE)
             B, T, J, D = rot.shape      # batches, frames(time), joints, data_dimension
-            assert T == WINDOW_SIZE, f"Expected window size {WINDOW_SIZE}, but got {T}"
+            assert T == BATCH_WINDOW_SIZE, f"Expected window size {BATCH_WINDOW_SIZE}, but got {T}"
+
+            # Get fixed points
+            fixed_points = list(range(0, CONTEXT_FRAMES))
+            fixed_points.extend(list(range(BATCH_WINDOW_SIZE - TARGET_FRAMES, BATCH_WINDOW_SIZE)))
 
             # Center root position to the first frame of the window
             root_offset = pos[:, 0:1, :].clone()   # (B, T, 3)
@@ -148,7 +175,7 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
             src_pos[:, hole_start:hole_end, :] = 0.0
 
             if INTERPOLATE_BEFORE_PREDICTION:
-                src_rot_q = batch["rotations_quat"].to(DEVICE)
+                src_rot_q = batch["rotations_quat"][:, :BATCH_WINDOW_SIZE, :, :].to(DEVICE)
                 src_rot_q[:, hole_start:hole_end, :, :] = 0.0
                 with torch.no_grad():
                     src_rot, _ = interpolate_rotations(
@@ -352,6 +379,7 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
             for key, value in test_loss_coponents.items():
                 log_epoch_str += f"  |- {key}: {value:.5f}\n"
             log_epoch_str += f"LR: {optimizer.param_groups[0]['lr']:.6f}\n"
+            log_epoch_str += f"Hole frames in this epoch: [{min_hole_frames}, {epoch_max_hole_frames}]\n"
             log_epoch_str += "\n"
 
         # Print results
@@ -388,6 +416,7 @@ if __name__ == "__main__":
 
     # v Literal['all', 'selected-subjects', 'selected-moves', 'selected-subjects-and-moves', 'selected-files'] v
     data_subset_type = 'all'
+    # subjects_indices = [1, 2, 3, 4]
     # moves_names: list = ['fallAndGetUp', 'jumps1']
     
     args = parser.parse_args()
