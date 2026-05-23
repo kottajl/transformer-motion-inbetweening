@@ -1,4 +1,4 @@
-from typing import Tuple, List, Optional
+from typing import Tuple, List, Optional, Literal
 
 import torch
 import torch.nn as nn
@@ -203,6 +203,8 @@ class MotionTransformer(nn.Module):
         #     batch_first=True
         # )
 
+        self.hole_mask_embedding = nn.Embedding(2, self.dim_model)  # 0 = available, 1 = masked
+
         encoder_layer = nn.TransformerEncoderLayer(
             d_model=self.dim_model,
             nhead=num_heads,
@@ -268,10 +270,20 @@ class MotionTransformer(nn.Module):
     def forward(
         self,
         src_rot: torch.Tensor,
-        src_pos: torch.Tensor
+        src_pos: torch.Tensor,
+        fixed_points: List[int]
     ) -> Tuple[torch.Tensor, torch.Tensor]:
         # Encoding
         enc_seq = self.input_encoder(src_rot, src_pos)
+        B, T, _ = enc_seq.shape
+
+        # Generate mask for self-attention based on fixed points
+        hole_mask = torch.ones(T, dtype=torch.long, device=enc_seq.device)
+        hole_mask[fixed_points] = 0     # 0 = available, 1 = masked
+
+        # Add hole mask embedding to the input sequence
+        mask_embed = self.hole_mask_embedding(hole_mask).unsqueeze(0).expand(B, -1, -1) # (B, T, dim_model)
+        enc_seq = enc_seq + mask_embed
 
         if self.pe_type == "sinusoidal":
             enc_h = self.pos_encoder(enc_seq)

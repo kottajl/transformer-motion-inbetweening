@@ -53,7 +53,6 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
     print(f"Maximum sequence length: {MAX_LEN}")
 
     PE_TYPE = params.get("pe_type", "sinusoidal")
-
     INTERPOLATE_BEFORE_PREDICTION = params.get("interpolate_before_prediction", False)
 
     LOSS_WEIGHTS = params["loss_weights"]
@@ -200,7 +199,7 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
                 pred_rot, pred_pos = model(
                     src_rot, src_pos,
                     # src_rot.clone(), src_pos.clone(),
-                    # fixed_points=fixed_points
+                    fixed_points=fixed_points
                 )
 
             # Compute loss - only on predicted frames in hole
@@ -277,6 +276,11 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
             leave=False
         )
         with torch.no_grad():
+            # Get fixed points for every batch (hole size here is always max_hole_frames)
+            BATCH_WINDOW_SIZE = CONTEXT_FRAMES + max_hole_frames + TARGET_FRAMES
+            fixed_points = list(range(0, CONTEXT_FRAMES))
+            fixed_points.extend(list(range(BATCH_WINDOW_SIZE - TARGET_FRAMES, BATCH_WINDOW_SIZE)))
+
             for batch in loop:
                 rot = batch["rotations"].to(DEVICE)
                 pos = batch["positions"].to(DEVICE)
@@ -312,7 +316,7 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
                     pred_rot, pred_pos = model(
                         src_rot, src_pos,
                         # src_rot.clone(), src_pos.clone(),
-                        # fixed_points=fixed_points
+                        fixed_points=fixed_points
                     )
 
                 # Compute loss - only on predicted frames in hole

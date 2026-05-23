@@ -130,7 +130,7 @@ def test_and_get_scores(
                 pred_rot, pred_pos = model(
                     src_rot, src_pos,
                     # src_rot.clone(), src_pos.clone(),
-                    # fixed_points=fixed_points
+                    fixed_points=fixed_points
                 )
             
             # Return to original position space
