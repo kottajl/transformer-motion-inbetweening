@@ -134,7 +134,8 @@ def forward_kinematics(
     rot_mats: torch.Tensor,
     root_pos: torch.Tensor,
     parents: list,
-    offsets: torch.Tensor
+    offsets: torch.Tensor,
+    return_rot_mats: bool = False
 ) -> torch.Tensor:
     """
     rot_mats: (B,T,J,3,3)
@@ -168,5 +169,8 @@ def forward_kinematics(
         world_pos = parent_pos + rotated_offset    # (B,T,3)
         joint_positions.append(world_pos)
 
-    return torch.stack(joint_positions, dim=2)
+    if return_rot_mats:
+        return torch.stack(joint_positions, dim=2), torch.stack(global_rot_mats, dim=2)
+    else:
+        return torch.stack(joint_positions, dim=2)
 #forward_kinematics

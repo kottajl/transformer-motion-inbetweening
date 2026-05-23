@@ -136,54 +136,48 @@ def test_and_get_scores(
             # Return to original position space
             pos += root_offset
             pred_pos += root_offset
-            
-            # Prepare mask on only-predicted frames in hole
-            # mask = torch.ones(T, dtype=torch.bool, device=DEVICE)
-            # mask[fixed_points] = False
 
-            # Compute gt quaternions for L2Q metric
             gt_rot_mats = rot6d_to_mat_torch(rot)
-            gt_rot_mats_np = gt_rot_mats.cpu().numpy().reshape(-1, 3, 3)
-            gt_rot_q_np = R.from_matrix(gt_rot_mats_np).as_quat()
-            gt_rot_q = torch.tensor(gt_rot_q_np, device=DEVICE).view(B, T, J, 4)
-
-            # Compute predicted quaternions for L2Q metric
             pred_rot_mats = rot6d_to_mat_torch(pred_rot)
-            pred_rot_mats_np = pred_rot_mats.cpu().numpy().reshape(-1, 3, 3)
-            pred_rot_q_np = R.from_matrix(pred_rot_mats_np).as_quat()
-            pred_rot_q = torch.tensor(pred_rot_q_np, device=DEVICE).view(B, T, J, 4)
 
             # Compute forward kinematics to get joint positions
-            pred_pos_fk = forward_kinematics(
+            pred_pos_fk, pred_rot_mats_fk = forward_kinematics(
                 pred_rot_mats,
                 pred_pos,
                 dataset.parents,
-                torch.tensor(dataset.offsets, device=DEVICE)
+                torch.tensor(dataset.offsets, device=DEVICE),
+                return_rot_mats=True
             )
-            gt_pos_fk = forward_kinematics(
-                rot6d_to_mat_torch(rot),
+            gt_pos_fk, gt_rot_mats_fk = forward_kinematics(
+                gt_rot_mats,
                 pos,
                 dataset.parents,
-                torch.tensor(dataset.offsets, device=DEVICE)
+                torch.tensor(dataset.offsets, device=DEVICE),
+                return_rot_mats=True
             )
+
+            # Compute predicted global quaternions for L2Q metric
+            gt_rot_mats_fk_np = gt_rot_mats_fk.cpu().numpy().reshape(-1, 3, 3)
+            gt_rot_q_fk_np = R.from_matrix(gt_rot_mats_fk_np).as_quat()
+            gt_rot_fk_q = torch.tensor(gt_rot_q_fk_np, device=DEVICE).view(B, T, J, 4)
+
+            # Compute gt global quaternions for L2Q metric
+            pred_rot_mats_fk_np = pred_rot_mats_fk.cpu().numpy().reshape(-1, 3, 3)
+            pred_rot_q_fk_np = R.from_matrix(pred_rot_mats_fk_np).as_quat()
+            pred_rot_fk_q = torch.tensor(pred_rot_q_fk_np, device=DEVICE).view(B, T, J, 4)
 
             # --- METRICS ---
 
             # - l2 position error (L2P)
-            # mask_pos = mask.view(1, T, 1).expand(B, T, 3)
-            # batch_l2p = metrics.l2p(pred_pos[mask_pos], pos[mask_pos])
             batch_l2p = metrics.l2p(pred_pos_fk[:, hole_start:hole_end, :, :], gt_pos_fk[:, hole_start:hole_end, :, :])
             
             # - l2 quaternion error (L2Q)
-            # mask_rot_q = mask.view(1, T, 1, 1).expand(B, T, J, 4)
-            # rot_q = batch["rotations_quat"].to(DEVICE)
-            # batch_l2q = metrics.l2q(pred_rot_q[mask_rot_q], rot_q[mask_rot_q])
-            batch_l2q = metrics.l2q(pred_rot_q[:, hole_start:hole_end, :, :], gt_rot_q[:, hole_start:hole_end, :, :])
+            batch_l2q = metrics.l2q(pred_rot_fk_q[:, hole_start:hole_end, :, :], gt_rot_fk_q[:, hole_start:hole_end, :, :])
 
-            # - npss (Normalized Power Spectrum Similarity) - on joint positions
+            # - npss (Normalized Power Spectrum Similarity) - on global rotations
             batch_npss = metrics.npss(
-                pred_pos_fk[:, hole_start:hole_end, :, :].reshape(B, hole_end - hole_start, n_joints * 3),
-                gt_pos_fk[:, hole_start:hole_end, :, :].reshape(B, hole_end - hole_start, n_joints * 3)
+                pred_rot_fk_q[:, hole_start:hole_end, :, :].reshape(B, hole_end - hole_start, n_joints * 4),
+                gt_rot_fk_q[:, hole_start:hole_end, :, :].reshape(B, hole_end - hole_start, n_joints * 4)
             )
 
             # Aggregate scores
