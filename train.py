@@ -50,6 +50,9 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
         raise ValueError("Invalid 'hole_frames' parameter. Must be either an integer or a list of two integers [min, max].")
     WINDOW_SIZE = CONTEXT_FRAMES + max_hole_frames + TARGET_FRAMES
     MAX_LEN = max(64, WINDOW_SIZE)
+    print(f"Maximum sequence length: {MAX_LEN}")
+
+    PE_TYPE = params.get("pe_type", "sinusoidal")
 
     INTERPOLATE_BEFORE_PREDICTION = params.get("interpolate_before_prediction", False)
 
@@ -115,6 +118,7 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
         num_decoder_layers=NUM_DECODER_LAYERS,
         num_heads=NUM_HEADS,
         dropout=DROPOUT,
+        pe_type=PE_TYPE,
         max_len=MAX_LEN
     ).to(DEVICE)
     # if torch.cuda.is_available():

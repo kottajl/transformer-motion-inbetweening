@@ -1,0 +1,35 @@
+{
+    "config_name": "beta3_small",
+    "description": "Beta 0.3 small model. Add Relative Position Encoding, rest as beta1 (small training to check if it works).",
+
+    "context_frames": 10,
+    "hole_frames": [4, 16],
+    "target_frames": 1,
+
+    "batch_size": 512,
+    "n_epochs": 64,
+    "patience": 8,
+    "val_ratio": 0.16,
+    "window_step": 4,
+
+    "optimizer_lr": 0.0001,
+
+    "loss_weights": {
+        "rot_6d": 0.5,
+        "pos": 0.35,
+        "fk": 0.1,
+        "smoothness": 0.05
+    },
+    "fk_weighted": false,
+
+    "joint_embedding_size": 48,
+    "root_embedding_size": 48,
+
+    "num_encoder_layers": 6,
+    "num_decoder_layers": 2,
+    "num_heads": 8,
+    "dropout": 0.05,
+
+    "pe_type": "relative",
+    "interpolate_before_prediction": true
+}
