@@ -26,6 +26,7 @@ def fetch_model(model_file: str, params: dict, n_joints: int, window_size: int) 
             num_decoder_layers=params['num_decoder_layers'],
             num_heads=params['num_heads'],
             dropout=params['dropout'],
+            velocity_included=params.get("velocity_included", False),
             pe_type=params.get("pe_type", "sinusoidal"),
             max_len=max(64, window_size)
         )

@@ -14,21 +14,29 @@ class InputEncoder(nn.Module):
         self,
         num_joints,
         joint_embedding_size,
-        root_embedding_size
+        root_embedding_size,
+        velocity_included: bool
     ):
         super(InputEncoder, self).__init__()
 
         self.J = num_joints
         self.joint_embedding_size = joint_embedding_size
         self.root_embedding_size = root_embedding_size
+        self.velocity_included = velocity_included
+
+        rot_input_size = 6
+        pos_input_size = 3
+        if velocity_included:
+            rot_input_size *= 2
+            pos_input_size *= 2
 
         self.rot_encoder = nn.Sequential(
-            nn.Linear(in_features=6, out_features=16),
+            nn.Linear(in_features=rot_input_size, out_features=16),
             nn.ReLU(inplace=True),
             nn.Linear(in_features=16, out_features=self.joint_embedding_size)
         )
         self.pos_encoder = nn.Sequential(
-            nn.Linear(in_features=3, out_features=8),
+            nn.Linear(in_features=pos_input_size, out_features=8),
             nn.ReLU(inplace=True),
             nn.Linear(in_features=8, out_features=self.root_embedding_size)
         )
@@ -41,13 +49,25 @@ class InputEncoder(nn.Module):
         B, T, J, _ = local_6d_rot.shape
         assert J == self.J
 
-        local_6d_rot = self.rot_encoder(local_6d_rot)
-        global_root_pos = self.pos_encoder(global_root_pos)
+        local_6d_rot_data = local_6d_rot
+        global_root_pos_data = global_root_pos
 
-        # Reshape local_6d_rot
-        local_6d_rot = local_6d_rot.reshape((B, T, J * self.joint_embedding_size))
+        if self.velocity_included:
+            velocity_6d_rot = local_6d_rot[:, 1:, :, :] - local_6d_rot[:, :-1, :, :]
+            velocity_6d_rot = torch.cat([torch.zeros_like(velocity_6d_rot[:, :1, :, :]), velocity_6d_rot], dim=1)
+            local_6d_rot_data = torch.cat([local_6d_rot, velocity_6d_rot], dim=-1)
+
+            velocity_root_pos = global_root_pos[:, 1:, :] - global_root_pos[:, :-1, :]
+            velocity_root_pos = torch.cat([torch.zeros_like(velocity_root_pos[:, :1, :]), velocity_root_pos], dim=1)
+            global_root_pos_data = torch.cat([global_root_pos, velocity_root_pos], dim=-1)
+
+        rotation_encoded_data = self.rot_encoder(local_6d_rot_data)
+        root_pos_encoded_data = self.pos_encoder(global_root_pos_data)
+
+        # Reshape rotation_encoded_data
+        rotation_encoded_data = rotation_encoded_data.reshape((B, T, J * self.joint_embedding_size))
         
-        seq = torch.cat([global_root_pos, local_6d_rot], dim=-1)
+        seq = torch.cat([root_pos_encoded_data, rotation_encoded_data], dim=-1)
         return seq
 #InputEncoder
 
@@ -166,9 +186,11 @@ class MotionTransformer(nn.Module):
         root_embedding_size: int,
 
         num_encoder_layers: int,
-        num_decoder_layers: int,
+        num_decoder_layers: Optional[int],
         num_heads: int,
         dropout: float,
+
+        velocity_included: bool,
 
         pe_type: Literal["sinusoidal", "relative"],
         max_len: int
@@ -182,7 +204,8 @@ class MotionTransformer(nn.Module):
         self.input_encoder = InputEncoder(
             num_joints=num_joints,
             joint_embedding_size=joint_embedding_size,
-            root_embedding_size=root_embedding_size
+            root_embedding_size=root_embedding_size,
+            velocity_included=velocity_included
         )
 
         self.output_decoder = OutputDecoder(

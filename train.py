@@ -52,6 +52,8 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
     MAX_LEN = max(64, WINDOW_SIZE)
     print(f"Maximum sequence length: {MAX_LEN}")
 
+    VELOCITY_INCLUDED = params.get("velocity_included", False)
+
     PE_TYPE = params.get("pe_type", "sinusoidal")
     INTERPOLATE_BEFORE_PREDICTION = params.get("interpolate_before_prediction", False)
 
@@ -117,6 +119,7 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
         num_decoder_layers=NUM_DECODER_LAYERS,
         num_heads=NUM_HEADS,
         dropout=DROPOUT,
+        velocity_included=VELOCITY_INCLUDED,
         pe_type=PE_TYPE,
         max_len=MAX_LEN
     ).to(DEVICE)
