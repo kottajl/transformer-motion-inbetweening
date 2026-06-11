@@ -138,6 +138,8 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
     best_val_loss = float("inf")
     epochs_no_improve = 0
 
+    start_time = time.time()
+
     for epoch in range(N_EPOCHS):
         model.train()
         running_loss = 0
@@ -409,11 +411,27 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
         else:
             epochs_no_improve += 1
             if epochs_no_improve >= PATIENCE:
+                end_time = time.time()
+                elapsed_time = end_time - start_time
                 print(f"Early stopping at epoch {epoch+1}")
+                print(f"Total training time: {elapsed_time:.2f} seconds ({elapsed_time//3600:.0f}h {(elapsed_time%3600)//60:.0f}m {elapsed_time%60:.0f}s)")
                 break
 
         # Update learning rate scheduler based on validation loss
         scheduler.step(val_loss)
+
+    # If end of loop and not stopped by early stopping
+    if epochs_no_improve < PATIENCE:
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        print(f"Total training time: {elapsed_time:.2f} seconds ({elapsed_time//3600:.0f}h {(elapsed_time%3600)//60:.0f}m {elapsed_time%60:.0f}s)")
+    
+    # Print elapsed time
+    with open('train_log.txt', 'a') as file:
+        file.write(f"Training time: {elapsed_time:.2f} s")
+    with open(f'generated_models/{CONFIG_NAME}.log', 'a') as file:
+        file.write(f"Training time: {elapsed_time:.2f} s")
+# train()
 
 
 if __name__ == "__main__":
