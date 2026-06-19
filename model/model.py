@@ -3,6 +3,9 @@ from typing import Tuple, List, Optional, Literal
 import torch
 import torch.nn as nn
 
+from model.positional_encoding.sinusoidal import SinusoidalPositionalEncoding
+from model.positional_encoding.relative_bias import RelativeAttentionBias
+
 '''
 Inspiration:
 https://openaccess.thecvf.com/content/ACCV2022W/TCV/papers/Sridhar_Transformer_Based_Motion_In-Betweening_ACCVW_2022_paper.pdf
@@ -112,70 +115,6 @@ class OutputDecoder(nn.Module):
         local_6d_rot = self.rot_decoder(local_6d_rot)
         global_root_pos = self.pos_decoder(global_root_pos)
         return local_6d_rot, global_root_pos
-
-
-class SinusoidalPositionalEncoding(nn.Module):
-    # https://medium.com/@lixue421/understanding-positional-encoding-in-transformers-2c7336728be5
-    def __init__(
-        self,
-        dim: int,
-        max_len: int = 5000
-    ):
-        super().__init__()
-        self.dim = dim
-        self.max_len = max_len
-
-        position = torch.arange(0, max_len).unsqueeze(1).float()  # (max_len, 1)
-        div_term = torch.exp(torch.arange(0, dim, 2).float() * (-torch.log(torch.tensor(10000.0)) / dim))
-
-        pe = torch.zeros(max_len, dim)
-        pe[:, 0::2] = torch.sin(position * div_term)
-        pe[:, 1::2] = torch.cos(position * div_term)
-
-        # shape (max_len, dim)
-        self.register_buffer('pe', pe)
-
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        T = x.size(1)
-        if self.dim != x.size(-1):
-            raise ValueError(f'Positional encoding dim ({self.dim}) != input last dim ({x.size(-1)})')
-
-        pe = self.pe[:T].unsqueeze(0).to(x.dtype).to(x.device)  # (1, T, D)
-        return x + pe
-#SinusoidalPositionalEncoding
-
-
-class RelativeAttentionBias(nn.Module):
-    def __init__(
-        self,
-        num_heads: int,
-        max_dist: int
-    ):
-        super().__init__()
-        self.num_heads = num_heads
-        self.max_dist = max_dist
-
-        self.embeddings = nn.Embedding(2 * max_dist + 1, num_heads)
-
-    def forward(self, T: int, B: int, device: torch.device) -> torch.Tensor:
-        positions = torch.arange(T, device=device)
-        # Compute matrix with relative positions (distances) between each pair of positions
-        distances = positions.unsqueeze(1) - positions.unsqueeze(0) # (T, T)
-
-        # Shift distances to be non-negative (for embedding lookup)
-        distances = torch.clamp(distances, -self.max_dist, self.max_dist)
-        indices = distances + self.max_dist         # (T, T)
-
-        # Get weights for each head based on relative distances
-        bias = self.embeddings(indices)             # (T, T, num_heads)
-
-        # Reshape to (num_heads, T, T) for multi-head attention
-        bias = bias.permute(2, 0, 1)                # (num_heads, T, T)
-        bias = bias.unsqueeze(0).repeat(B, 1, 1, 1) # (B, num_heads, T, T)
-        bias = bias.view(B * self.num_heads, T, T)  # (B*num_heads, T, T)
-
-        return bias
-#RelativeAttentionBias
 
 
 class MotionTransformer(nn.Module):
