@@ -1,31 +1,65 @@
 from typing import List
 from scipy.spatial.transform import Rotation as R
 from bvh import Bvh
-from bvh_parser import load_bvh
-from interpolation import interpolate_positions, interpolate_rotations
-from utils import load_params_from_json
+from utils.bvh_parser import load_bvh
+from utils.interpolation import interpolate_positions, interpolate_rotations
+from utils.utils import load_params_from_json
 from model.model import MotionTransformer
-from predict_bvh import sixd_to_matrix, stable_euler_from_matrix
 
 import numpy as np
 import torch
 import argparse
 
 
-def get_bvh_frames(file_path):
-    with open(file_path, 'r') as f:
-        for line in f:
-            if line.startswith("Frames:"):
-                return int(line.split(":")[1].strip())
-    raise ValueError("Frames not found in BVH file.")
+def sixd_to_matrix(sixd: np.ndarray) -> np.ndarray:
+    """
+    Convert 6D rotation representation to rotation matrices.
+    sixd: (N, 6)
+    returns: (N, 3, 3)
+    """
+
+    sixd = np.asarray(sixd)
+    orig_shape = sixd.shape
+    # T, _ = sixd.shape
+    # J = 22
+
+    assert sixd.shape[-1] == 6
+    a1 = sixd[:, 0:3]
+    a2 = sixd[:, 3:6]
+
+    # normalize a1 to get b1
+    b1 = a1 / (np.linalg.norm(a1, axis=1, keepdims=True) + 1e-8)
+    # make a2 orthogonal to b1
+    proj = (b1 * np.sum(b1 * a2, axis=1, keepdims=True))
+    u2 = a2 - proj
+    b2 = u2 / (np.linalg.norm(u2, axis=1, keepdims=True) + 1e-8)
+    b3 = np.cross(b1, b2)
+
+    # assemble as columns [b1 b2 b3] -> shape (N,3,3)
+    mats = np.stack([b1, b2, b3], axis=2)  # (N, 3, 3)
+    mats = mats.reshape(*orig_shape[:-1], 3, 3)
+    return mats
+#sixd_to_matrix
 
 
-def predict_bvh_loop(
+def stable_euler_from_matrix(mats, order="zyx", degrees=True):
+    # mats: (F, 3, 3)
+    raw_eulers = R.from_matrix(mats).as_euler(order, degrees=degrees) # (F, 3)
+    
+    rads = np.radians(raw_eulers) if degrees else raw_eulers
+    unwrapped_rads = np.unwrap(rads, axis=0)
+    
+    return np.degrees(unwrapped_rads) if degrees else unwrapped_rads
+#stable_euler_from_matrix
+
+
+def predict_bvh(
     model: torch.nn.Module,
     bvh_path_in: str,
     bvh_path_out: str,
     window_size: int,
-    period: int,
+    start_hole: int,
+    end_hole: int,
     device: torch.device = None,
     context_frames: int = 10,
     target_frames: int = 1,
@@ -34,9 +68,9 @@ def predict_bvh_loop(
     """
     Run inference on a BVH file and write result to another BVH.
     """
-    # print(f"Predicting BVH hole from frame {start_hole} to {end_hole}...")
-    # print(f"Window size: {window_size}, Context frames: {context_frames}, Target frames: {target_frames}")
-    # assert (end_hole - start_hole) + context_frames + target_frames == window_size, "Window data doesn't match up..."
+    print(f"Predicting BVH hole from frame {start_hole} to {end_hole}...")
+    print(f"Window size: {window_size}, Context frames: {context_frames}, Target frames: {target_frames}")
+    assert (end_hole - start_hole) + context_frames + target_frames == window_size, "Window data doesn't match up..."
 
     if device is None:
         device = next(model.parameters()).device if any(p.requires_grad for p in model.parameters()) else torch.device('cpu')
@@ -51,88 +85,64 @@ def predict_bvh_loop(
     positions = anim.positions  # (F, 3)
 
     F, J, _ = rot6d.shape
+    assert 0 <= start_hole < end_hole <= F, "Invalid hole range"
 
-    hole_size = window_size - context_frames - target_frames
-    print(f"Total frames: {F}, Joints: {J}, Hole size: {hole_size}")
-    assert hole_size > 0, "Hole size must be positive"
+    hole_len = end_hole - start_hole
+    T_win = context_frames + hole_len + target_frames
+    start_window = start_hole - context_frames
+    end_window = start_window + T_win
+    assert start_window >= 0 and end_window <= F, "Window exceeds sequence bounds"
 
-    # START LOOP
-    print()
-    for start_hole in range(50, F, period):
-        end_hole = start_hole + hole_size
-        if end_hole + target_frames >= F:
-            break
+    win_rot = rot6d[start_window:end_window]        # (T_win, J, 6)
+    win_pos = positions[start_window:end_window]    # (T_win, 3)
+    assert win_rot.shape[0] == T_win, f"Window length mismatch: got {win_rot.shape[0]} expected {T_win}"
 
-        assert 0 <= start_hole < end_hole <= F, "Invalid hole range"
+    rot = torch.from_numpy(win_rot).unsqueeze(0).to(device)  # (1, T_win, J, 6)
+    pos = torch.from_numpy(win_pos).unsqueeze(0).to(device)  # (1, T_win, 3)
 
-        hole_len = end_hole - start_hole
-        T_win = context_frames + hole_len + target_frames
-        start_window = start_hole - context_frames
-        end_window = start_window + T_win
-        assert start_window >= 0 and end_window <= F, "Window exceeds sequence bounds"
+    with torch.no_grad():
+        src_rot = rot.clone()
+        src_pos = pos.clone()
+        hole_start_in_win = start_hole - start_window
+        hole_end_in_win = end_hole - start_window
+        src_rot[:, hole_start_in_win:hole_end_in_win, :, :] = 0.0
+        src_pos[:, hole_start_in_win:hole_end_in_win, :] = 0.0
 
-        print(f"Predicting hole frames {start_hole} to {end_hole} (window {start_window} to {end_window})...", flush=True)
-
-        win_rot = rot6d[start_window:end_window]        # (T_win, J, 6)
-        win_pos = positions[start_window:end_window]    # (T_win, 3)
-        assert win_rot.shape[0] == T_win, f"Window length mismatch: got {win_rot.shape[0]} expected {T_win}"
-
-        rot = torch.from_numpy(win_rot).unsqueeze(0).to(device)  # (1, T_win, J, 6)
-        pos = torch.from_numpy(win_pos).unsqueeze(0).to(device)  # (1, T_win, 3)
-
-        # Center positions around root joint
-        root_offset = pos[:, 0:1, :].clone()   # (B, T, 1, 3)
-        pos -= root_offset
-
-        with torch.no_grad():
-            src_rot = rot.clone()
-            src_pos = pos.clone()
-            hole_start_in_win = start_hole - start_window
-            hole_end_in_win = end_hole - start_window
-            src_rot[:, hole_start_in_win:hole_end_in_win, :, :] = 0.0
-            src_pos[:, hole_start_in_win:hole_end_in_win, :] = 0.0
-
-            if preinterpolate:
-                win_rot_q = anim.rotations_quat[start_window:end_window]        # (T_win, J, 4)
-                src_rot_q = torch.from_numpy(win_rot_q).unsqueeze(0).to(device) # (1, T_win, J, 4)
-                src_rot_q[:, hole_start_in_win:hole_end_in_win, :, :] = 0.0
-                src_rot, _ = interpolate_rotations(
-                    src_rot,
-                    src_rot_q,
-                    hole_start_in_win,
-                    hole_end_in_win
-                )
-                src_pos = interpolate_positions(
-                    src_pos,
-                    hole_start_in_win,
-                    hole_end_in_win
-                )
-
-            # Fixed points (context_frames and target_frames indices)
-            fixed_points: List[int] = list(range(0, context_frames)) + list(range(T_win - target_frames, T_win))
-            
-            pred_rot, pred_pos = model(
-                src_rot, src_pos,
-                fixed_points=fixed_points
+        if preinterpolate:
+            win_rot_q = anim.rotations_quat[start_window:end_window]        # (T_win, J, 4)
+            src_rot_q = torch.from_numpy(win_rot_q).unsqueeze(0).to(device) # (1, T_win, J, 4)
+            src_rot_q[:, hole_start_in_win:hole_end_in_win, :, :] = 0.0
+            src_rot, _ = interpolate_rotations(
+                src_rot,
+                src_rot_q,
+                hole_start_in_win,
+                hole_end_in_win
+            )
+            src_pos = interpolate_positions(
+                src_pos,
+                hole_start_in_win,
+                hole_end_in_win
             )
 
-            # Return to original position space
-            pred_pos += root_offset
+        # Fixed points (context_frames and target_frames indices)
+        fixed_points: List[int] = list(range(0, context_frames)) + list(range(T_win - target_frames, T_win))
+        
+        # pred_rot, pred_pos = model(
+        #     src_rot, src_pos,
+        #     src_rot.clone(), src_pos.clone(),
+        #     fixed_points=fixed_points
+        # )
+        pred_rot, pred_pos = model(
+            src_rot, src_pos
+        )
 
-        pred_rot = pred_rot.cpu().numpy()[0]    # (T_win, J, 6)
-        pred_pos = pred_pos.cpu().numpy()[0]    # (T_win, 3)
+    pred_rot = pred_rot.cpu().numpy()[0]    # (T_win, J, 6)
+    pred_pos = pred_pos.cpu().numpy()[0]    # (T_win, 3)
 
-        # Ensure the rotations are correctly normalized
-        for t_idx in range(hole_start_in_win, hole_end_in_win):
-            m = sixd_to_matrix(pred_rot[t_idx])  # (J, 3, 3)
-            pred_rot[t_idx, :, :3] = m[:, :, 0]
-            pred_rot[t_idx, :, 3:] = m[:, :, 1]
-
-        rot6d[start_hole:end_hole, :, :] = pred_rot[hole_start_in_win:hole_end_in_win, :, :]
-        positions[start_hole:end_hole, :] = pred_pos[hole_start_in_win:hole_end_in_win, :]
-
-        print(".", end="", flush=True)
-    # END LOOP
+    final_rot6d = rot6d.copy()
+    final_pos = positions.copy()
+    final_rot6d[start_hole:end_hole, :, :] = pred_rot[hole_start_in_win:hole_end_in_win, :, :]
+    final_pos[start_hole:end_hole, :] = pred_pos[hole_start_in_win:hole_end_in_win, :]
 
     # Rebuild BVH frames
 
@@ -165,20 +175,18 @@ def predict_bvh_loop(
                     axis = 2
                 else:
                     raise ValueError(f"Unknown position channel name: {ch}")
-                new_frames[:, start_idx + idx] = positions[:, axis]
+                new_frames[:, start_idx + idx] = final_pos[:, axis]
 
         # Fill rotations
         if len(rot_channel_indices) == 3:
             # Euler order string (e.g. 'zyx') from channel names
             rot_ch_names = [channels[i] for i in rot_channel_indices]
             euler_order = ''.join([r[0].lower() for r in rot_ch_names])
-            euler_order = euler_order[::-1]
 
             # Convert 6D -> matrices -> euler angles
-            joint_sixd = rot6d[:, j, :]   # (F, 6)
+            joint_sixd = final_rot6d[:, j, :]   # (F, 6)
             mats = sixd_to_matrix(joint_sixd)  # (F, 3, 3)
             eulers = stable_euler_from_matrix(mats, euler_order, degrees=True)  # (F, 3)
-            eulers = eulers[:, ::-1]
             # eulers = R.from_matrix(mats).as_euler(euler_order, degrees=True)
 
             for local_rot_idx, ch_idx in enumerate(rot_channel_indices):
@@ -220,18 +228,17 @@ def predict_bvh_loop(
         f.write(out_text)
         # print(f"Written predicted BVH to '{bvh_path_out}'")
 
-#predict_bvh_loop
+#predict_bvh
 
 
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--bvh-in', type=str, default="eval/jumps1_subject5.bvh")
-    parser.add_argument('--bvh-out', default="eval/jumps1_subject5_predicted_beta6_rot_nvel.bvh")
-    parser.add_argument('--period', type=int, default=50)
+    parser.add_argument('--bvh-in', type=str, default="eval/walk1_subject5.bvh")
+    parser.add_argument('--bvh-out', default="eval/walk1_subject5_predicted.bvh")
+    parser.add_argument('--start', type=int, default=2000)      # Line in .bvh = <start> + 135
     parser.add_argument('--weights', default="best_model.pt", help='Path to model weights (.pt)')
     parser.add_argument('--config', type=str, required=True, help='Path to JSON config file')
-    parser.add_argument('--hole_size', type=int, default=-1, help='Hole size to test (overrides config if set)')
     args = parser.parse_args()
 
     # Load model parameters from JSON
@@ -249,29 +256,10 @@ if __name__ == '__main__':
     dropout = params["dropout"]
     context_frames = params["context_frames"]
     target_frames = params["target_frames"]
-    # WINDOW_SIZE = params["context_frames"] + 30 + params["target_frames"]
-    pe_type = params.get("pe_type", "sinusoidal")
-    velocity_included = params.get("velocity_included", False)
-    max_len = 256
+    WINDOW_SIZE = params["context_frames"] + params["hole_frames"] + params["target_frames"]
+    max_len = max(64, WINDOW_SIZE)
     INTERPOLATE_BEFORE_PREDICTION = params.get("interpolate_before_prediction", False)
-
-    try:
-        if args.hole_size != -1:
-            HOLE_FRAMES = args.hole_size
-        else:
-            if isinstance(args.hole_size, int):
-                HOLE_FRAMES = args.hole_size
-            elif isinstance(args.hole_size, list) and len(args.hole_size) == 2:
-                HOLE_FRAMES = args.hole_size[1]
-            else:
-                raise ValueError("Invalid hole_size argument. Must be an integer or a list of two integers.")
-            print(f"'hole_size' parameter not specified. Using hole_frames: {HOLE_FRAMES}")
-        
-        WINDOW_SIZE = params["context_frames"] + HOLE_FRAMES + params["target_frames"]
-    
-    except KeyError as e:
-        print(f"Error: Missing key in parameters: {e}")
-        exit(-1)  
+    end_hole = args.start + (params["hole_frames"])
 
     # Load input BVH to get number of joints for model instantiation
     anim = load_bvh(args.bvh_in)
@@ -285,8 +273,6 @@ if __name__ == '__main__':
         num_decoder_layers=num_decoder_layers,
         num_heads=num_heads,
         dropout=dropout,
-        velocity_included=velocity_included,
-        pe_type=pe_type,
         max_len=max_len
     )
 
@@ -295,17 +281,15 @@ if __name__ == '__main__':
     model.load_state_dict(state)
     model.to(torch.device('cuda' if torch.cuda.is_available() else 'cpu'))
 
-    # temp_file_in = args.bvh_in
-    # total_frames = get_bvh_frames(temp_file_in)
-
-    predict_bvh_loop(
+    predict_bvh(
         model=model,
         bvh_path_in=args.bvh_in,
         bvh_path_out=args.bvh_out,
         window_size=WINDOW_SIZE,
-        period=args.period,
+        start_hole=args.start,
+        end_hole=end_hole,
         context_frames=context_frames,
         target_frames=target_frames,
         preinterpolate=INTERPOLATE_BEFORE_PREDICTION
     )
-    print("\nPrediction completed.")
+    print(f"Written predicted BVH to '{args.bvh_out}'")

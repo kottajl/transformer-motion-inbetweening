@@ -5,8 +5,9 @@ from model.loss.FKVelocityBoundaryLoss import FKVelocityBoundaryLoss, root_pos_v
 from model.loss.SmoothnessLoss import SmoothnessLoss
 from model.model import MotionTransformer
 from model.loss.FKLoss import FKLoss
-from dataset import BvhDataset
-from interpolation import interpolate_rotations, interpolate_positions
+from utils.dataset import BvhDataset
+from utils.interpolation import interpolate_rotations, interpolate_positions
+from utils.utils import load_params_from_json, show_warning
 
 import torch
 import torch.optim as optim
@@ -14,8 +15,6 @@ import torch.nn.functional as F
 import argparse
 import datetime
 import time
-
-from utils import load_params_from_json, show_warning
 
 
 def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', **subset_kwargs):

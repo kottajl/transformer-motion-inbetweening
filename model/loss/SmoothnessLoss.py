@@ -5,7 +5,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from utils import rot6d_to_mat_torch, forward_kinematics
+from utils.rotation_convertion import rot6d_to_mat_torch
+from utils.utils import forward_kinematics
+
 
 class SmoothnessLoss(nn.Module):
     def __init__(self, parents):

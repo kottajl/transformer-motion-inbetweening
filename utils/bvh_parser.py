@@ -1,8 +1,8 @@
 from typing import Literal
 from bvh import Bvh
 from scipy.spatial.transform import Rotation as R
-from animation import Animation
-from utils import euler_to_6d, euler_to_quat
+from utils.animation import Animation
+from utils.rotation_convertion import euler_to_6d, euler_to_quat
 
 import numpy as np
 import os

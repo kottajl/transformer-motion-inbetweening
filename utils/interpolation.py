@@ -1,6 +1,6 @@
 import torch
 
-from utils import quat_to_6d_torch
+from utils.rotation_convertion import quat_to_6d_torch
 
 
 EPS = 1e-8

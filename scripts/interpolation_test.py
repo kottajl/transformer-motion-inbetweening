@@ -1,16 +1,17 @@
 import argparse
 import torch
-import metrics as metrics
 import numpy as np
+import utils.metrics as metrics
 
 from tqdm import tqdm
-from dataset import BvhDataset
-from interpolation import interpolate_positions, interpolate_rotations
-from model.model import MotionTransformer
-from utils import forward_kinematics, load_params_from_json
 from torch.utils.data import DataLoader
 from scipy.spatial.transform import Rotation as R
-from utils import rot6d_to_mat_torch
+
+from utils.dataset import BvhDataset
+from utils.interpolation import interpolate_positions, interpolate_rotations
+from utils.utils import forward_kinematics, load_params_from_json
+from utils.rotation_convertion import rot6d_to_mat_torch
+from model.model import MotionTransformer
 
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 

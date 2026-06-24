@@ -1,4 +1,4 @@
-from bvh_parser import parse_all_bvh_to_npz
+from utils.bvh_parser import parse_all_bvh_to_npz
 
 
 if __name__ == "__main__":

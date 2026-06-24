@@ -3,8 +3,8 @@ import torch
 import os
 
 from torch.utils.data import Dataset
-from bvh_parser import load_anim_from_npz
-from utils import to_tensor
+from utils.bvh_parser import load_anim_from_npz
+from utils.utils import to_tensor
 from typing import Literal
 
 
