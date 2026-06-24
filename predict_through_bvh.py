@@ -111,13 +111,9 @@ def predict_bvh_loop(
             # Fixed points (context_frames and target_frames indices)
             fixed_points: List[int] = list(range(0, context_frames)) + list(range(T_win - target_frames, T_win))
             
-            # pred_rot, pred_pos = model(
-            #     src_rot, src_pos,
-            #     src_rot.clone(), src_pos.clone(),
-            #     fixed_points=fixed_points
-            # )
             pred_rot, pred_pos = model(
-                src_rot, src_pos
+                src_rot, src_pos,
+                fixed_points=fixed_points
             )
 
             # Return to original position space
@@ -125,11 +121,6 @@ def predict_bvh_loop(
 
         pred_rot = pred_rot.cpu().numpy()[0]    # (T_win, J, 6)
         pred_pos = pred_pos.cpu().numpy()[0]    # (T_win, 3)
-
-        # final_rot6d = rot6d.copy()
-        # final_pos = positions.copy()
-        # final_rot6d[start_hole:end_hole, :, :] = pred_rot[hole_start_in_win:hole_end_in_win, :, :]
-        # final_pos[start_hole:end_hole, :] = pred_pos[hole_start_in_win:hole_end_in_win, :]
 
         # Ensure the rotations are correctly normalized
         for t_idx in range(hole_start_in_win, hole_end_in_win):
@@ -236,10 +227,11 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--bvh-in', type=str, default="eval/jumps1_subject5.bvh")
-    parser.add_argument('--bvh-out', default="eval/jumps1_subject5_predicted_alpha14.bvh")
-    parser.add_argument('--period', type=int, default=25)
+    parser.add_argument('--bvh-out', default="eval/jumps1_subject5_predicted_beta6_rot_nvel.bvh")
+    parser.add_argument('--period', type=int, default=50)
     parser.add_argument('--weights', default="best_model.pt", help='Path to model weights (.pt)')
     parser.add_argument('--config', type=str, required=True, help='Path to JSON config file')
+    parser.add_argument('--hole_size', type=int, default=-1, help='Hole size to test (overrides config if set)')
     args = parser.parse_args()
 
     # Load model parameters from JSON
@@ -257,9 +249,29 @@ if __name__ == '__main__':
     dropout = params["dropout"]
     context_frames = params["context_frames"]
     target_frames = params["target_frames"]
-    WINDOW_SIZE = params["context_frames"] + params["hole_frames"] + params["target_frames"]
-    max_len = max(64, WINDOW_SIZE)
+    # WINDOW_SIZE = params["context_frames"] + 30 + params["target_frames"]
+    pe_type = params.get("pe_type", "sinusoidal")
+    velocity_included = params.get("velocity_included", False)
+    max_len = 256
     INTERPOLATE_BEFORE_PREDICTION = params.get("interpolate_before_prediction", False)
+
+    try:
+        if args.hole_size != -1:
+            HOLE_FRAMES = args.hole_size
+        else:
+            if isinstance(args.hole_size, int):
+                HOLE_FRAMES = args.hole_size
+            elif isinstance(args.hole_size, list) and len(args.hole_size) == 2:
+                HOLE_FRAMES = args.hole_size[1]
+            else:
+                raise ValueError("Invalid hole_size argument. Must be an integer or a list of two integers.")
+            print(f"'hole_size' parameter not specified. Using hole_frames: {HOLE_FRAMES}")
+        
+        WINDOW_SIZE = params["context_frames"] + HOLE_FRAMES + params["target_frames"]
+    
+    except KeyError as e:
+        print(f"Error: Missing key in parameters: {e}")
+        exit(-1)  
 
     # Load input BVH to get number of joints for model instantiation
     anim = load_bvh(args.bvh_in)
@@ -273,6 +285,8 @@ if __name__ == '__main__':
         num_decoder_layers=num_decoder_layers,
         num_heads=num_heads,
         dropout=dropout,
+        velocity_included=velocity_included,
+        pe_type=pe_type,
         max_len=max_len
     )
 
