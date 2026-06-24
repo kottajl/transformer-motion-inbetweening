@@ -33,5 +33,9 @@ __pycache__/
 configs/ae*.json
 generated_models/ae*.log
 
+# Some scripts, where editting doesn't change the general logic (only using files, etc.)
+scripts/plot_loss.py
+scripts/night_labour.py
+
 # Temporary files
 temp/
