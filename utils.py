@@ -3,6 +3,7 @@ import torch.nn.functional as F
 import numpy as np
 import torch
 import json
+import time
 
 
 def to_tensor(x, device):
@@ -174,3 +175,20 @@ def forward_kinematics(
     else:
         return torch.stack(joint_positions, dim=2)
 #forward_kinematics
+
+
+'''
+Logging
+'''
+
+def show_warning(log_message: str):
+    print(f"{'\033[93m'}WARNING: {log_message}")
+    for _ in range(3):
+        time.sleep(0.7)
+        print(".", flush=True)
+    time.sleep(0.5)
+    for _ in range(5):
+        print(".", end='', flush=True)
+        time.sleep(0.2)
+    print(f"{'\033[0m'}")
+#show_warning

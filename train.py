@@ -15,7 +15,7 @@ import argparse
 import datetime
 import time
 
-from utils import load_params_from_json    
+from utils import load_params_from_json, show_warning
 
 
 def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', **subset_kwargs):
@@ -456,15 +456,12 @@ if __name__ == "__main__":
         print(f"Error: The file '{args.params}.json' was not found in the config/ folder.")
         exit(1)
     
+    # Check if user is aware that file name happens to be 'the same' as config_name parameter (probably a nasty error)
+    if args.params != params.get("config_name", "new_config"):
+        show_warning(f"The name of the config file ({args.params}) is not the same as the name written inside the config ({params.get("config_name", "new_config")}). This may result in overriding existing model weights file!")
+    
+    # Check if user really wants not to enable full logging (usually they should want it to be enabled)
     if not args.full_log:
-        print(f"{'\033[93m'}WARNING: Full logging is disabled! This means that detailed loss components and learning rate information will not be logged. Enable full logging with the --full_log flag for more insights during training.")     
-        for _ in range(3):
-            time.sleep(0.7)
-            print(".", flush=True)
-        time.sleep(0.5)
-        for _ in range(5):
-            print(".", end='', flush=True)
-            time.sleep(0.2)
-        print(f"{'\033[0m'}")
+        show_warning("Full logging is disabled! This means that detailed loss components and learning rate information will not be logged. Enable full logging with the --full_log flag for more insights during training.")
 
     train(params, full_log=args.full_log, data_subset_type=data_subset_type)
