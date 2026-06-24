@@ -159,15 +159,18 @@ def test_and_get_scores(
                 return_rot_mats=True
             )
 
-            # Compute predicted global quaternions for L2Q metric
-            gt_rot_mats_fk_np = gt_rot_mats_fk.cpu().numpy().reshape(-1, 3, 3)
-            gt_rot_q_fk_np = R.from_matrix(gt_rot_mats_fk_np).as_quat()
-            gt_rot_fk_q = torch.tensor(gt_rot_q_fk_np, device=DEVICE).view(B, T, J, 4)
+            # # Compute predicted global quaternions for L2Q metric
+            # gt_rot_mats_fk_np = gt_rot_mats_fk.cpu().numpy().reshape(-1, 3, 3)
+            # gt_rot_q_fk_np = R.from_matrix(gt_rot_mats_fk_np).as_quat()
+            # gt_rot_fk_q = torch.tensor(gt_rot_q_fk_np, device=DEVICE).view(B, T, J, 4)
 
-            # Compute gt global quaternions for L2Q metric
-            pred_rot_mats_fk_np = pred_rot_mats_fk.cpu().numpy().reshape(-1, 3, 3)
-            pred_rot_q_fk_np = R.from_matrix(pred_rot_mats_fk_np).as_quat()
-            pred_rot_fk_q = torch.tensor(pred_rot_q_fk_np, device=DEVICE).view(B, T, J, 4)
+            # # Compute gt global quaternions for L2Q metric
+            # pred_rot_mats_fk_np = pred_rot_mats_fk.cpu().numpy().reshape(-1, 3, 3)
+            # pred_rot_q_fk_np = R.from_matrix(pred_rot_mats_fk_np).as_quat()
+            # pred_rot_fk_q = torch.tensor(pred_rot_q_fk_np, device=DEVICE).view(B, T, J, 4)
+
+            gt_rot_fk_q = mat_to_quat_torch(gt_rot_mats_fk)
+            pred_rot_fk_q = mat_to_quat_torch(pred_rot_mats_fk)
 
             # --- METRICS ---
 
