@@ -2,6 +2,12 @@ import torch
 import torch.nn as nn
 
 
+"""
+How the 'mask' parameter actually works:
+https://docs.pytorch.org/docs/2.12/generated/torch.nn.functional.scaled_dot_product_attention.html
+"""
+
+
 class RelativeAttentionBias(nn.Module):
     def __init__(
         self,

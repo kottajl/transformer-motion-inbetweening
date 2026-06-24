@@ -49,7 +49,8 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
     else:
         raise ValueError("Invalid 'hole_frames' parameter. Must be either an integer or a list of two integers [min, max].")
     WINDOW_SIZE = CONTEXT_FRAMES + max_hole_frames + TARGET_FRAMES
-    MAX_LEN = max(64, WINDOW_SIZE)
+    # MAX_LEN = max(64, WINDOW_SIZE)
+    MAX_LEN = 256
     print(f"Maximum sequence length: {MAX_LEN}")
 
     VELOCITY_INCLUDED = params.get("velocity_included", False)

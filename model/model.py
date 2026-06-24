@@ -5,6 +5,7 @@ import torch.nn as nn
 
 from model.positional_encoding.sinusoidal import SinusoidalPositionalEncoding
 from model.positional_encoding.relative_bias import RelativeAttentionBias
+from model.rotary_torch_utils import RotaryTransformerEncoderLayer
 
 '''
 Inspiration:
@@ -72,6 +73,7 @@ class InputEncoder(nn.Module):
         
         seq = torch.cat([root_pos_encoded_data, rotation_encoded_data], dim=-1)
         return seq
+
 #InputEncoder
 
 
@@ -116,6 +118,7 @@ class OutputDecoder(nn.Module):
         global_root_pos = self.pos_decoder(global_root_pos)
         return local_6d_rot, global_root_pos
 
+#OutputDecoder
 
 class MotionTransformer(nn.Module):
     def __init__(
@@ -131,7 +134,7 @@ class MotionTransformer(nn.Module):
 
         velocity_included: bool,
 
-        pe_type: Literal["sinusoidal", "relative"],
+        pe_type: Literal["sinusoidal", "relative", "rotary", "none"],
         max_len: int
     ):
         super().__init__()
@@ -173,14 +176,11 @@ class MotionTransformer(nn.Module):
             dropout=dropout,
             batch_first=True
         )
-        self.transformer = nn.TransformerEncoder(
-            encoder_layer,
-            num_layers=num_encoder_layers
-        )
-
+        
+        enable_nested_tensor = True         # Default value for nn.TransformerEncoder
         self.pe_type = pe_type
         if pe_type == "sinusoidal":
-            self.pos_encoder = SinusoidalPositionalEncoding(
+            self.abs_pos_encoder = SinusoidalPositionalEncoding(
                 dim=self.dim_model,
                 max_len=max_len
             )
@@ -189,45 +189,26 @@ class MotionTransformer(nn.Module):
                 num_heads=num_heads,
                 max_dist=max_len
             )
+        elif pe_type == "rotary":
+            encoder_layer = RotaryTransformerEncoderLayer(
+                d_model=self.dim_model,
+                nhead=num_heads,
+                max_seq_len=max_len,
+                dropout=dropout,
+                batch_first=True
+            )
+            enable_nested_tensor = False    # Custom layer, so fast-path not possible
+        elif pe_type == "none":
+            pass
         else:
-            raise ValueError(f"Invalid pe_type: {pe_type}. Must be 'sinusoidal' or 'relative'.")
+            raise ValueError(f"Invalid pe_type: {pe_type}. Choose between: 'sinusoidal', 'relative', 'rotary' or 'none'.")
 
-        # self.mask_token = nn.Parameter(torch.randn(1, 1, self.dim_model) * 0.02)
-    
-    # OLD VERSION OF TRANSFORMER TRAINING - MASKED FRAME PREDICTION, encoder-decoder structure
-    # def forward(
-    #     self,
-    #     src_rot: torch.Tensor,
-    #     src_pos: torch.Tensor,
-    #     # tgt_rot: Optional[torch.Tensor] = None,
-    #     # tgt_pos: Optional[torch.Tensor] = None,
-    #     fixed_points: List[int] = []
-    # ) -> Tuple[torch.Tensor, torch.Tensor]:
-    #     # assert (tgt_rot is None and tgt_pos is None) or type(tgt_rot) == torch.Tensor and type(tgt_pos) == torch.Tensor, "tgt_rot and tgt_pos must be both None or both Tensors"
-
-    #     # Encoding
-    #     enc_seq = self.input_encoder(src_rot, src_pos)
-    #     B, T, _ = enc_seq.shape
-
-    #     enc_h = self.pos_encoder(enc_seq)
-    #     dec_h = enc_h.clone()
-
-    #     # mask_bool = torch.ones(T, dtype=torch.bool, device=enc_seq.device)
-    #     # mask_bool[fixed_points] = False     # True = masked, False = available
-    #     # mask_token_exp = self.mask_token.expand(B, T, self.dim_model)
-    #     # dec_seq = torch.where(mask_bool.view(1, T, 1), mask_token_exp.to(dec_seq.dtype), dec_seq)
-
-    #     # dec_h = self.pos_encoder(dec_seq)
-
-    #     tgt_mask = torch.full((T, T), float("-inf"), device=enc_h.device, dtype=enc_h.dtype)
-    #     for j in fixed_points:
-    #         tgt_mask[:, j] = 0.0
-    #     tgt_mask = tgt_mask.to(enc_h.device).to(enc_h.dtype)
-
-    #     out = self.transformer(enc_h, dec_h, tgt_mask=tgt_mask)
-
-    #     pred_rot, pred_pos = self.output_decoder(out)
-    #     return pred_rot, pred_pos
+        self.transformer = nn.TransformerEncoder(
+            encoder_layer,
+            num_layers=num_encoder_layers,
+            enable_nested_tensor=enable_nested_tensor
+        )
+    #__init__
 
     def forward(
         self,
@@ -246,13 +227,19 @@ class MotionTransformer(nn.Module):
         # Add hole mask embedding to the input sequence
         mask_embed = self.hole_mask_embedding(hole_mask).unsqueeze(0).expand(B, -1, -1) # (B, T, dim_model)
         enc_seq = enc_seq + mask_embed
-
+    
+        # Handle PE in different ways
+        rel_mask = None
         if self.pe_type == "sinusoidal":
-            enc_h = self.pos_encoder(enc_seq)
-            out = self.transformer(enc_h)
+            enc_seq = self.abs_pos_encoder(enc_seq)
         elif self.pe_type == "relative":
             rel_mask = self.rel_bias(T=T, B=B, device=enc_seq.device)
-            out = self.transformer(enc_seq, mask=rel_mask)
+        elif self.pe_type == "rotary":
+            pass    # -> custom encoder layers don't need any more information
+        elif self.pe_type == "none":
+            pass
+
+        out = self.transformer(enc_seq, mask=rel_mask)
 
         pred_rot_delta, pred_pos_delta = self.output_decoder(out)
 
@@ -262,5 +249,6 @@ class MotionTransformer(nn.Module):
         # pred_rot, pred_pos = pred_rot_delta, pred_pos_delta
 
         return pred_rot, pred_pos
-    
+    #forward
+
 #MotionTransformer

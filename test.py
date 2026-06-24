@@ -28,7 +28,8 @@ def fetch_model(model_file: str, params: dict, n_joints: int, window_size: int) 
             dropout=params['dropout'],
             velocity_included=params.get("velocity_included", False),
             pe_type=params.get("pe_type", "sinusoidal"),
-            max_len=max(64, window_size)
+            # max_len=max(64, window_size)
+            max_len=256
         )
     except KeyError as e:
         print(f"Error: Missing key in parameters: {e}")
