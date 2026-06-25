@@ -9,7 +9,7 @@ from torch.utils.data import DataLoader
 
 from utils.dataset import BvhDataset
 from utils.interpolation import interpolate_positions, interpolate_rotations
-from utils.utils import forward_kinematics, load_params_from_json
+from utils.utils import forward_kinematics, load_params_from_json, set_seed
 from utils.rotation_convertion import mat_to_quat_torch, rot6d_to_mat_torch
 from model.model import MotionTransformer
 
@@ -206,8 +206,13 @@ if __name__ == "__main__":
     parser.add_argument('--config', type=str, required=True, help='Path to JSON config file')
     parser.add_argument('--window_step', type=int, default=-1, help='Step size for sliding window over the data')
     parser.add_argument('--hole_size', type=int, default=-1, help='Hole size to test (overrides config if set)')
+    parser.add_argument('--seed', type=int, default=None, help='Random seed for reproducibility (default: None)')
     # parser.add_argument('--data_subset_type', type=str, default='all', help='Subset of data to use for training (e.g., "all", "selected-moves", etc.)')
     args = parser.parse_args()
+
+    if args.seed is not None:
+        set_seed(args.seed)
+        print(f"Random seed set to: {args.seed}")
 
     # v Literal['all', 'selected-subjects', 'selected-moves', 'selected-subjects-and-moves', 'selected-files'] v
     data_subset_type = 'all'

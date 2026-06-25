@@ -3,7 +3,7 @@ from scipy.spatial.transform import Rotation as R
 from bvh import Bvh
 from utils.bvh_parser import load_bvh
 from utils.interpolation import interpolate_positions, interpolate_rotations
-from utils.utils import load_params_from_json
+from utils.utils import load_params_from_json, set_seed
 from model.model import MotionTransformer
 from scripts.predict_bvh import sixd_to_matrix, stable_euler_from_matrix
 
@@ -232,7 +232,12 @@ if __name__ == '__main__':
     parser.add_argument('--weights', default="best_model.pt", help='Path to model weights (.pt)')
     parser.add_argument('--config', type=str, required=True, help='Path to JSON config file')
     parser.add_argument('--hole_size', type=int, default=-1, help='Hole size to test (overrides config if set)')
+    parser.add_argument('--seed', type=int, default=None, help='Random seed for reproducibility (default: None)')
     args = parser.parse_args()
+
+    if args.seed is not None:
+        set_seed(args.seed)
+        print(f"Random seed set to: {args.seed}")
 
     # Load model parameters from JSON
     try:

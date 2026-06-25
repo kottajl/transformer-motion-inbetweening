@@ -7,7 +7,7 @@ from model.model import MotionTransformer
 from model.loss.FKLoss import FKLoss
 from utils.dataset import BvhDataset
 from utils.interpolation import interpolate_rotations, interpolate_positions
-from utils.utils import load_params_from_json, show_warning
+from utils.utils import load_params_from_json, set_seed, show_warning
 
 import torch
 import torch.optim as optim
@@ -441,24 +441,43 @@ if __name__ == "__main__":
         help='Name of the JSON file with training parameters (without .json extension, must be in the config/ folder)'
     )
     parser.add_argument('--full_log', action='store_true', help='Enable full logging during training (default: False)')
+    parser.add_argument('--seed', type=int, default=None, help='Random seed for reproducibility (default: None)')
+    parser.add_argument(
+        '--name', type=str, default=None, 
+        help='Output name, which will be used in the name of output files (default: None - using name from config file)'
+    )
+    parser.add_argument(
+        '--name_suffix', type=str, default=None, 
+        help='Output name suffix, which will be used added in the name of output files (default: None - no additional suffix)'
+    )
     # parser.add_argument('--data_subset_type', type=str, default='all', help='Subset of data to use for training (e.g., "all", "selected-moves", etc.)')
+    args = parser.parse_args()
 
     # v Literal['all', 'selected-subjects', 'selected-moves', 'selected-subjects-and-moves', 'selected-files'] v
     data_subset_type = 'all'
     # subjects_indices = [1, 2, 3, 4]
     # moves_names: list = ['fallAndGetUp', 'jumps1']
     
-    args = parser.parse_args()
+    if args.seed is not None:
+        set_seed(args.seed)
+        print(f"Random seed set to: {args.seed}")
+
     try:
         params = load_params_from_json("configs/" + args.params + ".json")
     except FileNotFoundError:
         print(f"Error: The file '{args.params}.json' was not found in the config/ folder.")
         exit(1)
     
+    if args.name is not None:
+        params['config_name'] = args.name
     # Check if user is aware that file name happens to be 'the same' as config_name parameter (probably a nasty error)
-    if args.params != params.get("config_name", "new_config"):
+    elif args.params != params["config_name"]:
         show_warning(f"The name of the config file ({args.params}) is not the same as the name written inside the config ({params.get("config_name", "new_config")}). This may result in overriding existing model weights file!")
     
+    # Add suffix to output files name (if exists)
+    if args.name_suffix is not None:
+        params['config_name'] += f"_{args.name_suffix}"
+
     # Check if user really wants not to enable full logging (usually they should want it to be enabled)
     if not args.full_log:
         show_warning("Full logging is disabled! This means that detailed loss components and learning rate information will not be logged. Enable full logging with the --full_log flag for more insights during training.")

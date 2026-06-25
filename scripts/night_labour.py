@@ -1,6 +1,10 @@
 import subprocess
 import sys
 
+from scripts.seed_generator import get_n_seeds
+
+SEEDS = get_n_seeds(1)
+
 commands_to_run = [
     ...
 ]

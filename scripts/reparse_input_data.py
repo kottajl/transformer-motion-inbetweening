@@ -1,7 +1,17 @@
+import argparse
+
 from utils.bvh_parser import parse_all_bvh_to_npz
+from utils.utils import set_seed
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--seed', type=int, default=None, help='Random seed for reproducibility (default: None)')
+    args = parser.parse_args()
+    
+    if args.seed is not None:
+        set_seed(args.seed)
+        print(f"Random seed set to: {args.seed}")
 
     # Train
     success, errors = parse_all_bvh_to_npz(

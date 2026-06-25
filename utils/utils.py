@@ -1,18 +1,25 @@
 import torch
 import json
 import time
+import os
+import random
+import numpy as np
 
 
 def to_tensor(x, device):
     return torch.tensor(x, dtype=torch.float32, device=device)
 
 
-def load_params_from_json(json_path: str) -> dict:
+def load_params_from_json(json_path: str, require_config_name: bool = True) -> dict:
     with open(json_path, 'r') as f:
         params = json.load(f)
-        
+
+    if require_config_name and 'config_name' not in params:
+        raise KeyError(f"There is no 'config_name' parameter in {json_path} file!")
+
     if "description" in params:
         del params["description"]
+    
     return params
 
 
@@ -81,3 +88,26 @@ def show_warning(log_message: str):
         time.sleep(0.2)
     print(f"{'\033[0m'}")
 #show_warning
+
+
+'''
+Reproducibility
+'''
+
+def set_seed(seed: int | None = None):
+    if seed is None:
+        show_warning("set_seed() method called, but no valid seed provided (None). Reproducibility is not guaranteed.")
+        return  # Do not set any seed if None is provided
+
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    
+    random.seed(seed)
+    np.random.seed(seed)
+
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+#set_seed
