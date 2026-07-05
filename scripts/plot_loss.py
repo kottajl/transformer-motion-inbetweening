@@ -7,6 +7,8 @@ logging.getLogger('matplotlib.font_manager').setLevel(logging.ERROR)
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--log', type=str, default="generated_models/alpha12.log")
+    parser.add_argument('--no_show', action='store_true', help='Do not show the plot to user (makes sense only without "--no_save" parameter)')
+    parser.add_argument('--no_save', action='store_true', help='Disable saving the plot to a file')
     args = parser.parse_args()
 
     with open(args.log, "r") as f:
@@ -26,10 +28,15 @@ if __name__ == "__main__":
             train_losses.append(train_loss)
             val_losses.append(val_loss)
 
+
     with plt.xkcd():
+        plt.figure(figsize=(8, 6))
         plt.plot(epochs, train_losses, label="Train Loss", color='blue')
         plt.plot(epochs, val_losses, label="Val Loss", color='orange')
         plt.xlabel("Epoch")
         plt.ylabel("Loss")
         plt.legend()
-        plt.show()
+        if not args.no_save:
+            plt.savefig(f"{args.log.replace('.log', '.png')}")
+        if not args.no_show:
+            plt.show()

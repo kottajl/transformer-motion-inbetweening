@@ -115,6 +115,7 @@ def predict_bvh_loop(
                 src_rot, src_pos,
                 fixed_points=fixed_points
             )
+            # pred_rot, pred_pos = src_rot.clone(), src_pos.clone()     # just interpolate
 
             # Return to original position space
             pred_pos += root_offset
