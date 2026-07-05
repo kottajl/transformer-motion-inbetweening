@@ -1,0 +1,4299 @@
+Epoch 1 | Train Loss: 1.22777 | Val Loss: 1.14417
+Train Loss Components:
+  |- loss_rot: 0.11135
+  |- loss_pos: 1.62797
+  |- fk_loss: 4.24920
+  |- smoothness_loss: 0.16969
+Val Loss Components:
+  |- loss_rot: 0.10998
+  |- loss_pos: 1.76756
+  |- fk_loss: 4.36322
+  |- smoothness_loss: 0.00966
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 2 | Train Loss: 1.09114 | Val Loss: 1.03743
+Train Loss Components:
+  |- loss_rot: 0.09205
+  |- loss_pos: 1.74538
+  |- fk_loss: 3.71800
+  |- smoothness_loss: 0.13435
+Val Loss Components:
+  |- loss_rot: 0.09045
+  |- loss_pos: 1.64899
+  |- fk_loss: 3.66581
+  |- smoothness_loss: 0.01146
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 3 | Train Loss: 1.01843 | Val Loss: 0.98794
+Train Loss Components:
+  |- loss_rot: 0.07740
+  |- loss_pos: 1.61946
+  |- fk_loss: 3.34414
+  |- smoothness_loss: 0.11104
+Val Loss Components:
+  |- loss_rot: 0.07879
+  |- loss_pos: 1.63699
+  |- fk_loss: 3.35342
+  |- smoothness_loss: 0.01464
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 4 | Train Loss: 0.95695 | Val Loss: 0.91878
+Train Loss Components:
+  |- loss_rot: 0.06738
+  |- loss_pos: 1.41327
+  |- fk_loss: 2.88844
+  |- smoothness_loss: 0.13122
+Val Loss Components:
+  |- loss_rot: 0.06851
+  |- loss_pos: 1.55164
+  |- fk_loss: 3.17890
+  |- smoothness_loss: 0.01975
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 5 | Train Loss: 0.89681 | Val Loss: 0.87487
+Train Loss Components:
+  |- loss_rot: 0.06332
+  |- loss_pos: 1.70706
+  |- fk_loss: 3.13678
+  |- smoothness_loss: 0.11827
+Val Loss Components:
+  |- loss_rot: 0.06097
+  |- loss_pos: 1.46134
+  |- fk_loss: 3.01967
+  |- smoothness_loss: 0.02264
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 6 | Train Loss: 0.85457 | Val Loss: 0.81202
+Train Loss Components:
+  |- loss_rot: 0.05539
+  |- loss_pos: 1.35613
+  |- fk_loss: 2.71014
+  |- smoothness_loss: 0.13250
+Val Loss Components:
+  |- loss_rot: 0.05549
+  |- loss_pos: 1.36950
+  |- fk_loss: 2.78952
+  |- smoothness_loss: 0.02847
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 7 | Train Loss: 0.80565 | Val Loss: 0.78285
+Train Loss Components:
+  |- loss_rot: 0.05067
+  |- loss_pos: 1.31553
+  |- fk_loss: 2.57980
+  |- smoothness_loss: 0.18218
+Val Loss Components:
+  |- loss_rot: 0.05214
+  |- loss_pos: 1.32556
+  |- fk_loss: 2.59869
+  |- smoothness_loss: 0.07035
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 8 | Train Loss: 0.76053 | Val Loss: 0.73096
+Train Loss Components:
+  |- loss_rot: 0.04952
+  |- loss_pos: 1.22231
+  |- fk_loss: 2.56159
+  |- smoothness_loss: 0.14445
+Val Loss Components:
+  |- loss_rot: 0.04787
+  |- loss_pos: 1.20804
+  |- fk_loss: 2.45913
+  |- smoothness_loss: 0.06464
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 9 | Train Loss: 0.72789 | Val Loss: 0.69274
+Train Loss Components:
+  |- loss_rot: 0.04808
+  |- loss_pos: 1.22734
+  |- fk_loss: 2.48665
+  |- smoothness_loss: 0.19351
+Val Loss Components:
+  |- loss_rot: 0.04541
+  |- loss_pos: 1.12831
+  |- fk_loss: 2.31237
+  |- smoothness_loss: 0.06795
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 10 | Train Loss: 0.70059 | Val Loss: 0.67438
+Train Loss Components:
+  |- loss_rot: 0.04381
+  |- loss_pos: 1.13314
+  |- fk_loss: 2.23535
+  |- smoothness_loss: 0.18464
+Val Loss Components:
+  |- loss_rot: 0.04453
+  |- loss_pos: 1.10600
+  |- fk_loss: 2.29474
+  |- smoothness_loss: 0.07303
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 11 | Train Loss: 0.67692 | Val Loss: 0.65953
+Train Loss Components:
+  |- loss_rot: 0.04244
+  |- loss_pos: 1.03334
+  |- fk_loss: 2.09725
+  |- smoothness_loss: 0.21139
+Val Loss Components:
+  |- loss_rot: 0.04386
+  |- loss_pos: 1.07097
+  |- fk_loss: 2.23236
+  |- smoothness_loss: 0.09021
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 12 | Train Loss: 0.65872 | Val Loss: 0.65627
+Train Loss Components:
+  |- loss_rot: 0.04510
+  |- loss_pos: 1.16728
+  |- fk_loss: 2.33346
+  |- smoothness_loss: 0.23459
+Val Loss Components:
+  |- loss_rot: 0.04319
+  |- loss_pos: 1.06383
+  |- fk_loss: 2.18839
+  |- smoothness_loss: 0.07674
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 13 | Train Loss: 0.64252 | Val Loss: 0.63282
+Train Loss Components:
+  |- loss_rot: 0.04096
+  |- loss_pos: 1.14567
+  |- fk_loss: 2.13794
+  |- smoothness_loss: 0.23412
+Val Loss Components:
+  |- loss_rot: 0.04226
+  |- loss_pos: 0.96755
+  |- fk_loss: 2.09966
+  |- smoothness_loss: 0.08833
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 14 | Train Loss: 0.62856 | Val Loss: 0.61012
+Train Loss Components:
+  |- loss_rot: 0.04355
+  |- loss_pos: 1.00876
+  |- fk_loss: 2.14298
+  |- smoothness_loss: 0.19911
+Val Loss Components:
+  |- loss_rot: 0.04230
+  |- loss_pos: 0.96269
+  |- fk_loss: 2.07570
+  |- smoothness_loss: 0.09097
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 15 | Train Loss: 0.61204 | Val Loss: 0.61050
+Train Loss Components:
+  |- loss_rot: 0.04628
+  |- loss_pos: 1.02122
+  |- fk_loss: 2.26942
+  |- smoothness_loss: 0.24789
+Val Loss Components:
+  |- loss_rot: 0.04262
+  |- loss_pos: 0.94011
+  |- fk_loss: 2.06328
+  |- smoothness_loss: 0.09693
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 16 | Train Loss: 0.60274 | Val Loss: 0.60267
+Train Loss Components:
+  |- loss_rot: 0.04491
+  |- loss_pos: 1.00103
+  |- fk_loss: 2.28312
+  |- smoothness_loss: 0.27821
+Val Loss Components:
+  |- loss_rot: 0.04201
+  |- loss_pos: 0.97439
+  |- fk_loss: 2.06926
+  |- smoothness_loss: 0.09977
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 17 | Train Loss: 0.58894 | Val Loss: 0.59053
+Train Loss Components:
+  |- loss_rot: 0.04551
+  |- loss_pos: 0.89563
+  |- fk_loss: 2.13041
+  |- smoothness_loss: 0.22028
+Val Loss Components:
+  |- loss_rot: 0.04189
+  |- loss_pos: 0.93663
+  |- fk_loss: 2.01501
+  |- smoothness_loss: 0.10283
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 18 | Train Loss: 0.57685 | Val Loss: 0.58826
+Train Loss Components:
+  |- loss_rot: 0.04403
+  |- loss_pos: 0.99988
+  |- fk_loss: 2.22295
+  |- smoothness_loss: 0.24609
+Val Loss Components:
+  |- loss_rot: 0.04196
+  |- loss_pos: 0.90757
+  |- fk_loss: 1.97481
+  |- smoothness_loss: 0.12111
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 19 | Train Loss: 0.56745 | Val Loss: 0.57681
+Train Loss Components:
+  |- loss_rot: 0.04244
+  |- loss_pos: 0.94968
+  |- fk_loss: 2.09376
+  |- smoothness_loss: 0.24259
+Val Loss Components:
+  |- loss_rot: 0.04187
+  |- loss_pos: 0.90371
+  |- fk_loss: 1.96387
+  |- smoothness_loss: 0.09928
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 20 | Train Loss: 0.55490 | Val Loss: 0.56827
+Train Loss Components:
+  |- loss_rot: 0.04522
+  |- loss_pos: 0.86545
+  |- fk_loss: 2.09589
+  |- smoothness_loss: 0.22456
+Val Loss Components:
+  |- loss_rot: 0.04168
+  |- loss_pos: 0.86532
+  |- fk_loss: 1.96025
+  |- smoothness_loss: 0.10135
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 21 | Train Loss: 0.54536 | Val Loss: 0.56259
+Train Loss Components:
+  |- loss_rot: 0.04248
+  |- loss_pos: 0.83891
+  |- fk_loss: 1.96326
+  |- smoothness_loss: 0.27854
+Val Loss Components:
+  |- loss_rot: 0.04119
+  |- loss_pos: 0.86701
+  |- fk_loss: 1.93443
+  |- smoothness_loss: 0.10328
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 22 | Train Loss: 0.53485 | Val Loss: 0.55592
+Train Loss Components:
+  |- loss_rot: 0.04949
+  |- loss_pos: 0.96740
+  |- fk_loss: 2.37272
+  |- smoothness_loss: 0.34032
+Val Loss Components:
+  |- loss_rot: 0.04122
+  |- loss_pos: 0.86946
+  |- fk_loss: 1.92835
+  |- smoothness_loss: 0.11193
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 23 | Train Loss: 0.52503 | Val Loss: 0.55441
+Train Loss Components:
+  |- loss_rot: 0.04464
+  |- loss_pos: 0.84940
+  |- fk_loss: 1.93613
+  |- smoothness_loss: 0.26362
+Val Loss Components:
+  |- loss_rot: 0.04168
+  |- loss_pos: 0.88408
+  |- fk_loss: 1.91738
+  |- smoothness_loss: 0.11807
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 24 | Train Loss: 0.51455 | Val Loss: 0.55067
+Train Loss Components:
+  |- loss_rot: 0.04285
+  |- loss_pos: 0.82962
+  |- fk_loss: 1.93375
+  |- smoothness_loss: 0.30158
+Val Loss Components:
+  |- loss_rot: 0.04149
+  |- loss_pos: 0.84076
+  |- fk_loss: 1.89419
+  |- smoothness_loss: 0.11432
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 25 | Train Loss: 0.50538 | Val Loss: 0.54288
+Train Loss Components:
+  |- loss_rot: 0.04220
+  |- loss_pos: 0.77474
+  |- fk_loss: 1.92546
+  |- smoothness_loss: 0.24669
+Val Loss Components:
+  |- loss_rot: 0.04120
+  |- loss_pos: 0.83221
+  |- fk_loss: 1.84506
+  |- smoothness_loss: 0.12759
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 26 | Train Loss: 0.49661 | Val Loss: 0.53898
+Train Loss Components:
+  |- loss_rot: 0.04271
+  |- loss_pos: 0.80736
+  |- fk_loss: 1.93688
+  |- smoothness_loss: 0.24062
+Val Loss Components:
+  |- loss_rot: 0.04166
+  |- loss_pos: 0.82014
+  |- fk_loss: 1.85440
+  |- smoothness_loss: 0.12224
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 27 | Train Loss: 0.48688 | Val Loss: 0.53967
+Train Loss Components:
+  |- loss_rot: 0.03870
+  |- loss_pos: 0.65527
+  |- fk_loss: 1.72140
+  |- smoothness_loss: 0.25945
+Val Loss Components:
+  |- loss_rot: 0.04131
+  |- loss_pos: 0.82909
+  |- fk_loss: 1.83675
+  |- smoothness_loss: 0.12712
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 28 | Train Loss: 0.48032 | Val Loss: 0.53164
+Train Loss Components:
+  |- loss_rot: 0.04435
+  |- loss_pos: 0.73362
+  |- fk_loss: 1.90210
+  |- smoothness_loss: 0.31891
+Val Loss Components:
+  |- loss_rot: 0.04099
+  |- loss_pos: 0.86037
+  |- fk_loss: 1.86248
+  |- smoothness_loss: 0.12689
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 29 | Train Loss: 0.46877 | Val Loss: 0.53006
+Train Loss Components:
+  |- loss_rot: 0.04383
+  |- loss_pos: 0.70743
+  |- fk_loss: 1.89299
+  |- smoothness_loss: 0.30140
+Val Loss Components:
+  |- loss_rot: 0.04092
+  |- loss_pos: 0.85231
+  |- fk_loss: 1.83974
+  |- smoothness_loss: 0.12597
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 30 | Train Loss: 0.46308 | Val Loss: 0.52620
+Train Loss Components:
+  |- loss_rot: 0.04600
+  |- loss_pos: 0.69662
+  |- fk_loss: 1.92094
+  |- smoothness_loss: 0.33615
+Val Loss Components:
+  |- loss_rot: 0.04109
+  |- loss_pos: 0.83685
+  |- fk_loss: 1.84540
+  |- smoothness_loss: 0.13099
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 31 | Train Loss: 0.45503 | Val Loss: 0.53515
+Train Loss Components:
+  |- loss_rot: 0.03989
+  |- loss_pos: 0.68809
+  |- fk_loss: 1.73407
+  |- smoothness_loss: 0.24653
+Val Loss Components:
+  |- loss_rot: 0.04087
+  |- loss_pos: 0.83184
+  |- fk_loss: 1.81937
+  |- smoothness_loss: 0.13208
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 32 | Train Loss: 0.44801 | Val Loss: 0.51771
+Train Loss Components:
+  |- loss_rot: 0.04595
+  |- loss_pos: 0.71993
+  |- fk_loss: 1.94362
+  |- smoothness_loss: 0.33953
+Val Loss Components:
+  |- loss_rot: 0.04058
+  |- loss_pos: 0.82366
+  |- fk_loss: 1.78601
+  |- smoothness_loss: 0.12859
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 33 | Train Loss: 0.44088 | Val Loss: 0.51646
+Train Loss Components:
+  |- loss_rot: 0.04401
+  |- loss_pos: 0.60113
+  |- fk_loss: 1.77075
+  |- smoothness_loss: 0.29731
+Val Loss Components:
+  |- loss_rot: 0.04058
+  |- loss_pos: 0.75838
+  |- fk_loss: 1.75209
+  |- smoothness_loss: 0.13522
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 34 | Train Loss: 0.43522 | Val Loss: 0.51015
+Train Loss Components:
+  |- loss_rot: 0.04274
+  |- loss_pos: 0.64558
+  |- fk_loss: 1.78599
+  |- smoothness_loss: 0.28078
+Val Loss Components:
+  |- loss_rot: 0.04033
+  |- loss_pos: 0.77220
+  |- fk_loss: 1.73957
+  |- smoothness_loss: 0.12547
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 35 | Train Loss: 0.42934 | Val Loss: 0.51024
+Train Loss Components:
+  |- loss_rot: 0.04640
+  |- loss_pos: 0.66194
+  |- fk_loss: 1.84899
+  |- smoothness_loss: 0.34213
+Val Loss Components:
+  |- loss_rot: 0.04115
+  |- loss_pos: 0.81015
+  |- fk_loss: 1.77853
+  |- smoothness_loss: 0.14063
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 36 | Train Loss: 0.42163 | Val Loss: 0.50879
+Train Loss Components:
+  |- loss_rot: 0.04406
+  |- loss_pos: 0.61185
+  |- fk_loss: 1.75273
+  |- smoothness_loss: 0.31405
+Val Loss Components:
+  |- loss_rot: 0.04079
+  |- loss_pos: 0.81169
+  |- fk_loss: 1.76516
+  |- smoothness_loss: 0.14388
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 37 | Train Loss: 0.41685 | Val Loss: 0.50641
+Train Loss Components:
+  |- loss_rot: 0.03950
+  |- loss_pos: 0.57716
+  |- fk_loss: 1.62649
+  |- smoothness_loss: 0.29492
+Val Loss Components:
+  |- loss_rot: 0.04061
+  |- loss_pos: 0.81045
+  |- fk_loss: 1.76477
+  |- smoothness_loss: 0.13618
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 38 | Train Loss: 0.41123 | Val Loss: 0.50066
+Train Loss Components:
+  |- loss_rot: 0.03882
+  |- loss_pos: 0.55824
+  |- fk_loss: 1.64977
+  |- smoothness_loss: 0.26049
+Val Loss Components:
+  |- loss_rot: 0.04067
+  |- loss_pos: 0.80097
+  |- fk_loss: 1.74477
+  |- smoothness_loss: 0.13449
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 39 | Train Loss: 0.40658 | Val Loss: 0.50447
+Train Loss Components:
+  |- loss_rot: 0.04079
+  |- loss_pos: 0.62897
+  |- fk_loss: 1.70225
+  |- smoothness_loss: 0.27753
+Val Loss Components:
+  |- loss_rot: 0.04116
+  |- loss_pos: 0.80352
+  |- fk_loss: 1.78335
+  |- smoothness_loss: 0.13900
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 40 | Train Loss: 0.40074 | Val Loss: 0.49778
+Train Loss Components:
+  |- loss_rot: 0.04266
+  |- loss_pos: 0.58721
+  |- fk_loss: 1.75812
+  |- smoothness_loss: 0.31556
+Val Loss Components:
+  |- loss_rot: 0.04051
+  |- loss_pos: 0.77565
+  |- fk_loss: 1.72655
+  |- smoothness_loss: 0.13510
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 41 | Train Loss: 0.39479 | Val Loss: 0.49261
+Train Loss Components:
+  |- loss_rot: 0.04320
+  |- loss_pos: 0.55899
+  |- fk_loss: 1.66135
+  |- smoothness_loss: 0.33475
+Val Loss Components:
+  |- loss_rot: 0.04016
+  |- loss_pos: 0.78799
+  |- fk_loss: 1.68445
+  |- smoothness_loss: 0.14466
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 42 | Train Loss: 0.38807 | Val Loss: 0.49160
+Train Loss Components:
+  |- loss_rot: 0.03699
+  |- loss_pos: 0.47933
+  |- fk_loss: 1.38945
+  |- smoothness_loss: 0.24629
+Val Loss Components:
+  |- loss_rot: 0.03971
+  |- loss_pos: 0.77199
+  |- fk_loss: 1.68831
+  |- smoothness_loss: 0.14865
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 43 | Train Loss: 0.38209 | Val Loss: 0.48837
+Train Loss Components:
+  |- loss_rot: 0.03938
+  |- loss_pos: 0.48871
+  |- fk_loss: 1.55296
+  |- smoothness_loss: 0.32633
+Val Loss Components:
+  |- loss_rot: 0.03974
+  |- loss_pos: 0.78940
+  |- fk_loss: 1.67831
+  |- smoothness_loss: 0.14576
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 44 | Train Loss: 0.37778 | Val Loss: 0.48438
+Train Loss Components:
+  |- loss_rot: 0.03971
+  |- loss_pos: 0.48722
+  |- fk_loss: 1.55355
+  |- smoothness_loss: 0.34896
+Val Loss Components:
+  |- loss_rot: 0.03970
+  |- loss_pos: 0.76603
+  |- fk_loss: 1.64711
+  |- smoothness_loss: 0.15109
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 45 | Train Loss: 0.37351 | Val Loss: 0.48585
+Train Loss Components:
+  |- loss_rot: 0.04123
+  |- loss_pos: 0.51586
+  |- fk_loss: 1.58259
+  |- smoothness_loss: 0.30285
+Val Loss Components:
+  |- loss_rot: 0.03957
+  |- loss_pos: 0.76465
+  |- fk_loss: 1.64921
+  |- smoothness_loss: 0.15219
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 46 | Train Loss: 0.36887 | Val Loss: 0.48195
+Train Loss Components:
+  |- loss_rot: 0.03844
+  |- loss_pos: 0.47604
+  |- fk_loss: 1.50232
+  |- smoothness_loss: 0.27533
+Val Loss Components:
+  |- loss_rot: 0.03924
+  |- loss_pos: 0.75346
+  |- fk_loss: 1.64746
+  |- smoothness_loss: 0.15255
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 47 | Train Loss: 0.36587 | Val Loss: 0.48173
+Train Loss Components:
+  |- loss_rot: 0.04296
+  |- loss_pos: 0.50698
+  |- fk_loss: 1.68673
+  |- smoothness_loss: 0.34801
+Val Loss Components:
+  |- loss_rot: 0.03939
+  |- loss_pos: 0.77819
+  |- fk_loss: 1.63085
+  |- smoothness_loss: 0.15357
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 48 | Train Loss: 0.36174 | Val Loss: 0.47782
+Train Loss Components:
+  |- loss_rot: 0.04132
+  |- loss_pos: 0.46035
+  |- fk_loss: 1.49609
+  |- smoothness_loss: 0.34619
+Val Loss Components:
+  |- loss_rot: 0.03940
+  |- loss_pos: 0.73405
+  |- fk_loss: 1.61044
+  |- smoothness_loss: 0.15720
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 49 | Train Loss: 0.35798 | Val Loss: 0.47551
+Train Loss Components:
+  |- loss_rot: 0.03926
+  |- loss_pos: 0.48493
+  |- fk_loss: 1.48566
+  |- smoothness_loss: 0.33103
+Val Loss Components:
+  |- loss_rot: 0.03933
+  |- loss_pos: 0.75553
+  |- fk_loss: 1.62003
+  |- smoothness_loss: 0.14762
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 50 | Train Loss: 0.35549 | Val Loss: 0.47474
+Train Loss Components:
+  |- loss_rot: 0.04082
+  |- loss_pos: 0.48045
+  |- fk_loss: 1.55702
+  |- smoothness_loss: 0.34917
+Val Loss Components:
+  |- loss_rot: 0.03951
+  |- loss_pos: 0.74035
+  |- fk_loss: 1.61507
+  |- smoothness_loss: 0.15537
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 51 | Train Loss: 0.35145 | Val Loss: 0.47155
+Train Loss Components:
+  |- loss_rot: 0.03688
+  |- loss_pos: 0.44627
+  |- fk_loss: 1.33303
+  |- smoothness_loss: 0.26895
+Val Loss Components:
+  |- loss_rot: 0.03925
+  |- loss_pos: 0.76652
+  |- fk_loss: 1.60045
+  |- smoothness_loss: 0.15313
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 52 | Train Loss: 0.34840 | Val Loss: 0.47107
+Train Loss Components:
+  |- loss_rot: 0.04065
+  |- loss_pos: 0.46489
+  |- fk_loss: 1.46737
+  |- smoothness_loss: 0.31507
+Val Loss Components:
+  |- loss_rot: 0.03893
+  |- loss_pos: 0.75789
+  |- fk_loss: 1.60648
+  |- smoothness_loss: 0.15538
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 53 | Train Loss: 0.34495 | Val Loss: 0.47427
+Train Loss Components:
+  |- loss_rot: 0.03783
+  |- loss_pos: 0.42163
+  |- fk_loss: 1.45140
+  |- smoothness_loss: 0.22932
+Val Loss Components:
+  |- loss_rot: 0.03944
+  |- loss_pos: 0.74462
+  |- fk_loss: 1.59872
+  |- smoothness_loss: 0.14733
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 54 | Train Loss: 0.34188 | Val Loss: 0.47347
+Train Loss Components:
+  |- loss_rot: 0.03940
+  |- loss_pos: 0.41843
+  |- fk_loss: 1.42685
+  |- smoothness_loss: 0.31251
+Val Loss Components:
+  |- loss_rot: 0.03923
+  |- loss_pos: 0.75144
+  |- fk_loss: 1.59126
+  |- smoothness_loss: 0.15805
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 55 | Train Loss: 0.33861 | Val Loss: 0.46948
+Train Loss Components:
+  |- loss_rot: 0.03794
+  |- loss_pos: 0.39006
+  |- fk_loss: 1.35437
+  |- smoothness_loss: 0.29000
+Val Loss Components:
+  |- loss_rot: 0.03925
+  |- loss_pos: 0.73293
+  |- fk_loss: 1.57688
+  |- smoothness_loss: 0.15532
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 56 | Train Loss: 0.33691 | Val Loss: 0.46943
+Train Loss Components:
+  |- loss_rot: 0.03615
+  |- loss_pos: 0.38562
+  |- fk_loss: 1.28316
+  |- smoothness_loss: 0.25775
+Val Loss Components:
+  |- loss_rot: 0.03935
+  |- loss_pos: 0.73209
+  |- fk_loss: 1.56980
+  |- smoothness_loss: 0.15711
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 57 | Train Loss: 0.33334 | Val Loss: 0.46530
+Train Loss Components:
+  |- loss_rot: 0.04259
+  |- loss_pos: 0.45265
+  |- fk_loss: 1.53987
+  |- smoothness_loss: 0.36057
+Val Loss Components:
+  |- loss_rot: 0.03934
+  |- loss_pos: 0.73694
+  |- fk_loss: 1.58258
+  |- smoothness_loss: 0.15433
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 58 | Train Loss: 0.33087 | Val Loss: 0.46491
+Train Loss Components:
+  |- loss_rot: 0.03693
+  |- loss_pos: 0.39480
+  |- fk_loss: 1.33479
+  |- smoothness_loss: 0.32891
+Val Loss Components:
+  |- loss_rot: 0.03936
+  |- loss_pos: 0.69522
+  |- fk_loss: 1.54783
+  |- smoothness_loss: 0.16213
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 59 | Train Loss: 0.32780 | Val Loss: 0.46130
+Train Loss Components:
+  |- loss_rot: 0.03799
+  |- loss_pos: 0.40834
+  |- fk_loss: 1.34282
+  |- smoothness_loss: 0.31766
+Val Loss Components:
+  |- loss_rot: 0.03918
+  |- loss_pos: 0.69943
+  |- fk_loss: 1.53466
+  |- smoothness_loss: 0.16112
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 60 | Train Loss: 0.32490 | Val Loss: 0.46288
+Train Loss Components:
+  |- loss_rot: 0.04329
+  |- loss_pos: 0.48022
+  |- fk_loss: 1.61201
+  |- smoothness_loss: 0.40104
+Val Loss Components:
+  |- loss_rot: 0.03917
+  |- loss_pos: 0.71514
+  |- fk_loss: 1.54515
+  |- smoothness_loss: 0.15802
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 61 | Train Loss: 0.32313 | Val Loss: 0.45943
+Train Loss Components:
+  |- loss_rot: 0.04106
+  |- loss_pos: 0.42177
+  |- fk_loss: 1.49027
+  |- smoothness_loss: 0.41150
+Val Loss Components:
+  |- loss_rot: 0.03911
+  |- loss_pos: 0.69259
+  |- fk_loss: 1.52611
+  |- smoothness_loss: 0.15722
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 62 | Train Loss: 0.32015 | Val Loss: 0.46702
+Train Loss Components:
+  |- loss_rot: 0.04062
+  |- loss_pos: 0.45509
+  |- fk_loss: 1.45724
+  |- smoothness_loss: 0.38010
+Val Loss Components:
+  |- loss_rot: 0.03936
+  |- loss_pos: 0.73229
+  |- fk_loss: 1.52384
+  |- smoothness_loss: 0.16476
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 63 | Train Loss: 0.31847 | Val Loss: 0.46163
+Train Loss Components:
+  |- loss_rot: 0.03669
+  |- loss_pos: 0.38004
+  |- fk_loss: 1.26889
+  |- smoothness_loss: 0.29765
+Val Loss Components:
+  |- loss_rot: 0.03946
+  |- loss_pos: 0.74608
+  |- fk_loss: 1.54202
+  |- smoothness_loss: 0.16735
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 64 | Train Loss: 0.31638 | Val Loss: 0.45658
+Train Loss Components:
+  |- loss_rot: 0.04266
+  |- loss_pos: 0.43207
+  |- fk_loss: 1.58591
+  |- smoothness_loss: 0.38037
+Val Loss Components:
+  |- loss_rot: 0.03922
+  |- loss_pos: 0.70756
+  |- fk_loss: 1.52918
+  |- smoothness_loss: 0.15788
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 65 | Train Loss: 0.31411 | Val Loss: 0.45695
+Train Loss Components:
+  |- loss_rot: 0.03822
+  |- loss_pos: 0.39454
+  |- fk_loss: 1.37236
+  |- smoothness_loss: 0.31877
+Val Loss Components:
+  |- loss_rot: 0.03896
+  |- loss_pos: 0.72365
+  |- fk_loss: 1.52624
+  |- smoothness_loss: 0.16557
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 66 | Train Loss: 0.31144 | Val Loss: 0.45480
+Train Loss Components:
+  |- loss_rot: 0.04442
+  |- loss_pos: 0.44093
+  |- fk_loss: 1.53563
+  |- smoothness_loss: 0.38534
+Val Loss Components:
+  |- loss_rot: 0.03903
+  |- loss_pos: 0.73574
+  |- fk_loss: 1.51272
+  |- smoothness_loss: 0.16102
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 67 | Train Loss: 0.30868 | Val Loss: 0.45658
+Train Loss Components:
+  |- loss_rot: 0.03629
+  |- loss_pos: 0.35868
+  |- fk_loss: 1.17147
+  |- smoothness_loss: 0.27102
+Val Loss Components:
+  |- loss_rot: 0.03912
+  |- loss_pos: 0.72576
+  |- fk_loss: 1.51850
+  |- smoothness_loss: 0.17068
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 68 | Train Loss: 0.30786 | Val Loss: 0.45322
+Train Loss Components:
+  |- loss_rot: 0.03784
+  |- loss_pos: 0.36158
+  |- fk_loss: 1.30793
+  |- smoothness_loss: 0.29275
+Val Loss Components:
+  |- loss_rot: 0.03892
+  |- loss_pos: 0.72360
+  |- fk_loss: 1.51744
+  |- smoothness_loss: 0.16286
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 69 | Train Loss: 0.30635 | Val Loss: 0.45291
+Train Loss Components:
+  |- loss_rot: 0.04103
+  |- loss_pos: 0.36894
+  |- fk_loss: 1.44367
+  |- smoothness_loss: 0.32019
+Val Loss Components:
+  |- loss_rot: 0.03905
+  |- loss_pos: 0.69682
+  |- fk_loss: 1.51690
+  |- smoothness_loss: 0.16090
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 70 | Train Loss: 0.30339 | Val Loss: 0.45384
+Train Loss Components:
+  |- loss_rot: 0.03638
+  |- loss_pos: 0.34491
+  |- fk_loss: 1.24534
+  |- smoothness_loss: 0.25856
+Val Loss Components:
+  |- loss_rot: 0.03887
+  |- loss_pos: 0.69115
+  |- fk_loss: 1.49296
+  |- smoothness_loss: 0.16159
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 71 | Train Loss: 0.30180 | Val Loss: 0.45014
+Train Loss Components:
+  |- loss_rot: 0.03617
+  |- loss_pos: 0.34079
+  |- fk_loss: 1.21550
+  |- smoothness_loss: 0.29741
+Val Loss Components:
+  |- loss_rot: 0.03891
+  |- loss_pos: 0.66755
+  |- fk_loss: 1.47981
+  |- smoothness_loss: 0.16190
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 72 | Train Loss: 0.29998 | Val Loss: 0.45095
+Train Loss Components:
+  |- loss_rot: 0.04195
+  |- loss_pos: 0.38719
+  |- fk_loss: 1.41114
+  |- smoothness_loss: 0.33060
+Val Loss Components:
+  |- loss_rot: 0.03917
+  |- loss_pos: 0.68420
+  |- fk_loss: 1.48088
+  |- smoothness_loss: 0.16673
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 73 | Train Loss: 0.29915 | Val Loss: 0.45131
+Train Loss Components:
+  |- loss_rot: 0.03729
+  |- loss_pos: 0.34960
+  |- fk_loss: 1.25922
+  |- smoothness_loss: 0.32349
+Val Loss Components:
+  |- loss_rot: 0.03878
+  |- loss_pos: 0.68403
+  |- fk_loss: 1.46616
+  |- smoothness_loss: 0.16420
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 74 | Train Loss: 0.29506 | Val Loss: 0.44479
+Train Loss Components:
+  |- loss_rot: 0.03692
+  |- loss_pos: 0.36626
+  |- fk_loss: 1.28351
+  |- smoothness_loss: 0.30233
+Val Loss Components:
+  |- loss_rot: 0.03766
+  |- loss_pos: 0.70165
+  |- fk_loss: 1.43498
+  |- smoothness_loss: 0.16579
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 75 | Train Loss: 0.29113 | Val Loss: 0.44330
+Train Loss Components:
+  |- loss_rot: 0.03686
+  |- loss_pos: 0.35668
+  |- fk_loss: 1.28819
+  |- smoothness_loss: 0.33518
+Val Loss Components:
+  |- loss_rot: 0.03734
+  |- loss_pos: 0.68573
+  |- fk_loss: 1.41567
+  |- smoothness_loss: 0.16346
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 76 | Train Loss: 0.28926 | Val Loss: 0.44381
+Train Loss Components:
+  |- loss_rot: 0.04089
+  |- loss_pos: 0.36636
+  |- fk_loss: 1.36747
+  |- smoothness_loss: 0.37761
+Val Loss Components:
+  |- loss_rot: 0.03735
+  |- loss_pos: 0.70494
+  |- fk_loss: 1.43728
+  |- smoothness_loss: 0.16378
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 77 | Train Loss: 0.28708 | Val Loss: 0.44029
+Train Loss Components:
+  |- loss_rot: 0.03857
+  |- loss_pos: 0.37163
+  |- fk_loss: 1.33241
+  |- smoothness_loss: 0.39050
+Val Loss Components:
+  |- loss_rot: 0.03709
+  |- loss_pos: 0.71126
+  |- fk_loss: 1.42509
+  |- smoothness_loss: 0.16399
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 78 | Train Loss: 0.28489 | Val Loss: 0.44272
+Train Loss Components:
+  |- loss_rot: 0.03951
+  |- loss_pos: 0.36996
+  |- fk_loss: 1.33147
+  |- smoothness_loss: 0.33538
+Val Loss Components:
+  |- loss_rot: 0.03721
+  |- loss_pos: 0.65045
+  |- fk_loss: 1.39875
+  |- smoothness_loss: 0.16547
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 79 | Train Loss: 0.28340 | Val Loss: 0.44254
+Train Loss Components:
+  |- loss_rot: 0.03878
+  |- loss_pos: 0.32328
+  |- fk_loss: 1.31026
+  |- smoothness_loss: 0.32446
+Val Loss Components:
+  |- loss_rot: 0.03711
+  |- loss_pos: 0.67705
+  |- fk_loss: 1.39870
+  |- smoothness_loss: 0.17109
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 80 | Train Loss: 0.28214 | Val Loss: 0.44215
+Train Loss Components:
+  |- loss_rot: 0.03837
+  |- loss_pos: 0.33702
+  |- fk_loss: 1.26508
+  |- smoothness_loss: 0.29473
+Val Loss Components:
+  |- loss_rot: 0.03699
+  |- loss_pos: 0.70255
+  |- fk_loss: 1.43128
+  |- smoothness_loss: 0.16791
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 81 | Train Loss: 0.28110 | Val Loss: 0.43888
+Train Loss Components:
+  |- loss_rot: 0.03638
+  |- loss_pos: 0.32920
+  |- fk_loss: 1.17308
+  |- smoothness_loss: 0.34089
+Val Loss Components:
+  |- loss_rot: 0.03681
+  |- loss_pos: 0.67165
+  |- fk_loss: 1.38603
+  |- smoothness_loss: 0.17569
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 82 | Train Loss: 0.27928 | Val Loss: 0.43961
+Train Loss Components:
+  |- loss_rot: 0.04562
+  |- loss_pos: 0.37324
+  |- fk_loss: 1.44035
+  |- smoothness_loss: 0.43643
+Val Loss Components:
+  |- loss_rot: 0.03691
+  |- loss_pos: 0.70295
+  |- fk_loss: 1.40699
+  |- smoothness_loss: 0.17185
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 83 | Train Loss: 0.27780 | Val Loss: 0.43811
+Train Loss Components:
+  |- loss_rot: 0.03382
+  |- loss_pos: 0.29284
+  |- fk_loss: 1.06738
+  |- smoothness_loss: 0.26881
+Val Loss Components:
+  |- loss_rot: 0.03669
+  |- loss_pos: 0.66107
+  |- fk_loss: 1.37999
+  |- smoothness_loss: 0.17245
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 84 | Train Loss: 0.27620 | Val Loss: 0.43655
+Train Loss Components:
+  |- loss_rot: 0.03880
+  |- loss_pos: 0.33490
+  |- fk_loss: 1.26389
+  |- smoothness_loss: 0.33416
+Val Loss Components:
+  |- loss_rot: 0.03696
+  |- loss_pos: 0.66194
+  |- fk_loss: 1.37182
+  |- smoothness_loss: 0.17116
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 85 | Train Loss: 0.27415 | Val Loss: 0.43825
+Train Loss Components:
+  |- loss_rot: 0.03682
+  |- loss_pos: 0.31492
+  |- fk_loss: 1.24582
+  |- smoothness_loss: 0.29236
+Val Loss Components:
+  |- loss_rot: 0.03682
+  |- loss_pos: 0.66657
+  |- fk_loss: 1.38010
+  |- smoothness_loss: 0.16988
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 86 | Train Loss: 0.27358 | Val Loss: 0.43611
+Train Loss Components:
+  |- loss_rot: 0.04166
+  |- loss_pos: 0.34331
+  |- fk_loss: 1.32825
+  |- smoothness_loss: 0.39675
+Val Loss Components:
+  |- loss_rot: 0.03682
+  |- loss_pos: 0.64406
+  |- fk_loss: 1.36716
+  |- smoothness_loss: 0.17311
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 87 | Train Loss: 0.27079 | Val Loss: 0.43468
+Train Loss Components:
+  |- loss_rot: 0.03955
+  |- loss_pos: 0.32507
+  |- fk_loss: 1.26328
+  |- smoothness_loss: 0.36634
+Val Loss Components:
+  |- loss_rot: 0.03680
+  |- loss_pos: 0.66513
+  |- fk_loss: 1.36190
+  |- smoothness_loss: 0.17015
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 88 | Train Loss: 0.27061 | Val Loss: 0.43678
+Train Loss Components:
+  |- loss_rot: 0.03846
+  |- loss_pos: 0.32236
+  |- fk_loss: 1.25072
+  |- smoothness_loss: 0.32099
+Val Loss Components:
+  |- loss_rot: 0.03681
+  |- loss_pos: 0.68772
+  |- fk_loss: 1.38226
+  |- smoothness_loss: 0.16762
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 89 | Train Loss: 0.26957 | Val Loss: 0.43519
+Train Loss Components:
+  |- loss_rot: 0.03723
+  |- loss_pos: 0.32120
+  |- fk_loss: 1.15101
+  |- smoothness_loss: 0.33768
+Val Loss Components:
+  |- loss_rot: 0.03676
+  |- loss_pos: 0.66629
+  |- fk_loss: 1.37284
+  |- smoothness_loss: 0.16815
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 90 | Train Loss: 0.26817 | Val Loss: 0.43594
+Train Loss Components:
+  |- loss_rot: 0.03477
+  |- loss_pos: 0.30504
+  |- fk_loss: 1.18548
+  |- smoothness_loss: 0.30825
+Val Loss Components:
+  |- loss_rot: 0.03677
+  |- loss_pos: 0.68413
+  |- fk_loss: 1.37661
+  |- smoothness_loss: 0.16311
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 91 | Train Loss: 0.26695 | Val Loss: 0.43398
+Train Loss Components:
+  |- loss_rot: 0.04283
+  |- loss_pos: 0.34153
+  |- fk_loss: 1.34262
+  |- smoothness_loss: 0.40586
+Val Loss Components:
+  |- loss_rot: 0.03683
+  |- loss_pos: 0.65619
+  |- fk_loss: 1.36277
+  |- smoothness_loss: 0.17416
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 92 | Train Loss: 0.26604 | Val Loss: 0.43486
+Train Loss Components:
+  |- loss_rot: 0.03896
+  |- loss_pos: 0.31486
+  |- fk_loss: 1.22072
+  |- smoothness_loss: 0.36022
+Val Loss Components:
+  |- loss_rot: 0.03682
+  |- loss_pos: 0.64431
+  |- fk_loss: 1.33814
+  |- smoothness_loss: 0.17464
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 93 | Train Loss: 0.26470 | Val Loss: 0.43343
+Train Loss Components:
+  |- loss_rot: 0.03678
+  |- loss_pos: 0.28281
+  |- fk_loss: 1.12877
+  |- smoothness_loss: 0.27535
+Val Loss Components:
+  |- loss_rot: 0.03662
+  |- loss_pos: 0.69439
+  |- fk_loss: 1.37371
+  |- smoothness_loss: 0.17024
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 94 | Train Loss: 0.26291 | Val Loss: 0.43131
+Train Loss Components:
+  |- loss_rot: 0.03814
+  |- loss_pos: 0.31197
+  |- fk_loss: 1.18358
+  |- smoothness_loss: 0.31703
+Val Loss Components:
+  |- loss_rot: 0.03672
+  |- loss_pos: 0.64248
+  |- fk_loss: 1.34419
+  |- smoothness_loss: 0.16916
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 95 | Train Loss: 0.26166 | Val Loss: 0.43402
+Train Loss Components:
+  |- loss_rot: 0.03862
+  |- loss_pos: 0.31652
+  |- fk_loss: 1.19589
+  |- smoothness_loss: 0.37649
+Val Loss Components:
+  |- loss_rot: 0.03690
+  |- loss_pos: 0.68929
+  |- fk_loss: 1.37184
+  |- smoothness_loss: 0.17498
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 96 | Train Loss: 0.26095 | Val Loss: 0.43281
+Train Loss Components:
+  |- loss_rot: 0.03703
+  |- loss_pos: 0.28669
+  |- fk_loss: 1.13852
+  |- smoothness_loss: 0.29041
+Val Loss Components:
+  |- loss_rot: 0.03677
+  |- loss_pos: 0.65270
+  |- fk_loss: 1.34838
+  |- smoothness_loss: 0.18251
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 97 | Train Loss: 0.25962 | Val Loss: 0.43107
+Train Loss Components:
+  |- loss_rot: 0.03750
+  |- loss_pos: 0.31046
+  |- fk_loss: 1.15497
+  |- smoothness_loss: 0.33288
+Val Loss Components:
+  |- loss_rot: 0.03654
+  |- loss_pos: 0.66306
+  |- fk_loss: 1.34706
+  |- smoothness_loss: 0.16704
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 98 | Train Loss: 0.25819 | Val Loss: 0.42991
+Train Loss Components:
+  |- loss_rot: 0.03810
+  |- loss_pos: 0.33377
+  |- fk_loss: 1.19424
+  |- smoothness_loss: 0.34621
+Val Loss Components:
+  |- loss_rot: 0.03654
+  |- loss_pos: 0.65401
+  |- fk_loss: 1.33980
+  |- smoothness_loss: 0.17242
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 99 | Train Loss: 0.25771 | Val Loss: 0.42874
+Train Loss Components:
+  |- loss_rot: 0.03871
+  |- loss_pos: 0.30119
+  |- fk_loss: 1.18684
+  |- smoothness_loss: 0.37683
+Val Loss Components:
+  |- loss_rot: 0.03649
+  |- loss_pos: 0.69001
+  |- fk_loss: 1.35194
+  |- smoothness_loss: 0.17350
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 100 | Train Loss: 0.25683 | Val Loss: 0.43181
+Train Loss Components:
+  |- loss_rot: 0.04081
+  |- loss_pos: 0.32129
+  |- fk_loss: 1.27063
+  |- smoothness_loss: 0.38560
+Val Loss Components:
+  |- loss_rot: 0.03686
+  |- loss_pos: 0.65742
+  |- fk_loss: 1.36079
+  |- smoothness_loss: 0.17770
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 101 | Train Loss: 0.25560 | Val Loss: 0.42687
+Train Loss Components:
+  |- loss_rot: 0.03788
+  |- loss_pos: 0.30131
+  |- fk_loss: 1.17322
+  |- smoothness_loss: 0.33123
+Val Loss Components:
+  |- loss_rot: 0.03671
+  |- loss_pos: 0.64382
+  |- fk_loss: 1.32975
+  |- smoothness_loss: 0.17888
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 102 | Train Loss: 0.25500 | Val Loss: 0.42709
+Train Loss Components:
+  |- loss_rot: 0.03819
+  |- loss_pos: 0.29540
+  |- fk_loss: 1.17146
+  |- smoothness_loss: 0.34714
+Val Loss Components:
+  |- loss_rot: 0.03658
+  |- loss_pos: 0.63770
+  |- fk_loss: 1.33013
+  |- smoothness_loss: 0.17917
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 103 | Train Loss: 0.25293 | Val Loss: 0.42858
+Train Loss Components:
+  |- loss_rot: 0.03894
+  |- loss_pos: 0.31426
+  |- fk_loss: 1.17698
+  |- smoothness_loss: 0.42223
+Val Loss Components:
+  |- loss_rot: 0.03640
+  |- loss_pos: 0.63228
+  |- fk_loss: 1.31781
+  |- smoothness_loss: 0.17467
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 104 | Train Loss: 0.25304 | Val Loss: 0.42899
+Train Loss Components:
+  |- loss_rot: 0.03766
+  |- loss_pos: 0.29547
+  |- fk_loss: 1.16105
+  |- smoothness_loss: 0.30371
+Val Loss Components:
+  |- loss_rot: 0.03655
+  |- loss_pos: 0.65036
+  |- fk_loss: 1.32937
+  |- smoothness_loss: 0.17726
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 105 | Train Loss: 0.25158 | Val Loss: 0.42855
+Train Loss Components:
+  |- loss_rot: 0.03779
+  |- loss_pos: 0.29566
+  |- fk_loss: 1.13950
+  |- smoothness_loss: 0.34908
+Val Loss Components:
+  |- loss_rot: 0.03665
+  |- loss_pos: 0.65161
+  |- fk_loss: 1.31631
+  |- smoothness_loss: 0.18051
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 106 | Train Loss: 0.25024 | Val Loss: 0.42669
+Train Loss Components:
+  |- loss_rot: 0.03850
+  |- loss_pos: 0.29330
+  |- fk_loss: 1.24955
+  |- smoothness_loss: 0.35274
+Val Loss Components:
+  |- loss_rot: 0.03637
+  |- loss_pos: 0.64966
+  |- fk_loss: 1.32868
+  |- smoothness_loss: 0.17657
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 107 | Train Loss: 0.24948 | Val Loss: 0.42695
+Train Loss Components:
+  |- loss_rot: 0.03416
+  |- loss_pos: 0.27093
+  |- fk_loss: 1.01830
+  |- smoothness_loss: 0.30658
+Val Loss Components:
+  |- loss_rot: 0.03633
+  |- loss_pos: 0.66256
+  |- fk_loss: 1.33641
+  |- smoothness_loss: 0.17491
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 108 | Train Loss: 0.24927 | Val Loss: 0.42939
+Train Loss Components:
+  |- loss_rot: 0.03458
+  |- loss_pos: 0.25633
+  |- fk_loss: 1.01902
+  |- smoothness_loss: 0.30915
+Val Loss Components:
+  |- loss_rot: 0.03643
+  |- loss_pos: 0.67085
+  |- fk_loss: 1.34623
+  |- smoothness_loss: 0.18020
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 109 | Train Loss: 0.24845 | Val Loss: 0.42598
+Train Loss Components:
+  |- loss_rot: 0.03834
+  |- loss_pos: 0.29272
+  |- fk_loss: 1.17338
+  |- smoothness_loss: 0.33958
+Val Loss Components:
+  |- loss_rot: 0.03638
+  |- loss_pos: 0.63845
+  |- fk_loss: 1.32707
+  |- smoothness_loss: 0.18379
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 110 | Train Loss: 0.24682 | Val Loss: 0.42652
+Train Loss Components:
+  |- loss_rot: 0.03716
+  |- loss_pos: 0.28676
+  |- fk_loss: 1.10210
+  |- smoothness_loss: 0.33288
+Val Loss Components:
+  |- loss_rot: 0.03639
+  |- loss_pos: 0.63794
+  |- fk_loss: 1.33022
+  |- smoothness_loss: 0.17791
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 111 | Train Loss: 0.24604 | Val Loss: 0.42595
+Train Loss Components:
+  |- loss_rot: 0.03921
+  |- loss_pos: 0.27358
+  |- fk_loss: 1.11174
+  |- smoothness_loss: 0.33536
+Val Loss Components:
+  |- loss_rot: 0.03642
+  |- loss_pos: 0.63591
+  |- fk_loss: 1.33147
+  |- smoothness_loss: 0.17302
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 112 | Train Loss: 0.24575 | Val Loss: 0.42420
+Train Loss Components:
+  |- loss_rot: 0.03705
+  |- loss_pos: 0.27921
+  |- fk_loss: 1.13610
+  |- smoothness_loss: 0.30317
+Val Loss Components:
+  |- loss_rot: 0.03617
+  |- loss_pos: 0.66514
+  |- fk_loss: 1.31197
+  |- smoothness_loss: 0.17689
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 113 | Train Loss: 0.24427 | Val Loss: 0.42529
+Train Loss Components:
+  |- loss_rot: 0.03792
+  |- loss_pos: 0.27346
+  |- fk_loss: 1.08524
+  |- smoothness_loss: 0.32963
+Val Loss Components:
+  |- loss_rot: 0.03638
+  |- loss_pos: 0.62060
+  |- fk_loss: 1.30054
+  |- smoothness_loss: 0.18294
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 114 | Train Loss: 0.24368 | Val Loss: 0.42414
+Train Loss Components:
+  |- loss_rot: 0.03590
+  |- loss_pos: 0.26613
+  |- fk_loss: 1.04013
+  |- smoothness_loss: 0.34008
+Val Loss Components:
+  |- loss_rot: 0.03633
+  |- loss_pos: 0.64198
+  |- fk_loss: 1.29494
+  |- smoothness_loss: 0.18323
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 115 | Train Loss: 0.24302 | Val Loss: 0.42516
+Train Loss Components:
+  |- loss_rot: 0.03720
+  |- loss_pos: 0.31127
+  |- fk_loss: 1.15874
+  |- smoothness_loss: 0.36082
+Val Loss Components:
+  |- loss_rot: 0.03613
+  |- loss_pos: 0.66308
+  |- fk_loss: 1.31294
+  |- smoothness_loss: 0.17391
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 116 | Train Loss: 0.24220 | Val Loss: 0.42433
+Train Loss Components:
+  |- loss_rot: 0.03390
+  |- loss_pos: 0.25453
+  |- fk_loss: 0.96370
+  |- smoothness_loss: 0.27805
+Val Loss Components:
+  |- loss_rot: 0.03635
+  |- loss_pos: 0.63959
+  |- fk_loss: 1.30444
+  |- smoothness_loss: 0.18150
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 117 | Train Loss: 0.24070 | Val Loss: 0.42415
+Train Loss Components:
+  |- loss_rot: 0.03547
+  |- loss_pos: 0.25739
+  |- fk_loss: 1.05024
+  |- smoothness_loss: 0.28955
+Val Loss Components:
+  |- loss_rot: 0.03621
+  |- loss_pos: 0.64038
+  |- fk_loss: 1.30929
+  |- smoothness_loss: 0.17964
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 118 | Train Loss: 0.24034 | Val Loss: 0.42244
+Train Loss Components:
+  |- loss_rot: 0.03791
+  |- loss_pos: 0.26692
+  |- fk_loss: 1.09468
+  |- smoothness_loss: 0.36216
+Val Loss Components:
+  |- loss_rot: 0.03652
+  |- loss_pos: 0.63624
+  |- fk_loss: 1.31585
+  |- smoothness_loss: 0.18048
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 119 | Train Loss: 0.24003 | Val Loss: 0.42084
+Train Loss Components:
+  |- loss_rot: 0.03467
+  |- loss_pos: 0.23190
+  |- fk_loss: 0.95052
+  |- smoothness_loss: 0.27975
+Val Loss Components:
+  |- loss_rot: 0.03622
+  |- loss_pos: 0.63715
+  |- fk_loss: 1.29987
+  |- smoothness_loss: 0.18578
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 120 | Train Loss: 0.23852 | Val Loss: 0.42084
+Train Loss Components:
+  |- loss_rot: 0.03810
+  |- loss_pos: 0.26587
+  |- fk_loss: 1.09617
+  |- smoothness_loss: 0.34931
+Val Loss Components:
+  |- loss_rot: 0.03625
+  |- loss_pos: 0.66163
+  |- fk_loss: 1.32101
+  |- smoothness_loss: 0.18486
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 121 | Train Loss: 0.23786 | Val Loss: 0.42060
+Train Loss Components:
+  |- loss_rot: 0.04029
+  |- loss_pos: 0.28915
+  |- fk_loss: 1.20704
+  |- smoothness_loss: 0.42686
+Val Loss Components:
+  |- loss_rot: 0.03635
+  |- loss_pos: 0.64476
+  |- fk_loss: 1.30650
+  |- smoothness_loss: 0.18154
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 122 | Train Loss: 0.23654 | Val Loss: 0.42115
+Train Loss Components:
+  |- loss_rot: 0.03650
+  |- loss_pos: 0.26028
+  |- fk_loss: 1.11956
+  |- smoothness_loss: 0.33474
+Val Loss Components:
+  |- loss_rot: 0.03608
+  |- loss_pos: 0.63893
+  |- fk_loss: 1.28436
+  |- smoothness_loss: 0.17992
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 123 | Train Loss: 0.23649 | Val Loss: 0.42150
+Train Loss Components:
+  |- loss_rot: 0.03524
+  |- loss_pos: 0.25741
+  |- fk_loss: 0.99624
+  |- smoothness_loss: 0.35737
+Val Loss Components:
+  |- loss_rot: 0.03601
+  |- loss_pos: 0.62806
+  |- fk_loss: 1.30647
+  |- smoothness_loss: 0.18486
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 124 | Train Loss: 0.23479 | Val Loss: 0.42066
+Train Loss Components:
+  |- loss_rot: 0.03443
+  |- loss_pos: 0.24996
+  |- fk_loss: 0.99001
+  |- smoothness_loss: 0.29174
+Val Loss Components:
+  |- loss_rot: 0.03621
+  |- loss_pos: 0.63648
+  |- fk_loss: 1.30025
+  |- smoothness_loss: 0.18748
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 125 | Train Loss: 0.23417 | Val Loss: 0.41821
+Train Loss Components:
+  |- loss_rot: 0.03776
+  |- loss_pos: 0.28600
+  |- fk_loss: 1.07772
+  |- smoothness_loss: 0.39646
+Val Loss Components:
+  |- loss_rot: 0.03623
+  |- loss_pos: 0.63719
+  |- fk_loss: 1.30305
+  |- smoothness_loss: 0.18029
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 126 | Train Loss: 0.23362 | Val Loss: 0.41935
+Train Loss Components:
+  |- loss_rot: 0.03614
+  |- loss_pos: 0.25790
+  |- fk_loss: 0.97752
+  |- smoothness_loss: 0.32072
+Val Loss Components:
+  |- loss_rot: 0.03591
+  |- loss_pos: 0.63418
+  |- fk_loss: 1.28813
+  |- smoothness_loss: 0.18373
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 127 | Train Loss: 0.23237 | Val Loss: 0.42089
+Train Loss Components:
+  |- loss_rot: 0.03699
+  |- loss_pos: 0.26276
+  |- fk_loss: 1.06690
+  |- smoothness_loss: 0.34190
+Val Loss Components:
+  |- loss_rot: 0.03612
+  |- loss_pos: 0.65047
+  |- fk_loss: 1.30893
+  |- smoothness_loss: 0.18515
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 128 | Train Loss: 0.23195 | Val Loss: 0.41896
+Train Loss Components:
+  |- loss_rot: 0.03595
+  |- loss_pos: 0.25861
+  |- fk_loss: 0.98351
+  |- smoothness_loss: 0.29462
+Val Loss Components:
+  |- loss_rot: 0.03605
+  |- loss_pos: 0.62682
+  |- fk_loss: 1.27553
+  |- smoothness_loss: 0.18956
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 129 | Train Loss: 0.23106 | Val Loss: 0.41696
+Train Loss Components:
+  |- loss_rot: 0.03744
+  |- loss_pos: 0.24731
+  |- fk_loss: 1.02083
+  |- smoothness_loss: 0.34757
+Val Loss Components:
+  |- loss_rot: 0.03605
+  |- loss_pos: 0.63698
+  |- fk_loss: 1.29630
+  |- smoothness_loss: 0.18433
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 130 | Train Loss: 0.23088 | Val Loss: 0.41986
+Train Loss Components:
+  |- loss_rot: 0.03866
+  |- loss_pos: 0.26854
+  |- fk_loss: 1.10463
+  |- smoothness_loss: 0.38714
+Val Loss Components:
+  |- loss_rot: 0.03604
+  |- loss_pos: 0.64126
+  |- fk_loss: 1.28891
+  |- smoothness_loss: 0.19330
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 131 | Train Loss: 0.22963 | Val Loss: 0.41731
+Train Loss Components:
+  |- loss_rot: 0.03493
+  |- loss_pos: 0.25139
+  |- fk_loss: 0.99248
+  |- smoothness_loss: 0.32498
+Val Loss Components:
+  |- loss_rot: 0.03594
+  |- loss_pos: 0.64311
+  |- fk_loss: 1.27647
+  |- smoothness_loss: 0.18033
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 132 | Train Loss: 0.22904 | Val Loss: 0.41622
+Train Loss Components:
+  |- loss_rot: 0.03528
+  |- loss_pos: 0.24424
+  |- fk_loss: 1.00038
+  |- smoothness_loss: 0.36860
+Val Loss Components:
+  |- loss_rot: 0.03585
+  |- loss_pos: 0.62963
+  |- fk_loss: 1.28058
+  |- smoothness_loss: 0.18851
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 133 | Train Loss: 0.22782 | Val Loss: 0.41780
+Train Loss Components:
+  |- loss_rot: 0.03497
+  |- loss_pos: 0.24624
+  |- fk_loss: 0.99474
+  |- smoothness_loss: 0.31290
+Val Loss Components:
+  |- loss_rot: 0.03587
+  |- loss_pos: 0.61706
+  |- fk_loss: 1.27589
+  |- smoothness_loss: 0.18923
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 134 | Train Loss: 0.22755 | Val Loss: 0.41736
+Train Loss Components:
+  |- loss_rot: 0.03591
+  |- loss_pos: 0.23929
+  |- fk_loss: 0.99960
+  |- smoothness_loss: 0.31496
+Val Loss Components:
+  |- loss_rot: 0.03606
+  |- loss_pos: 0.63421
+  |- fk_loss: 1.28319
+  |- smoothness_loss: 0.18879
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 135 | Train Loss: 0.22729 | Val Loss: 0.41749
+Train Loss Components:
+  |- loss_rot: 0.03691
+  |- loss_pos: 0.25612
+  |- fk_loss: 1.05117
+  |- smoothness_loss: 0.37145
+Val Loss Components:
+  |- loss_rot: 0.03587
+  |- loss_pos: 0.60826
+  |- fk_loss: 1.27540
+  |- smoothness_loss: 0.18275
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 136 | Train Loss: 0.22663 | Val Loss: 0.41515
+Train Loss Components:
+  |- loss_rot: 0.03599
+  |- loss_pos: 0.26608
+  |- fk_loss: 1.04032
+  |- smoothness_loss: 0.32719
+Val Loss Components:
+  |- loss_rot: 0.03605
+  |- loss_pos: 0.63854
+  |- fk_loss: 1.28875
+  |- smoothness_loss: 0.18516
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 137 | Train Loss: 0.22557 | Val Loss: 0.41603
+Train Loss Components:
+  |- loss_rot: 0.03611
+  |- loss_pos: 0.23330
+  |- fk_loss: 1.00087
+  |- smoothness_loss: 0.31854
+Val Loss Components:
+  |- loss_rot: 0.03590
+  |- loss_pos: 0.62569
+  |- fk_loss: 1.28208
+  |- smoothness_loss: 0.18334
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 138 | Train Loss: 0.22537 | Val Loss: 0.41698
+Train Loss Components:
+  |- loss_rot: 0.03686
+  |- loss_pos: 0.25162
+  |- fk_loss: 1.02487
+  |- smoothness_loss: 0.38484
+Val Loss Components:
+  |- loss_rot: 0.03598
+  |- loss_pos: 0.63835
+  |- fk_loss: 1.29767
+  |- smoothness_loss: 0.18927
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 139 | Train Loss: 0.22432 | Val Loss: 0.41611
+Train Loss Components:
+  |- loss_rot: 0.03510
+  |- loss_pos: 0.24484
+  |- fk_loss: 0.98855
+  |- smoothness_loss: 0.33685
+Val Loss Components:
+  |- loss_rot: 0.03606
+  |- loss_pos: 0.63973
+  |- fk_loss: 1.28263
+  |- smoothness_loss: 0.18851
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 140 | Train Loss: 0.22382 | Val Loss: 0.41610
+Train Loss Components:
+  |- loss_rot: 0.03927
+  |- loss_pos: 0.28880
+  |- fk_loss: 1.06830
+  |- smoothness_loss: 0.42779
+Val Loss Components:
+  |- loss_rot: 0.03603
+  |- loss_pos: 0.64604
+  |- fk_loss: 1.29367
+  |- smoothness_loss: 0.18800
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 141 | Train Loss: 0.22391 | Val Loss: 0.41549
+Train Loss Components:
+  |- loss_rot: 0.03381
+  |- loss_pos: 0.23741
+  |- fk_loss: 0.93256
+  |- smoothness_loss: 0.28729
+Val Loss Components:
+  |- loss_rot: 0.03579
+  |- loss_pos: 0.62628
+  |- fk_loss: 1.28361
+  |- smoothness_loss: 0.18907
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 142 | Train Loss: 0.22263 | Val Loss: 0.41477
+Train Loss Components:
+  |- loss_rot: 0.03783
+  |- loss_pos: 0.25029
+  |- fk_loss: 1.02351
+  |- smoothness_loss: 0.40426
+Val Loss Components:
+  |- loss_rot: 0.03579
+  |- loss_pos: 0.63512
+  |- fk_loss: 1.26296
+  |- smoothness_loss: 0.18901
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 143 | Train Loss: 0.22247 | Val Loss: 0.41459
+Train Loss Components:
+  |- loss_rot: 0.03672
+  |- loss_pos: 0.24260
+  |- fk_loss: 1.02517
+  |- smoothness_loss: 0.36726
+Val Loss Components:
+  |- loss_rot: 0.03566
+  |- loss_pos: 0.62263
+  |- fk_loss: 1.28768
+  |- smoothness_loss: 0.19011
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 144 | Train Loss: 0.22182 | Val Loss: 0.41459
+Train Loss Components:
+  |- loss_rot: 0.03862
+  |- loss_pos: 0.26082
+  |- fk_loss: 1.08134
+  |- smoothness_loss: 0.37332
+Val Loss Components:
+  |- loss_rot: 0.03593
+  |- loss_pos: 0.61041
+  |- fk_loss: 1.28253
+  |- smoothness_loss: 0.19373
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 145 | Train Loss: 0.22046 | Val Loss: 0.41368
+Train Loss Components:
+  |- loss_rot: 0.03391
+  |- loss_pos: 0.23567
+  |- fk_loss: 0.92627
+  |- smoothness_loss: 0.32680
+Val Loss Components:
+  |- loss_rot: 0.03599
+  |- loss_pos: 0.63362
+  |- fk_loss: 1.28444
+  |- smoothness_loss: 0.18782
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 146 | Train Loss: 0.21995 | Val Loss: 0.41482
+Train Loss Components:
+  |- loss_rot: 0.04049
+  |- loss_pos: 0.24044
+  |- fk_loss: 1.05494
+  |- smoothness_loss: 0.37696
+Val Loss Components:
+  |- loss_rot: 0.03597
+  |- loss_pos: 0.62686
+  |- fk_loss: 1.26962
+  |- smoothness_loss: 0.19260
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 147 | Train Loss: 0.21955 | Val Loss: 0.41267
+Train Loss Components:
+  |- loss_rot: 0.03700
+  |- loss_pos: 0.23078
+  |- fk_loss: 0.98779
+  |- smoothness_loss: 0.33647
+Val Loss Components:
+  |- loss_rot: 0.03572
+  |- loss_pos: 0.62216
+  |- fk_loss: 1.26419
+  |- smoothness_loss: 0.19336
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 148 | Train Loss: 0.21940 | Val Loss: 0.41255
+Train Loss Components:
+  |- loss_rot: 0.03596
+  |- loss_pos: 0.23026
+  |- fk_loss: 0.94972
+  |- smoothness_loss: 0.35025
+Val Loss Components:
+  |- loss_rot: 0.03600
+  |- loss_pos: 0.63736
+  |- fk_loss: 1.27099
+  |- smoothness_loss: 0.19414
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 149 | Train Loss: 0.21867 | Val Loss: 0.41369
+Train Loss Components:
+  |- loss_rot: 0.04046
+  |- loss_pos: 0.25785
+  |- fk_loss: 1.09027
+  |- smoothness_loss: 0.41195
+Val Loss Components:
+  |- loss_rot: 0.03587
+  |- loss_pos: 0.62053
+  |- fk_loss: 1.27496
+  |- smoothness_loss: 0.19005
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 150 | Train Loss: 0.21809 | Val Loss: 0.41256
+Train Loss Components:
+  |- loss_rot: 0.03619
+  |- loss_pos: 0.24975
+  |- fk_loss: 0.99553
+  |- smoothness_loss: 0.35518
+Val Loss Components:
+  |- loss_rot: 0.03573
+  |- loss_pos: 0.62323
+  |- fk_loss: 1.28066
+  |- smoothness_loss: 0.18722
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 151 | Train Loss: 0.21767 | Val Loss: 0.41298
+Train Loss Components:
+  |- loss_rot: 0.04002
+  |- loss_pos: 0.25407
+  |- fk_loss: 1.09396
+  |- smoothness_loss: 0.37909
+Val Loss Components:
+  |- loss_rot: 0.03573
+  |- loss_pos: 0.63634
+  |- fk_loss: 1.27712
+  |- smoothness_loss: 0.19516
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 152 | Train Loss: 0.21735 | Val Loss: 0.41240
+Train Loss Components:
+  |- loss_rot: 0.03597
+  |- loss_pos: 0.24079
+  |- fk_loss: 0.97152
+  |- smoothness_loss: 0.39975
+Val Loss Components:
+  |- loss_rot: 0.03590
+  |- loss_pos: 0.61147
+  |- fk_loss: 1.26332
+  |- smoothness_loss: 0.19909
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 153 | Train Loss: 0.21676 | Val Loss: 0.41305
+Train Loss Components:
+  |- loss_rot: 0.03655
+  |- loss_pos: 0.24705
+  |- fk_loss: 0.96109
+  |- smoothness_loss: 0.33024
+Val Loss Components:
+  |- loss_rot: 0.03552
+  |- loss_pos: 0.61651
+  |- fk_loss: 1.25757
+  |- smoothness_loss: 0.19315
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 154 | Train Loss: 0.21597 | Val Loss: 0.41266
+Train Loss Components:
+  |- loss_rot: 0.03561
+  |- loss_pos: 0.23344
+  |- fk_loss: 0.95237
+  |- smoothness_loss: 0.32353
+Val Loss Components:
+  |- loss_rot: 0.03588
+  |- loss_pos: 0.62372
+  |- fk_loss: 1.27629
+  |- smoothness_loss: 0.19582
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 155 | Train Loss: 0.21511 | Val Loss: 0.41343
+Train Loss Components:
+  |- loss_rot: 0.03599
+  |- loss_pos: 0.22471
+  |- fk_loss: 0.94194
+  |- smoothness_loss: 0.35439
+Val Loss Components:
+  |- loss_rot: 0.03596
+  |- loss_pos: 0.63442
+  |- fk_loss: 1.28300
+  |- smoothness_loss: 0.20247
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 156 | Train Loss: 0.21472 | Val Loss: 0.41305
+Train Loss Components:
+  |- loss_rot: 0.03490
+  |- loss_pos: 0.22184
+  |- fk_loss: 0.92819
+  |- smoothness_loss: 0.32071
+Val Loss Components:
+  |- loss_rot: 0.03599
+  |- loss_pos: 0.61690
+  |- fk_loss: 1.27793
+  |- smoothness_loss: 0.19777
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 157 | Train Loss: 0.21424 | Val Loss: 0.41114
+Train Loss Components:
+  |- loss_rot: 0.03585
+  |- loss_pos: 0.24089
+  |- fk_loss: 0.97088
+  |- smoothness_loss: 0.33995
+Val Loss Components:
+  |- loss_rot: 0.03565
+  |- loss_pos: 0.61158
+  |- fk_loss: 1.26403
+  |- smoothness_loss: 0.18952
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 158 | Train Loss: 0.21437 | Val Loss: 0.41255
+Train Loss Components:
+  |- loss_rot: 0.03779
+  |- loss_pos: 0.25091
+  |- fk_loss: 0.99371
+  |- smoothness_loss: 0.38483
+Val Loss Components:
+  |- loss_rot: 0.03572
+  |- loss_pos: 0.60780
+  |- fk_loss: 1.25887
+  |- smoothness_loss: 0.19201
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 159 | Train Loss: 0.21371 | Val Loss: 0.41210
+Train Loss Components:
+  |- loss_rot: 0.03509
+  |- loss_pos: 0.21970
+  |- fk_loss: 0.91421
+  |- smoothness_loss: 0.41376
+Val Loss Components:
+  |- loss_rot: 0.03574
+  |- loss_pos: 0.61687
+  |- fk_loss: 1.26077
+  |- smoothness_loss: 0.19184
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 160 | Train Loss: 0.21340 | Val Loss: 0.41200
+Train Loss Components:
+  |- loss_rot: 0.03664
+  |- loss_pos: 0.23720
+  |- fk_loss: 1.01482
+  |- smoothness_loss: 0.34071
+Val Loss Components:
+  |- loss_rot: 0.03564
+  |- loss_pos: 0.61723
+  |- fk_loss: 1.25224
+  |- smoothness_loss: 0.19623
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 161 | Train Loss: 0.21233 | Val Loss: 0.41218
+Train Loss Components:
+  |- loss_rot: 0.03410
+  |- loss_pos: 0.22045
+  |- fk_loss: 0.91015
+  |- smoothness_loss: 0.31074
+Val Loss Components:
+  |- loss_rot: 0.03562
+  |- loss_pos: 0.62301
+  |- fk_loss: 1.25703
+  |- smoothness_loss: 0.19438
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 162 | Train Loss: 0.21181 | Val Loss: 0.40995
+Train Loss Components:
+  |- loss_rot: 0.03395
+  |- loss_pos: 0.23449
+  |- fk_loss: 0.88558
+  |- smoothness_loss: 0.30839
+Val Loss Components:
+  |- loss_rot: 0.03550
+  |- loss_pos: 0.62700
+  |- fk_loss: 1.26351
+  |- smoothness_loss: 0.19165
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 163 | Train Loss: 0.21238 | Val Loss: 0.40988
+Train Loss Components:
+  |- loss_rot: 0.03485
+  |- loss_pos: 0.22584
+  |- fk_loss: 0.93500
+  |- smoothness_loss: 0.37084
+Val Loss Components:
+  |- loss_rot: 0.03573
+  |- loss_pos: 0.61839
+  |- fk_loss: 1.24721
+  |- smoothness_loss: 0.19387
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 164 | Train Loss: 0.21103 | Val Loss: 0.40968
+Train Loss Components:
+  |- loss_rot: 0.03637
+  |- loss_pos: 0.22670
+  |- fk_loss: 0.95561
+  |- smoothness_loss: 0.32641
+Val Loss Components:
+  |- loss_rot: 0.03577
+  |- loss_pos: 0.61576
+  |- fk_loss: 1.26399
+  |- smoothness_loss: 0.19289
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 165 | Train Loss: 0.21025 | Val Loss: 0.41020
+Train Loss Components:
+  |- loss_rot: 0.03709
+  |- loss_pos: 0.23482
+  |- fk_loss: 0.97780
+  |- smoothness_loss: 0.36592
+Val Loss Components:
+  |- loss_rot: 0.03543
+  |- loss_pos: 0.63146
+  |- fk_loss: 1.23127
+  |- smoothness_loss: 0.19264
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 166 | Train Loss: 0.20668 | Val Loss: 0.40554
+Train Loss Components:
+  |- loss_rot: 0.03127
+  |- loss_pos: 0.20194
+  |- fk_loss: 0.79160
+  |- smoothness_loss: 0.28049
+Val Loss Components:
+  |- loss_rot: 0.03453
+  |- loss_pos: 0.62476
+  |- fk_loss: 1.23442
+  |- smoothness_loss: 0.19797
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 167 | Train Loss: 0.20540 | Val Loss: 0.40457
+Train Loss Components:
+  |- loss_rot: 0.03598
+  |- loss_pos: 0.23406
+  |- fk_loss: 0.90164
+  |- smoothness_loss: 0.35569
+Val Loss Components:
+  |- loss_rot: 0.03460
+  |- loss_pos: 0.62002
+  |- fk_loss: 1.21654
+  |- smoothness_loss: 0.19686
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 168 | Train Loss: 0.20395 | Val Loss: 0.40393
+Train Loss Components:
+  |- loss_rot: 0.03529
+  |- loss_pos: 0.23614
+  |- fk_loss: 0.90339
+  |- smoothness_loss: 0.35889
+Val Loss Components:
+  |- loss_rot: 0.03421
+  |- loss_pos: 0.60580
+  |- fk_loss: 1.21512
+  |- smoothness_loss: 0.19055
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 169 | Train Loss: 0.20406 | Val Loss: 0.40327
+Train Loss Components:
+  |- loss_rot: 0.03584
+  |- loss_pos: 0.22575
+  |- fk_loss: 0.89243
+  |- smoothness_loss: 0.37084
+Val Loss Components:
+  |- loss_rot: 0.03434
+  |- loss_pos: 0.60045
+  |- fk_loss: 1.20995
+  |- smoothness_loss: 0.19244
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 170 | Train Loss: 0.20322 | Val Loss: 0.40411
+Train Loss Components:
+  |- loss_rot: 0.03206
+  |- loss_pos: 0.20452
+  |- fk_loss: 0.83947
+  |- smoothness_loss: 0.32745
+Val Loss Components:
+  |- loss_rot: 0.03423
+  |- loss_pos: 0.59721
+  |- fk_loss: 1.21236
+  |- smoothness_loss: 0.19691
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 171 | Train Loss: 0.20231 | Val Loss: 0.40380
+Train Loss Components:
+  |- loss_rot: 0.03548
+  |- loss_pos: 0.23329
+  |- fk_loss: 0.90211
+  |- smoothness_loss: 0.36807
+Val Loss Components:
+  |- loss_rot: 0.03441
+  |- loss_pos: 0.60809
+  |- fk_loss: 1.21216
+  |- smoothness_loss: 0.20145
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 172 | Train Loss: 0.20206 | Val Loss: 0.40344
+Train Loss Components:
+  |- loss_rot: 0.03498
+  |- loss_pos: 0.21810
+  |- fk_loss: 0.93861
+  |- smoothness_loss: 0.38079
+Val Loss Components:
+  |- loss_rot: 0.03420
+  |- loss_pos: 0.61051
+  |- fk_loss: 1.21433
+  |- smoothness_loss: 0.20006
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 173 | Train Loss: 0.20092 | Val Loss: 0.40166
+Train Loss Components:
+  |- loss_rot: 0.03434
+  |- loss_pos: 0.21629
+  |- fk_loss: 0.89790
+  |- smoothness_loss: 0.38113
+Val Loss Components:
+  |- loss_rot: 0.03418
+  |- loss_pos: 0.60989
+  |- fk_loss: 1.22039
+  |- smoothness_loss: 0.19555
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 174 | Train Loss: 0.20072 | Val Loss: 0.40321
+Train Loss Components:
+  |- loss_rot: 0.03445
+  |- loss_pos: 0.24604
+  |- fk_loss: 0.87485
+  |- smoothness_loss: 0.40538
+Val Loss Components:
+  |- loss_rot: 0.03438
+  |- loss_pos: 0.59826
+  |- fk_loss: 1.21289
+  |- smoothness_loss: 0.19887
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 175 | Train Loss: 0.20041 | Val Loss: 0.40236
+Train Loss Components:
+  |- loss_rot: 0.03601
+  |- loss_pos: 0.21978
+  |- fk_loss: 0.90024
+  |- smoothness_loss: 0.30593
+Val Loss Components:
+  |- loss_rot: 0.03418
+  |- loss_pos: 0.60340
+  |- fk_loss: 1.20004
+  |- smoothness_loss: 0.19713
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 176 | Train Loss: 0.20018 | Val Loss: 0.40253
+Train Loss Components:
+  |- loss_rot: 0.03412
+  |- loss_pos: 0.22081
+  |- fk_loss: 0.85330
+  |- smoothness_loss: 0.35093
+Val Loss Components:
+  |- loss_rot: 0.03442
+  |- loss_pos: 0.60874
+  |- fk_loss: 1.20422
+  |- smoothness_loss: 0.20057
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 177 | Train Loss: 0.19965 | Val Loss: 0.40278
+Train Loss Components:
+  |- loss_rot: 0.03462
+  |- loss_pos: 0.21342
+  |- fk_loss: 0.88314
+  |- smoothness_loss: 0.32322
+Val Loss Components:
+  |- loss_rot: 0.03432
+  |- loss_pos: 0.61153
+  |- fk_loss: 1.20851
+  |- smoothness_loss: 0.19986
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 178 | Train Loss: 0.19884 | Val Loss: 0.40119
+Train Loss Components:
+  |- loss_rot: 0.03448
+  |- loss_pos: 0.20311
+  |- fk_loss: 0.83677
+  |- smoothness_loss: 0.31203
+Val Loss Components:
+  |- loss_rot: 0.03441
+  |- loss_pos: 0.59589
+  |- fk_loss: 1.22012
+  |- smoothness_loss: 0.19893
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 179 | Train Loss: 0.19804 | Val Loss: 0.40156
+Train Loss Components:
+  |- loss_rot: 0.03219
+  |- loss_pos: 0.21906
+  |- fk_loss: 0.83906
+  |- smoothness_loss: 0.33352
+Val Loss Components:
+  |- loss_rot: 0.03413
+  |- loss_pos: 0.60493
+  |- fk_loss: 1.21010
+  |- smoothness_loss: 0.19497
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 180 | Train Loss: 0.19811 | Val Loss: 0.40249
+Train Loss Components:
+  |- loss_rot: 0.03629
+  |- loss_pos: 0.22814
+  |- fk_loss: 0.89601
+  |- smoothness_loss: 0.39518
+Val Loss Components:
+  |- loss_rot: 0.03411
+  |- loss_pos: 0.62867
+  |- fk_loss: 1.22187
+  |- smoothness_loss: 0.20276
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 181 | Train Loss: 0.19768 | Val Loss: 0.40125
+Train Loss Components:
+  |- loss_rot: 0.03539
+  |- loss_pos: 0.22360
+  |- fk_loss: 0.88355
+  |- smoothness_loss: 0.39545
+Val Loss Components:
+  |- loss_rot: 0.03411
+  |- loss_pos: 0.61429
+  |- fk_loss: 1.22056
+  |- smoothness_loss: 0.20107
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 182 | Train Loss: 0.19703 | Val Loss: 0.40201
+Train Loss Components:
+  |- loss_rot: 0.03274
+  |- loss_pos: 0.21080
+  |- fk_loss: 0.82941
+  |- smoothness_loss: 0.32203
+Val Loss Components:
+  |- loss_rot: 0.03422
+  |- loss_pos: 0.61508
+  |- fk_loss: 1.22243
+  |- smoothness_loss: 0.20238
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 183 | Train Loss: 0.19713 | Val Loss: 0.40102
+Train Loss Components:
+  |- loss_rot: 0.03306
+  |- loss_pos: 0.21940
+  |- fk_loss: 0.84670
+  |- smoothness_loss: 0.34761
+Val Loss Components:
+  |- loss_rot: 0.03424
+  |- loss_pos: 0.60352
+  |- fk_loss: 1.20294
+  |- smoothness_loss: 0.20326
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 184 | Train Loss: 0.19574 | Val Loss: 0.40122
+Train Loss Components:
+  |- loss_rot: 0.03589
+  |- loss_pos: 0.21960
+  |- fk_loss: 0.90218
+  |- smoothness_loss: 0.34986
+Val Loss Components:
+  |- loss_rot: 0.03418
+  |- loss_pos: 0.61889
+  |- fk_loss: 1.22601
+  |- smoothness_loss: 0.20279
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 185 | Train Loss: 0.19555 | Val Loss: 0.40216
+Train Loss Components:
+  |- loss_rot: 0.03290
+  |- loss_pos: 0.19931
+  |- fk_loss: 0.78218
+  |- smoothness_loss: 0.29614
+Val Loss Components:
+  |- loss_rot: 0.03436
+  |- loss_pos: 0.62589
+  |- fk_loss: 1.22432
+  |- smoothness_loss: 0.19971
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 186 | Train Loss: 0.19572 | Val Loss: 0.40130
+Train Loss Components:
+  |- loss_rot: 0.03855
+  |- loss_pos: 0.23530
+  |- fk_loss: 1.02517
+  |- smoothness_loss: 0.44033
+Val Loss Components:
+  |- loss_rot: 0.03406
+  |- loss_pos: 0.60892
+  |- fk_loss: 1.19645
+  |- smoothness_loss: 0.20172
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 187 | Train Loss: 0.19570 | Val Loss: 0.40005
+Train Loss Components:
+  |- loss_rot: 0.03148
+  |- loss_pos: 0.20990
+  |- fk_loss: 0.80062
+  |- smoothness_loss: 0.32168
+Val Loss Components:
+  |- loss_rot: 0.03427
+  |- loss_pos: 0.60583
+  |- fk_loss: 1.20931
+  |- smoothness_loss: 0.20248
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 188 | Train Loss: 0.19464 | Val Loss: 0.40053
+Train Loss Components:
+  |- loss_rot: 0.03266
+  |- loss_pos: 0.20196
+  |- fk_loss: 0.79420
+  |- smoothness_loss: 0.30868
+Val Loss Components:
+  |- loss_rot: 0.03428
+  |- loss_pos: 0.61621
+  |- fk_loss: 1.20445
+  |- smoothness_loss: 0.20503
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 189 | Train Loss: 0.19440 | Val Loss: 0.39974
+Train Loss Components:
+  |- loss_rot: 0.03442
+  |- loss_pos: 0.21836
+  |- fk_loss: 0.82717
+  |- smoothness_loss: 0.35623
+Val Loss Components:
+  |- loss_rot: 0.03408
+  |- loss_pos: 0.60329
+  |- fk_loss: 1.21442
+  |- smoothness_loss: 0.20327
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 190 | Train Loss: 0.19360 | Val Loss: 0.40044
+Train Loss Components:
+  |- loss_rot: 0.03409
+  |- loss_pos: 0.22822
+  |- fk_loss: 0.87039
+  |- smoothness_loss: 0.36107
+Val Loss Components:
+  |- loss_rot: 0.03403
+  |- loss_pos: 0.60315
+  |- fk_loss: 1.19868
+  |- smoothness_loss: 0.20825
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 191 | Train Loss: 0.19314 | Val Loss: 0.40055
+Train Loss Components:
+  |- loss_rot: 0.03137
+  |- loss_pos: 0.20800
+  |- fk_loss: 0.77958
+  |- smoothness_loss: 0.31691
+Val Loss Components:
+  |- loss_rot: 0.03432
+  |- loss_pos: 0.60670
+  |- fk_loss: 1.21165
+  |- smoothness_loss: 0.20864
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 192 | Train Loss: 0.19329 | Val Loss: 0.39914
+Train Loss Components:
+  |- loss_rot: 0.03234
+  |- loss_pos: 0.20332
+  |- fk_loss: 0.80012
+  |- smoothness_loss: 0.29977
+Val Loss Components:
+  |- loss_rot: 0.03410
+  |- loss_pos: 0.60795
+  |- fk_loss: 1.21669
+  |- smoothness_loss: 0.19964
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 193 | Train Loss: 0.19274 | Val Loss: 0.39896
+Train Loss Components:
+  |- loss_rot: 0.03161
+  |- loss_pos: 0.20254
+  |- fk_loss: 0.77261
+  |- smoothness_loss: 0.31585
+Val Loss Components:
+  |- loss_rot: 0.03402
+  |- loss_pos: 0.60258
+  |- fk_loss: 1.19757
+  |- smoothness_loss: 0.19877
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 194 | Train Loss: 0.19292 | Val Loss: 0.39958
+Train Loss Components:
+  |- loss_rot: 0.03601
+  |- loss_pos: 0.23441
+  |- fk_loss: 0.92575
+  |- smoothness_loss: 0.36554
+Val Loss Components:
+  |- loss_rot: 0.03395
+  |- loss_pos: 0.60884
+  |- fk_loss: 1.18753
+  |- smoothness_loss: 0.20426
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 195 | Train Loss: 0.19194 | Val Loss: 0.39877
+Train Loss Components:
+  |- loss_rot: 0.03302
+  |- loss_pos: 0.20234
+  |- fk_loss: 0.79538
+  |- smoothness_loss: 0.31220
+Val Loss Components:
+  |- loss_rot: 0.03405
+  |- loss_pos: 0.61198
+  |- fk_loss: 1.21385
+  |- smoothness_loss: 0.20169
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 196 | Train Loss: 0.19163 | Val Loss: 0.39896
+Train Loss Components:
+  |- loss_rot: 0.03677
+  |- loss_pos: 0.23263
+  |- fk_loss: 0.92267
+  |- smoothness_loss: 0.42431
+Val Loss Components:
+  |- loss_rot: 0.03416
+  |- loss_pos: 0.60036
+  |- fk_loss: 1.19060
+  |- smoothness_loss: 0.20545
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 197 | Train Loss: 0.19122 | Val Loss: 0.39965
+Train Loss Components:
+  |- loss_rot: 0.02999
+  |- loss_pos: 0.19085
+  |- fk_loss: 0.74208
+  |- smoothness_loss: 0.27935
+Val Loss Components:
+  |- loss_rot: 0.03409
+  |- loss_pos: 0.60653
+  |- fk_loss: 1.19008
+  |- smoothness_loss: 0.21166
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 198 | Train Loss: 0.19102 | Val Loss: 0.39800
+Train Loss Components:
+  |- loss_rot: 0.03470
+  |- loss_pos: 0.21231
+  |- fk_loss: 0.80836
+  |- smoothness_loss: 0.35389
+Val Loss Components:
+  |- loss_rot: 0.03403
+  |- loss_pos: 0.59620
+  |- fk_loss: 1.18570
+  |- smoothness_loss: 0.20237
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 199 | Train Loss: 0.19067 | Val Loss: 0.39888
+Train Loss Components:
+  |- loss_rot: 0.03103
+  |- loss_pos: 0.21171
+  |- fk_loss: 0.76543
+  |- smoothness_loss: 0.31197
+Val Loss Components:
+  |- loss_rot: 0.03385
+  |- loss_pos: 0.60906
+  |- fk_loss: 1.18303
+  |- smoothness_loss: 0.20111
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 200 | Train Loss: 0.19043 | Val Loss: 0.39796
+Train Loss Components:
+  |- loss_rot: 0.03162
+  |- loss_pos: 0.18613
+  |- fk_loss: 0.77259
+  |- smoothness_loss: 0.29824
+Val Loss Components:
+  |- loss_rot: 0.03417
+  |- loss_pos: 0.61467
+  |- fk_loss: 1.20726
+  |- smoothness_loss: 0.20483
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 201 | Train Loss: 0.18981 | Val Loss: 0.39937
+Train Loss Components:
+  |- loss_rot: 0.03190
+  |- loss_pos: 0.20656
+  |- fk_loss: 0.77582
+  |- smoothness_loss: 0.31689
+Val Loss Components:
+  |- loss_rot: 0.03392
+  |- loss_pos: 0.60643
+  |- fk_loss: 1.19382
+  |- smoothness_loss: 0.20650
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 202 | Train Loss: 0.18966 | Val Loss: 0.39917
+Train Loss Components:
+  |- loss_rot: 0.03519
+  |- loss_pos: 0.19884
+  |- fk_loss: 0.81394
+  |- smoothness_loss: 0.30170
+Val Loss Components:
+  |- loss_rot: 0.03415
+  |- loss_pos: 0.61973
+  |- fk_loss: 1.20996
+  |- smoothness_loss: 0.20232
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 203 | Train Loss: 0.18931 | Val Loss: 0.39892
+Train Loss Components:
+  |- loss_rot: 0.03501
+  |- loss_pos: 0.20758
+  |- fk_loss: 0.84219
+  |- smoothness_loss: 0.35044
+Val Loss Components:
+  |- loss_rot: 0.03394
+  |- loss_pos: 0.62316
+  |- fk_loss: 1.20484
+  |- smoothness_loss: 0.20170
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 204 | Train Loss: 0.18897 | Val Loss: 0.39743
+Train Loss Components:
+  |- loss_rot: 0.03383
+  |- loss_pos: 0.19452
+  |- fk_loss: 0.80006
+  |- smoothness_loss: 0.33367
+Val Loss Components:
+  |- loss_rot: 0.03412
+  |- loss_pos: 0.59497
+  |- fk_loss: 1.17917
+  |- smoothness_loss: 0.21331
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 205 | Train Loss: 0.18888 | Val Loss: 0.39843
+Train Loss Components:
+  |- loss_rot: 0.03337
+  |- loss_pos: 0.21988
+  |- fk_loss: 0.80393
+  |- smoothness_loss: 0.33497
+Val Loss Components:
+  |- loss_rot: 0.03406
+  |- loss_pos: 0.60130
+  |- fk_loss: 1.19254
+  |- smoothness_loss: 0.20902
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 206 | Train Loss: 0.18846 | Val Loss: 0.39877
+Train Loss Components:
+  |- loss_rot: 0.03403
+  |- loss_pos: 0.20165
+  |- fk_loss: 0.83269
+  |- smoothness_loss: 0.30833
+Val Loss Components:
+  |- loss_rot: 0.03387
+  |- loss_pos: 0.61073
+  |- fk_loss: 1.19042
+  |- smoothness_loss: 0.21014
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 207 | Train Loss: 0.18809 | Val Loss: 0.39755
+Train Loss Components:
+  |- loss_rot: 0.03399
+  |- loss_pos: 0.20474
+  |- fk_loss: 0.82933
+  |- smoothness_loss: 0.33271
+Val Loss Components:
+  |- loss_rot: 0.03407
+  |- loss_pos: 0.59944
+  |- fk_loss: 1.19504
+  |- smoothness_loss: 0.19987
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 208 | Train Loss: 0.18809 | Val Loss: 0.39852
+Train Loss Components:
+  |- loss_rot: 0.03226
+  |- loss_pos: 0.19076
+  |- fk_loss: 0.77661
+  |- smoothness_loss: 0.30001
+Val Loss Components:
+  |- loss_rot: 0.03390
+  |- loss_pos: 0.61417
+  |- fk_loss: 1.19381
+  |- smoothness_loss: 0.20591
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 209 | Train Loss: 0.18749 | Val Loss: 0.39798
+Train Loss Components:
+  |- loss_rot: 0.03235
+  |- loss_pos: 0.19371
+  |- fk_loss: 0.76071
+  |- smoothness_loss: 0.30043
+Val Loss Components:
+  |- loss_rot: 0.03394
+  |- loss_pos: 0.60966
+  |- fk_loss: 1.21014
+  |- smoothness_loss: 0.20316
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 210 | Train Loss: 0.18703 | Val Loss: 0.39572
+Train Loss Components:
+  |- loss_rot: 0.03443
+  |- loss_pos: 0.21125
+  |- fk_loss: 0.81896
+  |- smoothness_loss: 0.37393
+Val Loss Components:
+  |- loss_rot: 0.03390
+  |- loss_pos: 0.60642
+  |- fk_loss: 1.17936
+  |- smoothness_loss: 0.20200
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 211 | Train Loss: 0.18640 | Val Loss: 0.39717
+Train Loss Components:
+  |- loss_rot: 0.03343
+  |- loss_pos: 0.19299
+  |- fk_loss: 0.77786
+  |- smoothness_loss: 0.30621
+Val Loss Components:
+  |- loss_rot: 0.03379
+  |- loss_pos: 0.61506
+  |- fk_loss: 1.19377
+  |- smoothness_loss: 0.20504
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 212 | Train Loss: 0.18621 | Val Loss: 0.39850
+Train Loss Components:
+  |- loss_rot: 0.03666
+  |- loss_pos: 0.22130
+  |- fk_loss: 0.85844
+  |- smoothness_loss: 0.37874
+Val Loss Components:
+  |- loss_rot: 0.03425
+  |- loss_pos: 0.62255
+  |- fk_loss: 1.21790
+  |- smoothness_loss: 0.21142
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 213 | Train Loss: 0.18582 | Val Loss: 0.39759
+Train Loss Components:
+  |- loss_rot: 0.03132
+  |- loss_pos: 0.18567
+  |- fk_loss: 0.73350
+  |- smoothness_loss: 0.28096
+Val Loss Components:
+  |- loss_rot: 0.03395
+  |- loss_pos: 0.61819
+  |- fk_loss: 1.19322
+  |- smoothness_loss: 0.21106
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 214 | Train Loss: 0.18598 | Val Loss: 0.39692
+Train Loss Components:
+  |- loss_rot: 0.03545
+  |- loss_pos: 0.21703
+  |- fk_loss: 0.85562
+  |- smoothness_loss: 0.34371
+Val Loss Components:
+  |- loss_rot: 0.03387
+  |- loss_pos: 0.60042
+  |- fk_loss: 1.18367
+  |- smoothness_loss: 0.20372
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 215 | Train Loss: 0.18548 | Val Loss: 0.39594
+Train Loss Components:
+  |- loss_rot: 0.03456
+  |- loss_pos: 0.20801
+  |- fk_loss: 0.80401
+  |- smoothness_loss: 0.37835
+Val Loss Components:
+  |- loss_rot: 0.03397
+  |- loss_pos: 0.61253
+  |- fk_loss: 1.19597
+  |- smoothness_loss: 0.20452
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 216 | Train Loss: 0.18551 | Val Loss: 0.39704
+Train Loss Components:
+  |- loss_rot: 0.03206
+  |- loss_pos: 0.20420
+  |- fk_loss: 0.77109
+  |- smoothness_loss: 0.31492
+Val Loss Components:
+  |- loss_rot: 0.03386
+  |- loss_pos: 0.60754
+  |- fk_loss: 1.17854
+  |- smoothness_loss: 0.20331
+LR: 0.000100
+Hole frames in this epoch: [15, 15]
+
+Epoch 217 | Train Loss: 0.17313 | Val Loss: 0.39104
+Train Loss Components:
+  |- loss_rot: 0.02963
+  |- loss_pos: 0.16539
+  |- fk_loss: 0.68171
+  |- smoothness_loss: 0.27683
+Val Loss Components:
+  |- loss_rot: 0.03381
+  |- loss_pos: 0.60167
+  |- fk_loss: 1.16424
+  |- smoothness_loss: 0.20729
+LR: 0.000050
+Hole frames in this epoch: [15, 15]
+
+Epoch 218 | Train Loss: 0.16374 | Val Loss: 0.39062
+Train Loss Components:
+  |- loss_rot: 0.03477
+  |- loss_pos: 0.16093
+  |- fk_loss: 0.84632
+  |- smoothness_loss: 0.42318
+Val Loss Components:
+  |- loss_rot: 0.03384
+  |- loss_pos: 0.59429
+  |- fk_loss: 1.16940
+  |- smoothness_loss: 0.21098
+LR: 0.000050
+Hole frames in this epoch: [15, 15]
+
+Epoch 219 | Train Loss: 0.16202 | Val Loss: 0.38997
+Train Loss Components:
+  |- loss_rot: 0.03298
+  |- loss_pos: 0.16083
+  |- fk_loss: 0.71954
+  |- smoothness_loss: 0.37919
+Val Loss Components:
+  |- loss_rot: 0.03376
+  |- loss_pos: 0.58284
+  |- fk_loss: 1.15815
+  |- smoothness_loss: 0.21149
+LR: 0.000050
+Hole frames in this epoch: [15, 15]
+
+Epoch 220 | Train Loss: 0.16148 | Val Loss: 0.38923
+Train Loss Components:
+  |- loss_rot: 0.03130
+  |- loss_pos: 0.14876
+  |- fk_loss: 0.68947
+  |- smoothness_loss: 0.29313
+Val Loss Components:
+  |- loss_rot: 0.03374
+  |- loss_pos: 0.59455
+  |- fk_loss: 1.15756
+  |- smoothness_loss: 0.20603
+LR: 0.000050
+Hole frames in this epoch: [15, 15]
+
+Epoch 221 | Train Loss: 0.16129 | Val Loss: 0.39011
+Train Loss Components:
+  |- loss_rot: 0.03266
+  |- loss_pos: 0.15471
+  |- fk_loss: 0.70736
+  |- smoothness_loss: 0.34662
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.59543
+  |- fk_loss: 1.16116
+  |- smoothness_loss: 0.21440
+LR: 0.000050
+Hole frames in this epoch: [15, 15]
+
+Epoch 222 | Train Loss: 0.16115 | Val Loss: 0.38957
+Train Loss Components:
+  |- loss_rot: 0.03547
+  |- loss_pos: 0.16683
+  |- fk_loss: 0.79755
+  |- smoothness_loss: 0.38598
+Val Loss Components:
+  |- loss_rot: 0.03385
+  |- loss_pos: 0.59068
+  |- fk_loss: 1.16116
+  |- smoothness_loss: 0.21197
+LR: 0.000050
+Hole frames in this epoch: [15, 15]
+
+Epoch 223 | Train Loss: 0.16081 | Val Loss: 0.38976
+Train Loss Components:
+  |- loss_rot: 0.03358
+  |- loss_pos: 0.15473
+  |- fk_loss: 0.73427
+  |- smoothness_loss: 0.33739
+Val Loss Components:
+  |- loss_rot: 0.03368
+  |- loss_pos: 0.58821
+  |- fk_loss: 1.15445
+  |- smoothness_loss: 0.21264
+LR: 0.000050
+Hole frames in this epoch: [15, 15]
+
+Epoch 224 | Train Loss: 0.16057 | Val Loss: 0.39002
+Train Loss Components:
+  |- loss_rot: 0.03814
+  |- loss_pos: 0.16935
+  |- fk_loss: 0.83658
+  |- smoothness_loss: 0.46368
+Val Loss Components:
+  |- loss_rot: 0.03363
+  |- loss_pos: 0.59603
+  |- fk_loss: 1.14464
+  |- smoothness_loss: 0.21201
+LR: 0.000050
+Hole frames in this epoch: [15, 15]
+
+Epoch 225 | Train Loss: 0.16075 | Val Loss: 0.38989
+Train Loss Components:
+  |- loss_rot: 0.03275
+  |- loss_pos: 0.15195
+  |- fk_loss: 0.71583
+  |- smoothness_loss: 0.34362
+Val Loss Components:
+  |- loss_rot: 0.03371
+  |- loss_pos: 0.59674
+  |- fk_loss: 1.14232
+  |- smoothness_loss: 0.20989
+LR: 0.000050
+Hole frames in this epoch: [15, 15]
+
+Epoch 226 | Train Loss: 0.16046 | Val Loss: 0.38992
+Train Loss Components:
+  |- loss_rot: 0.03412
+  |- loss_pos: 0.16362
+  |- fk_loss: 0.74308
+  |- smoothness_loss: 0.37923
+Val Loss Components:
+  |- loss_rot: 0.03381
+  |- loss_pos: 0.58298
+  |- fk_loss: 1.15336
+  |- smoothness_loss: 0.20903
+LR: 0.000050
+Hole frames in this epoch: [15, 15]
+
+Epoch 227 | Train Loss: 0.15518 | Val Loss: 0.38794
+Train Loss Components:
+  |- loss_rot: 0.03384
+  |- loss_pos: 0.15064
+  |- fk_loss: 0.73595
+  |- smoothness_loss: 0.33741
+Val Loss Components:
+  |- loss_rot: 0.03371
+  |- loss_pos: 0.59413
+  |- fk_loss: 1.14309
+  |- smoothness_loss: 0.21315
+LR: 0.000025
+Hole frames in this epoch: [15, 15]
+
+Epoch 228 | Train Loss: 0.15144 | Val Loss: 0.38771
+Train Loss Components:
+  |- loss_rot: 0.03543
+  |- loss_pos: 0.14473
+  |- fk_loss: 0.75078
+  |- smoothness_loss: 0.37866
+Val Loss Components:
+  |- loss_rot: 0.03371
+  |- loss_pos: 0.59541
+  |- fk_loss: 1.14512
+  |- smoothness_loss: 0.21434
+LR: 0.000025
+Hole frames in this epoch: [15, 15]
+
+Epoch 229 | Train Loss: 0.15055 | Val Loss: 0.38760
+Train Loss Components:
+  |- loss_rot: 0.03341
+  |- loss_pos: 0.12638
+  |- fk_loss: 0.69451
+  |- smoothness_loss: 0.32983
+Val Loss Components:
+  |- loss_rot: 0.03383
+  |- loss_pos: 0.59046
+  |- fk_loss: 1.14704
+  |- smoothness_loss: 0.21395
+LR: 0.000025
+Hole frames in this epoch: [15, 15]
+
+Epoch 230 | Train Loss: 0.15019 | Val Loss: 0.38750
+Train Loss Components:
+  |- loss_rot: 0.03119
+  |- loss_pos: 0.12898
+  |- fk_loss: 0.65111
+  |- smoothness_loss: 0.33679
+Val Loss Components:
+  |- loss_rot: 0.03372
+  |- loss_pos: 0.59476
+  |- fk_loss: 1.13920
+  |- smoothness_loss: 0.21501
+LR: 0.000025
+Hole frames in this epoch: [15, 15]
+
+Epoch 231 | Train Loss: 0.14987 | Val Loss: 0.38765
+Train Loss Components:
+  |- loss_rot: 0.03253
+  |- loss_pos: 0.16140
+  |- fk_loss: 0.72837
+  |- smoothness_loss: 0.37423
+Val Loss Components:
+  |- loss_rot: 0.03378
+  |- loss_pos: 0.59096
+  |- fk_loss: 1.14109
+  |- smoothness_loss: 0.21414
+LR: 0.000025
+Hole frames in this epoch: [15, 15]
+
+Epoch 232 | Train Loss: 0.14982 | Val Loss: 0.38714
+Train Loss Components:
+  |- loss_rot: 0.03239
+  |- loss_pos: 0.13607
+  |- fk_loss: 0.69498
+  |- smoothness_loss: 0.35623
+Val Loss Components:
+  |- loss_rot: 0.03379
+  |- loss_pos: 0.59130
+  |- fk_loss: 1.14166
+  |- smoothness_loss: 0.21608
+LR: 0.000025
+Hole frames in this epoch: [15, 15]
+
+Epoch 233 | Train Loss: 0.14951 | Val Loss: 0.38796
+Train Loss Components:
+  |- loss_rot: 0.03180
+  |- loss_pos: 0.12310
+  |- fk_loss: 0.70761
+  |- smoothness_loss: 0.29544
+Val Loss Components:
+  |- loss_rot: 0.03378
+  |- loss_pos: 0.58848
+  |- fk_loss: 1.14308
+  |- smoothness_loss: 0.21738
+LR: 0.000025
+Hole frames in this epoch: [15, 15]
+
+Epoch 234 | Train Loss: 0.14938 | Val Loss: 0.38786
+Train Loss Components:
+  |- loss_rot: 0.03305
+  |- loss_pos: 0.13321
+  |- fk_loss: 0.69557
+  |- smoothness_loss: 0.35001
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58847
+  |- fk_loss: 1.14237
+  |- smoothness_loss: 0.21657
+LR: 0.000025
+Hole frames in this epoch: [15, 15]
+
+Epoch 235 | Train Loss: 0.14925 | Val Loss: 0.38783
+Train Loss Components:
+  |- loss_rot: 0.03484
+  |- loss_pos: 0.13359
+  |- fk_loss: 0.72238
+  |- smoothness_loss: 0.35775
+Val Loss Components:
+  |- loss_rot: 0.03385
+  |- loss_pos: 0.59466
+  |- fk_loss: 1.14280
+  |- smoothness_loss: 0.21462
+LR: 0.000025
+Hole frames in this epoch: [15, 15]
+
+Epoch 236 | Train Loss: 0.14906 | Val Loss: 0.38757
+Train Loss Components:
+  |- loss_rot: 0.03251
+  |- loss_pos: 0.13018
+  |- fk_loss: 0.65349
+  |- smoothness_loss: 0.31229
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.59531
+  |- fk_loss: 1.14353
+  |- smoothness_loss: 0.21626
+LR: 0.000025
+Hole frames in this epoch: [15, 15]
+
+Epoch 237 | Train Loss: 0.14895 | Val Loss: 0.38777
+Train Loss Components:
+  |- loss_rot: 0.03310
+  |- loss_pos: 0.13509
+  |- fk_loss: 0.69917
+  |- smoothness_loss: 0.35537
+Val Loss Components:
+  |- loss_rot: 0.03379
+  |- loss_pos: 0.58703
+  |- fk_loss: 1.14555
+  |- smoothness_loss: 0.21468
+LR: 0.000025
+Hole frames in this epoch: [15, 15]
+
+Epoch 238 | Train Loss: 0.14878 | Val Loss: 0.38750
+Train Loss Components:
+  |- loss_rot: 0.03125
+  |- loss_pos: 0.12844
+  |- fk_loss: 0.67982
+  |- smoothness_loss: 0.35105
+Val Loss Components:
+  |- loss_rot: 0.03376
+  |- loss_pos: 0.58647
+  |- fk_loss: 1.14393
+  |- smoothness_loss: 0.21448
+LR: 0.000025
+Hole frames in this epoch: [15, 15]
+
+Epoch 239 | Train Loss: 0.14651 | Val Loss: 0.38663
+Train Loss Components:
+  |- loss_rot: 0.03326
+  |- loss_pos: 0.13361
+  |- fk_loss: 0.74644
+  |- smoothness_loss: 0.35195
+Val Loss Components:
+  |- loss_rot: 0.03376
+  |- loss_pos: 0.58558
+  |- fk_loss: 1.13621
+  |- smoothness_loss: 0.21575
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 240 | Train Loss: 0.14513 | Val Loss: 0.38673
+Train Loss Components:
+  |- loss_rot: 0.03646
+  |- loss_pos: 0.13126
+  |- fk_loss: 0.73151
+  |- smoothness_loss: 0.37104
+Val Loss Components:
+  |- loss_rot: 0.03379
+  |- loss_pos: 0.58956
+  |- fk_loss: 1.13849
+  |- smoothness_loss: 0.21465
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 241 | Train Loss: 0.14477 | Val Loss: 0.38672
+Train Loss Components:
+  |- loss_rot: 0.03201
+  |- loss_pos: 0.12551
+  |- fk_loss: 0.65963
+  |- smoothness_loss: 0.30641
+Val Loss Components:
+  |- loss_rot: 0.03377
+  |- loss_pos: 0.59079
+  |- fk_loss: 1.14053
+  |- smoothness_loss: 0.21676
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 242 | Train Loss: 0.14444 | Val Loss: 0.38642
+Train Loss Components:
+  |- loss_rot: 0.03027
+  |- loss_pos: 0.12121
+  |- fk_loss: 0.64749
+  |- smoothness_loss: 0.31564
+Val Loss Components:
+  |- loss_rot: 0.03372
+  |- loss_pos: 0.58694
+  |- fk_loss: 1.13386
+  |- smoothness_loss: 0.21560
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 243 | Train Loss: 0.14430 | Val Loss: 0.38643
+Train Loss Components:
+  |- loss_rot: 0.03235
+  |- loss_pos: 0.13029
+  |- fk_loss: 0.66623
+  |- smoothness_loss: 0.32374
+Val Loss Components:
+  |- loss_rot: 0.03374
+  |- loss_pos: 0.58502
+  |- fk_loss: 1.13662
+  |- smoothness_loss: 0.21482
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 244 | Train Loss: 0.14414 | Val Loss: 0.38636
+Train Loss Components:
+  |- loss_rot: 0.03371
+  |- loss_pos: 0.12782
+  |- fk_loss: 0.69875
+  |- smoothness_loss: 0.38195
+Val Loss Components:
+  |- loss_rot: 0.03381
+  |- loss_pos: 0.58556
+  |- fk_loss: 1.13952
+  |- smoothness_loss: 0.21597
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 245 | Train Loss: 0.14397 | Val Loss: 0.38628
+Train Loss Components:
+  |- loss_rot: 0.03054
+  |- loss_pos: 0.11234
+  |- fk_loss: 0.62897
+  |- smoothness_loss: 0.31429
+Val Loss Components:
+  |- loss_rot: 0.03372
+  |- loss_pos: 0.58124
+  |- fk_loss: 1.13495
+  |- smoothness_loss: 0.21539
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 246 | Train Loss: 0.14396 | Val Loss: 0.38630
+Train Loss Components:
+  |- loss_rot: 0.03240
+  |- loss_pos: 0.11787
+  |- fk_loss: 0.66634
+  |- smoothness_loss: 0.32003
+Val Loss Components:
+  |- loss_rot: 0.03370
+  |- loss_pos: 0.58590
+  |- fk_loss: 1.13531
+  |- smoothness_loss: 0.21586
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 247 | Train Loss: 0.14379 | Val Loss: 0.38622
+Train Loss Components:
+  |- loss_rot: 0.03130
+  |- loss_pos: 0.11706
+  |- fk_loss: 0.65852
+  |- smoothness_loss: 0.33985
+Val Loss Components:
+  |- loss_rot: 0.03368
+  |- loss_pos: 0.58636
+  |- fk_loss: 1.13482
+  |- smoothness_loss: 0.21619
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 248 | Train Loss: 0.14370 | Val Loss: 0.38664
+Train Loss Components:
+  |- loss_rot: 0.03465
+  |- loss_pos: 0.12075
+  |- fk_loss: 0.69322
+  |- smoothness_loss: 0.36010
+Val Loss Components:
+  |- loss_rot: 0.03376
+  |- loss_pos: 0.58667
+  |- fk_loss: 1.13323
+  |- smoothness_loss: 0.21808
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 249 | Train Loss: 0.14360 | Val Loss: 0.38675
+Train Loss Components:
+  |- loss_rot: 0.03168
+  |- loss_pos: 0.11572
+  |- fk_loss: 0.64788
+  |- smoothness_loss: 0.29835
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58682
+  |- fk_loss: 1.13460
+  |- smoothness_loss: 0.21806
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 250 | Train Loss: 0.14354 | Val Loss: 0.38633
+Train Loss Components:
+  |- loss_rot: 0.03111
+  |- loss_pos: 0.12067
+  |- fk_loss: 0.63013
+  |- smoothness_loss: 0.28253
+Val Loss Components:
+  |- loss_rot: 0.03370
+  |- loss_pos: 0.58444
+  |- fk_loss: 1.13334
+  |- smoothness_loss: 0.21505
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 251 | Train Loss: 0.14341 | Val Loss: 0.38627
+Train Loss Components:
+  |- loss_rot: 0.03271
+  |- loss_pos: 0.11945
+  |- fk_loss: 0.66684
+  |- smoothness_loss: 0.34863
+Val Loss Components:
+  |- loss_rot: 0.03370
+  |- loss_pos: 0.58521
+  |- fk_loss: 1.13418
+  |- smoothness_loss: 0.21610
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 252 | Train Loss: 0.14335 | Val Loss: 0.38639
+Train Loss Components:
+  |- loss_rot: 0.03219
+  |- loss_pos: 0.12103
+  |- fk_loss: 0.67006
+  |- smoothness_loss: 0.36749
+Val Loss Components:
+  |- loss_rot: 0.03379
+  |- loss_pos: 0.58879
+  |- fk_loss: 1.13863
+  |- smoothness_loss: 0.21830
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 253 | Train Loss: 0.14321 | Val Loss: 0.38613
+Train Loss Components:
+  |- loss_rot: 0.02910
+  |- loss_pos: 0.11263
+  |- fk_loss: 0.61327
+  |- smoothness_loss: 0.26463
+Val Loss Components:
+  |- loss_rot: 0.03374
+  |- loss_pos: 0.58316
+  |- fk_loss: 1.13014
+  |- smoothness_loss: 0.21653
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 254 | Train Loss: 0.14316 | Val Loss: 0.38636
+Train Loss Components:
+  |- loss_rot: 0.03081
+  |- loss_pos: 0.11716
+  |- fk_loss: 0.63116
+  |- smoothness_loss: 0.31081
+Val Loss Components:
+  |- loss_rot: 0.03378
+  |- loss_pos: 0.58729
+  |- fk_loss: 1.13458
+  |- smoothness_loss: 0.21707
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 255 | Train Loss: 0.14307 | Val Loss: 0.38652
+Train Loss Components:
+  |- loss_rot: 0.03322
+  |- loss_pos: 0.12133
+  |- fk_loss: 0.68079
+  |- smoothness_loss: 0.31761
+Val Loss Components:
+  |- loss_rot: 0.03374
+  |- loss_pos: 0.58487
+  |- fk_loss: 1.13502
+  |- smoothness_loss: 0.21983
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 256 | Train Loss: 0.14297 | Val Loss: 0.38595
+Train Loss Components:
+  |- loss_rot: 0.03053
+  |- loss_pos: 0.11655
+  |- fk_loss: 0.63467
+  |- smoothness_loss: 0.30350
+Val Loss Components:
+  |- loss_rot: 0.03374
+  |- loss_pos: 0.58683
+  |- fk_loss: 1.13492
+  |- smoothness_loss: 0.21799
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 257 | Train Loss: 0.14289 | Val Loss: 0.38647
+Train Loss Components:
+  |- loss_rot: 0.03254
+  |- loss_pos: 0.12108
+  |- fk_loss: 0.65572
+  |- smoothness_loss: 0.35473
+Val Loss Components:
+  |- loss_rot: 0.03379
+  |- loss_pos: 0.58895
+  |- fk_loss: 1.13648
+  |- smoothness_loss: 0.21928
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 258 | Train Loss: 0.14287 | Val Loss: 0.38642
+Train Loss Components:
+  |- loss_rot: 0.03324
+  |- loss_pos: 0.12163
+  |- fk_loss: 0.67469
+  |- smoothness_loss: 0.32979
+Val Loss Components:
+  |- loss_rot: 0.03376
+  |- loss_pos: 0.58651
+  |- fk_loss: 1.13545
+  |- smoothness_loss: 0.21693
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 259 | Train Loss: 0.14280 | Val Loss: 0.38654
+Train Loss Components:
+  |- loss_rot: 0.03245
+  |- loss_pos: 0.12171
+  |- fk_loss: 0.66585
+  |- smoothness_loss: 0.34799
+Val Loss Components:
+  |- loss_rot: 0.03374
+  |- loss_pos: 0.59021
+  |- fk_loss: 1.13802
+  |- smoothness_loss: 0.21514
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 260 | Train Loss: 0.14271 | Val Loss: 0.38662
+Train Loss Components:
+  |- loss_rot: 0.03177
+  |- loss_pos: 0.12234
+  |- fk_loss: 0.63018
+  |- smoothness_loss: 0.32889
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58666
+  |- fk_loss: 1.13630
+  |- smoothness_loss: 0.21745
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 261 | Train Loss: 0.14265 | Val Loss: 0.38597
+Train Loss Components:
+  |- loss_rot: 0.03089
+  |- loss_pos: 0.11467
+  |- fk_loss: 0.62539
+  |- smoothness_loss: 0.31621
+Val Loss Components:
+  |- loss_rot: 0.03377
+  |- loss_pos: 0.58739
+  |- fk_loss: 1.13509
+  |- smoothness_loss: 0.21596
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 262 | Train Loss: 0.14253 | Val Loss: 0.38642
+Train Loss Components:
+  |- loss_rot: 0.03151
+  |- loss_pos: 0.11408
+  |- fk_loss: 0.63773
+  |- smoothness_loss: 0.29473
+Val Loss Components:
+  |- loss_rot: 0.03373
+  |- loss_pos: 0.58424
+  |- fk_loss: 1.12918
+  |- smoothness_loss: 0.21719
+LR: 0.000013
+Hole frames in this epoch: [15, 15]
+
+Epoch 263 | Train Loss: 0.14154 | Val Loss: 0.38616
+Train Loss Components:
+  |- loss_rot: 0.03448
+  |- loss_pos: 0.12660
+  |- fk_loss: 0.69422
+  |- smoothness_loss: 0.38968
+Val Loss Components:
+  |- loss_rot: 0.03373
+  |- loss_pos: 0.58464
+  |- fk_loss: 1.13247
+  |- smoothness_loss: 0.21767
+LR: 0.000006
+Hole frames in this epoch: [15, 15]
+
+Epoch 264 | Train Loss: 0.14103 | Val Loss: 0.38583
+Train Loss Components:
+  |- loss_rot: 0.03448
+  |- loss_pos: 0.11449
+  |- fk_loss: 0.71019
+  |- smoothness_loss: 0.35952
+Val Loss Components:
+  |- loss_rot: 0.03372
+  |- loss_pos: 0.58570
+  |- fk_loss: 1.13261
+  |- smoothness_loss: 0.21937
+LR: 0.000006
+Hole frames in this epoch: [15, 15]
+
+Epoch 265 | Train Loss: 0.14085 | Val Loss: 0.38589
+Train Loss Components:
+  |- loss_rot: 0.03011
+  |- loss_pos: 0.10705
+  |- fk_loss: 0.63827
+  |- smoothness_loss: 0.28888
+Val Loss Components:
+  |- loss_rot: 0.03372
+  |- loss_pos: 0.58626
+  |- fk_loss: 1.13360
+  |- smoothness_loss: 0.21795
+LR: 0.000006
+Hole frames in this epoch: [15, 15]
+
+Epoch 266 | Train Loss: 0.14068 | Val Loss: 0.38588
+Train Loss Components:
+  |- loss_rot: 0.03268
+  |- loss_pos: 0.12562
+  |- fk_loss: 0.68018
+  |- smoothness_loss: 0.34688
+Val Loss Components:
+  |- loss_rot: 0.03374
+  |- loss_pos: 0.58715
+  |- fk_loss: 1.13409
+  |- smoothness_loss: 0.21849
+LR: 0.000006
+Hole frames in this epoch: [15, 15]
+
+Epoch 267 | Train Loss: 0.14055 | Val Loss: 0.38572
+Train Loss Components:
+  |- loss_rot: 0.03370
+  |- loss_pos: 0.12011
+  |- fk_loss: 0.67331
+  |- smoothness_loss: 0.37994
+Val Loss Components:
+  |- loss_rot: 0.03373
+  |- loss_pos: 0.58433
+  |- fk_loss: 1.13302
+  |- smoothness_loss: 0.21918
+LR: 0.000006
+Hole frames in this epoch: [15, 15]
+
+Epoch 268 | Train Loss: 0.14052 | Val Loss: 0.38567
+Train Loss Components:
+  |- loss_rot: 0.03308
+  |- loss_pos: 0.11826
+  |- fk_loss: 0.65653
+  |- smoothness_loss: 0.34036
+Val Loss Components:
+  |- loss_rot: 0.03376
+  |- loss_pos: 0.58536
+  |- fk_loss: 1.13225
+  |- smoothness_loss: 0.21994
+LR: 0.000006
+Hole frames in this epoch: [15, 15]
+
+Epoch 269 | Train Loss: 0.14048 | Val Loss: 0.38617
+Train Loss Components:
+  |- loss_rot: 0.03317
+  |- loss_pos: 0.12271
+  |- fk_loss: 0.65650
+  |- smoothness_loss: 0.36424
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58940
+  |- fk_loss: 1.13569
+  |- smoothness_loss: 0.21847
+LR: 0.000006
+Hole frames in this epoch: [15, 15]
+
+Epoch 270 | Train Loss: 0.14037 | Val Loss: 0.38566
+Train Loss Components:
+  |- loss_rot: 0.03046
+  |- loss_pos: 0.11453
+  |- fk_loss: 0.63678
+  |- smoothness_loss: 0.30520
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.59132
+  |- fk_loss: 1.13530
+  |- smoothness_loss: 0.21883
+LR: 0.000006
+Hole frames in this epoch: [15, 15]
+
+Epoch 271 | Train Loss: 0.14036 | Val Loss: 0.38564
+Train Loss Components:
+  |- loss_rot: 0.03561
+  |- loss_pos: 0.12535
+  |- fk_loss: 0.72539
+  |- smoothness_loss: 0.40975
+Val Loss Components:
+  |- loss_rot: 0.03374
+  |- loss_pos: 0.58690
+  |- fk_loss: 1.13290
+  |- smoothness_loss: 0.21967
+LR: 0.000006
+Hole frames in this epoch: [15, 15]
+
+Epoch 272 | Train Loss: 0.14027 | Val Loss: 0.38570
+Train Loss Components:
+  |- loss_rot: 0.03733
+  |- loss_pos: 0.12312
+  |- fk_loss: 0.71581
+  |- smoothness_loss: 0.37942
+Val Loss Components:
+  |- loss_rot: 0.03372
+  |- loss_pos: 0.58750
+  |- fk_loss: 1.13323
+  |- smoothness_loss: 0.21796
+LR: 0.000006
+Hole frames in this epoch: [15, 15]
+
+Epoch 273 | Train Loss: 0.14022 | Val Loss: 0.38572
+Train Loss Components:
+  |- loss_rot: 0.03397
+  |- loss_pos: 0.12022
+  |- fk_loss: 0.67702
+  |- smoothness_loss: 0.37924
+Val Loss Components:
+  |- loss_rot: 0.03376
+  |- loss_pos: 0.58884
+  |- fk_loss: 1.13380
+  |- smoothness_loss: 0.21883
+LR: 0.000006
+Hole frames in this epoch: [15, 15]
+
+Epoch 274 | Train Loss: 0.14008 | Val Loss: 0.38572
+Train Loss Components:
+  |- loss_rot: 0.03215
+  |- loss_pos: 0.11637
+  |- fk_loss: 0.64030
+  |- smoothness_loss: 0.33127
+Val Loss Components:
+  |- loss_rot: 0.03373
+  |- loss_pos: 0.59029
+  |- fk_loss: 1.13253
+  |- smoothness_loss: 0.21864
+LR: 0.000006
+Hole frames in this epoch: [15, 15]
+
+Epoch 275 | Train Loss: 0.13964 | Val Loss: 0.38558
+Train Loss Components:
+  |- loss_rot: 0.03046
+  |- loss_pos: 0.10624
+  |- fk_loss: 0.66767
+  |- smoothness_loss: 0.28346
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58941
+  |- fk_loss: 1.13278
+  |- smoothness_loss: 0.21925
+LR: 0.000003
+Hole frames in this epoch: [15, 15]
+
+Epoch 276 | Train Loss: 0.13950 | Val Loss: 0.38557
+Train Loss Components:
+  |- loss_rot: 0.03366
+  |- loss_pos: 0.11370
+  |- fk_loss: 0.69719
+  |- smoothness_loss: 0.32525
+Val Loss Components:
+  |- loss_rot: 0.03376
+  |- loss_pos: 0.58984
+  |- fk_loss: 1.13163
+  |- smoothness_loss: 0.21992
+LR: 0.000003
+Hole frames in this epoch: [15, 15]
+
+Epoch 277 | Train Loss: 0.13935 | Val Loss: 0.38556
+Train Loss Components:
+  |- loss_rot: 0.03144
+  |- loss_pos: 0.11424
+  |- fk_loss: 0.63629
+  |- smoothness_loss: 0.33729
+Val Loss Components:
+  |- loss_rot: 0.03374
+  |- loss_pos: 0.58683
+  |- fk_loss: 1.13109
+  |- smoothness_loss: 0.21827
+LR: 0.000003
+Hole frames in this epoch: [15, 15]
+
+Epoch 278 | Train Loss: 0.13929 | Val Loss: 0.38548
+Train Loss Components:
+  |- loss_rot: 0.02902
+  |- loss_pos: 0.10698
+  |- fk_loss: 0.59312
+  |- smoothness_loss: 0.30526
+Val Loss Components:
+  |- loss_rot: 0.03373
+  |- loss_pos: 0.58662
+  |- fk_loss: 1.13115
+  |- smoothness_loss: 0.21848
+LR: 0.000003
+Hole frames in this epoch: [15, 15]
+
+Epoch 279 | Train Loss: 0.13921 | Val Loss: 0.38551
+Train Loss Components:
+  |- loss_rot: 0.03116
+  |- loss_pos: 0.10761
+  |- fk_loss: 0.62664
+  |- smoothness_loss: 0.28329
+Val Loss Components:
+  |- loss_rot: 0.03376
+  |- loss_pos: 0.58390
+  |- fk_loss: 1.13155
+  |- smoothness_loss: 0.21970
+LR: 0.000003
+Hole frames in this epoch: [15, 15]
+
+Epoch 280 | Train Loss: 0.13917 | Val Loss: 0.38555
+Train Loss Components:
+  |- loss_rot: 0.03104
+  |- loss_pos: 0.10657
+  |- fk_loss: 0.61643
+  |- smoothness_loss: 0.33003
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58671
+  |- fk_loss: 1.13195
+  |- smoothness_loss: 0.21898
+LR: 0.000003
+Hole frames in this epoch: [15, 15]
+
+Epoch 281 | Train Loss: 0.13920 | Val Loss: 0.38555
+Train Loss Components:
+  |- loss_rot: 0.03290
+  |- loss_pos: 0.11872
+  |- fk_loss: 0.68796
+  |- smoothness_loss: 0.36567
+Val Loss Components:
+  |- loss_rot: 0.03376
+  |- loss_pos: 0.58371
+  |- fk_loss: 1.13189
+  |- smoothness_loss: 0.21944
+LR: 0.000003
+Hole frames in this epoch: [15, 15]
+
+Epoch 282 | Train Loss: 0.13907 | Val Loss: 0.38549
+Train Loss Components:
+  |- loss_rot: 0.03148
+  |- loss_pos: 0.10663
+  |- fk_loss: 0.62812
+  |- smoothness_loss: 0.35349
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58642
+  |- fk_loss: 1.13123
+  |- smoothness_loss: 0.21882
+LR: 0.000003
+Hole frames in this epoch: [15, 15]
+
+Epoch 283 | Train Loss: 0.13906 | Val Loss: 0.38561
+Train Loss Components:
+  |- loss_rot: 0.03188
+  |- loss_pos: 0.10808
+  |- fk_loss: 0.65367
+  |- smoothness_loss: 0.31583
+Val Loss Components:
+  |- loss_rot: 0.03376
+  |- loss_pos: 0.58631
+  |- fk_loss: 1.13284
+  |- smoothness_loss: 0.21940
+LR: 0.000003
+Hole frames in this epoch: [15, 15]
+
+Epoch 284 | Train Loss: 0.13906 | Val Loss: 0.38563
+Train Loss Components:
+  |- loss_rot: 0.03226
+  |- loss_pos: 0.10417
+  |- fk_loss: 0.62952
+  |- smoothness_loss: 0.28450
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58692
+  |- fk_loss: 1.13129
+  |- smoothness_loss: 0.21893
+LR: 0.000003
+Hole frames in this epoch: [15, 15]
+
+Epoch 285 | Train Loss: 0.13884 | Val Loss: 0.38540
+Train Loss Components:
+  |- loss_rot: 0.03479
+  |- loss_pos: 0.11339
+  |- fk_loss: 0.70532
+  |- smoothness_loss: 0.39111
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58546
+  |- fk_loss: 1.13077
+  |- smoothness_loss: 0.21880
+LR: 0.000002
+Hole frames in this epoch: [15, 15]
+
+Epoch 286 | Train Loss: 0.13877 | Val Loss: 0.38545
+Train Loss Components:
+  |- loss_rot: 0.03507
+  |- loss_pos: 0.12427
+  |- fk_loss: 0.72597
+  |- smoothness_loss: 0.39809
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58684
+  |- fk_loss: 1.13126
+  |- smoothness_loss: 0.21933
+LR: 0.000002
+Hole frames in this epoch: [15, 15]
+
+Epoch 287 | Train Loss: 0.13869 | Val Loss: 0.38544
+Train Loss Components:
+  |- loss_rot: 0.03202
+  |- loss_pos: 0.11137
+  |- fk_loss: 0.64195
+  |- smoothness_loss: 0.30714
+Val Loss Components:
+  |- loss_rot: 0.03374
+  |- loss_pos: 0.58563
+  |- fk_loss: 1.13130
+  |- smoothness_loss: 0.21946
+LR: 0.000002
+Hole frames in this epoch: [15, 15]
+
+Epoch 288 | Train Loss: 0.13868 | Val Loss: 0.38542
+Train Loss Components:
+  |- loss_rot: 0.03386
+  |- loss_pos: 0.11743
+  |- fk_loss: 0.70798
+  |- smoothness_loss: 0.38697
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58751
+  |- fk_loss: 1.13160
+  |- smoothness_loss: 0.21961
+LR: 0.000002
+Hole frames in this epoch: [15, 15]
+
+Epoch 289 | Train Loss: 0.13862 | Val Loss: 0.38543
+Train Loss Components:
+  |- loss_rot: 0.03310
+  |- loss_pos: 0.11582
+  |- fk_loss: 0.65127
+  |- smoothness_loss: 0.39159
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58640
+  |- fk_loss: 1.12979
+  |- smoothness_loss: 0.21929
+LR: 0.000002
+Hole frames in this epoch: [15, 15]
+
+Epoch 290 | Train Loss: 0.13858 | Val Loss: 0.38540
+Train Loss Components:
+  |- loss_rot: 0.03348
+  |- loss_pos: 0.11618
+  |- fk_loss: 0.67891
+  |- smoothness_loss: 0.40469
+Val Loss Components:
+  |- loss_rot: 0.03376
+  |- loss_pos: 0.58539
+  |- fk_loss: 1.13030
+  |- smoothness_loss: 0.21947
+LR: 0.000002
+Hole frames in this epoch: [15, 15]
+
+Epoch 291 | Train Loss: 0.13856 | Val Loss: 0.38539
+Train Loss Components:
+  |- loss_rot: 0.03101
+  |- loss_pos: 0.11150
+  |- fk_loss: 0.66208
+  |- smoothness_loss: 0.32366
+Val Loss Components:
+  |- loss_rot: 0.03373
+  |- loss_pos: 0.58661
+  |- fk_loss: 1.13093
+  |- smoothness_loss: 0.21943
+LR: 0.000002
+Hole frames in this epoch: [15, 15]
+
+Epoch 292 | Train Loss: 0.13846 | Val Loss: 0.38542
+Train Loss Components:
+  |- loss_rot: 0.02991
+  |- loss_pos: 0.10208
+  |- fk_loss: 0.59357
+  |- smoothness_loss: 0.29525
+Val Loss Components:
+  |- loss_rot: 0.03374
+  |- loss_pos: 0.58470
+  |- fk_loss: 1.13115
+  |- smoothness_loss: 0.21982
+LR: 0.000001
+Hole frames in this epoch: [15, 15]
+
+Epoch 293 | Train Loss: 0.13840 | Val Loss: 0.38544
+Train Loss Components:
+  |- loss_rot: 0.03441
+  |- loss_pos: 0.11623
+  |- fk_loss: 0.69565
+  |- smoothness_loss: 0.33727
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58612
+  |- fk_loss: 1.13125
+  |- smoothness_loss: 0.22017
+LR: 0.000001
+Hole frames in this epoch: [15, 15]
+
+Epoch 294 | Train Loss: 0.13841 | Val Loss: 0.38548
+Train Loss Components:
+  |- loss_rot: 0.02958
+  |- loss_pos: 0.10977
+  |- fk_loss: 0.58817
+  |- smoothness_loss: 0.30829
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58497
+  |- fk_loss: 1.12961
+  |- smoothness_loss: 0.21949
+LR: 0.000001
+Hole frames in this epoch: [15, 15]
+
+Epoch 295 | Train Loss: 0.13836 | Val Loss: 0.38546
+Train Loss Components:
+  |- loss_rot: 0.03479
+  |- loss_pos: 0.11523
+  |- fk_loss: 0.70350
+  |- smoothness_loss: 0.34804
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58510
+  |- fk_loss: 1.13010
+  |- smoothness_loss: 0.21916
+LR: 0.000001
+Hole frames in this epoch: [15, 15]
+
+Epoch 296 | Train Loss: 0.13840 | Val Loss: 0.38552
+Train Loss Components:
+  |- loss_rot: 0.03296
+  |- loss_pos: 0.11342
+  |- fk_loss: 0.65837
+  |- smoothness_loss: 0.31903
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58532
+  |- fk_loss: 1.13063
+  |- smoothness_loss: 0.21947
+LR: 0.000001
+Hole frames in this epoch: [15, 15]
+
+Epoch 297 | Train Loss: 0.13828 | Val Loss: 0.38550
+Train Loss Components:
+  |- loss_rot: 0.03164
+  |- loss_pos: 0.10742
+  |- fk_loss: 0.62838
+  |- smoothness_loss: 0.29953
+Val Loss Components:
+  |- loss_rot: 0.03376
+  |- loss_pos: 0.58662
+  |- fk_loss: 1.13094
+  |- smoothness_loss: 0.21865
+LR: 0.000001
+Hole frames in this epoch: [15, 15]
+
+Epoch 298 | Train Loss: 0.13828 | Val Loss: 0.38540
+Train Loss Components:
+  |- loss_rot: 0.03202
+  |- loss_pos: 0.10600
+  |- fk_loss: 0.65768
+  |- smoothness_loss: 0.30037
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58633
+  |- fk_loss: 1.13064
+  |- smoothness_loss: 0.21931
+LR: 0.000000
+Hole frames in this epoch: [15, 15]
+
+Epoch 299 | Train Loss: 0.13824 | Val Loss: 0.38536
+Train Loss Components:
+  |- loss_rot: 0.02969
+  |- loss_pos: 0.10505
+  |- fk_loss: 0.60930
+  |- smoothness_loss: 0.29844
+Val Loss Components:
+  |- loss_rot: 0.03374
+  |- loss_pos: 0.58608
+  |- fk_loss: 1.13090
+  |- smoothness_loss: 0.21925
+LR: 0.000000
+Hole frames in this epoch: [15, 15]
+
+Epoch 300 | Train Loss: 0.13829 | Val Loss: 0.38539
+Train Loss Components:
+  |- loss_rot: 0.03311
+  |- loss_pos: 0.11375
+  |- fk_loss: 0.70231
+  |- smoothness_loss: 0.37238
+Val Loss Components:
+  |- loss_rot: 0.03374
+  |- loss_pos: 0.58509
+  |- fk_loss: 1.12966
+  |- smoothness_loss: 0.21928
+LR: 0.000000
+Hole frames in this epoch: [15, 15]
+
+Epoch 301 | Train Loss: 0.13831 | Val Loss: 0.38542
+Train Loss Components:
+  |- loss_rot: 0.03263
+  |- loss_pos: 0.11209
+  |- fk_loss: 0.66277
+  |- smoothness_loss: 0.35384
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58468
+  |- fk_loss: 1.13014
+  |- smoothness_loss: 0.21981
+LR: 0.000000
+Hole frames in this epoch: [15, 15]
+
+Epoch 302 | Train Loss: 0.13826 | Val Loss: 0.38548
+Train Loss Components:
+  |- loss_rot: 0.03411
+  |- loss_pos: 0.11279
+  |- fk_loss: 0.67713
+  |- smoothness_loss: 0.36045
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58400
+  |- fk_loss: 1.12995
+  |- smoothness_loss: 0.21939
+LR: 0.000000
+Hole frames in this epoch: [15, 15]
+
+Epoch 303 | Train Loss: 0.13824 | Val Loss: 0.38538
+Train Loss Components:
+  |- loss_rot: 0.03517
+  |- loss_pos: 0.11734
+  |- fk_loss: 0.73080
+  |- smoothness_loss: 0.40199
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58616
+  |- fk_loss: 1.13030
+  |- smoothness_loss: 0.21932
+LR: 0.000000
+Hole frames in this epoch: [15, 15]
+
+Epoch 304 | Train Loss: 0.13826 | Val Loss: 0.38538
+Train Loss Components:
+  |- loss_rot: 0.03474
+  |- loss_pos: 0.11598
+  |- fk_loss: 0.70420
+  |- smoothness_loss: 0.35009
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58611
+  |- fk_loss: 1.13037
+  |- smoothness_loss: 0.21955
+LR: 0.000000
+Hole frames in this epoch: [15, 15]
+
+Epoch 305 | Train Loss: 0.13819 | Val Loss: 0.38541
+Train Loss Components:
+  |- loss_rot: 0.03432
+  |- loss_pos: 0.11461
+  |- fk_loss: 0.66896
+  |- smoothness_loss: 0.36835
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58487
+  |- fk_loss: 1.13056
+  |- smoothness_loss: 0.21976
+LR: 0.000000
+Hole frames in this epoch: [15, 15]
+
+Epoch 306 | Train Loss: 0.13816 | Val Loss: 0.38541
+Train Loss Components:
+  |- loss_rot: 0.03099
+  |- loss_pos: 0.10709
+  |- fk_loss: 0.61555
+  |- smoothness_loss: 0.33426
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58648
+  |- fk_loss: 1.13033
+  |- smoothness_loss: 0.21909
+LR: 0.000000
+Hole frames in this epoch: [15, 15]
+
+Epoch 307 | Train Loss: 0.13820 | Val Loss: 0.38538
+Train Loss Components:
+  |- loss_rot: 0.03238
+  |- loss_pos: 0.11247
+  |- fk_loss: 0.69446
+  |- smoothness_loss: 0.32771
+Val Loss Components:
+  |- loss_rot: 0.03375
+  |- loss_pos: 0.58482
+  |- fk_loss: 1.13035
+  |- smoothness_loss: 0.21967
+LR: 0.000000
+Hole frames in this epoch: [15, 15]
+
+Training time: 10245.31 s
