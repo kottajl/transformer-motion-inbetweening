@@ -10,7 +10,7 @@ from torch.utils.data import DataLoader
 from utils.dataset import BvhDataset
 from utils.interpolation import interpolate_positions, interpolate_rotations
 from utils.utils import forward_kinematics, load_params_from_json, set_seed
-from utils.rotation_convertion import mat_to_quat_torch, rot6d_to_mat_torch
+from utils.rotation_convertion import make_quaternions_continous, mat_to_quat_torch, rot6d_to_mat_torch
 from model.model import MotionTransformer
 
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -171,6 +171,9 @@ def test_and_get_scores(
 
             gt_rot_fk_q = mat_to_quat_torch(gt_rot_mats_fk)
             pred_rot_fk_q = mat_to_quat_torch(pred_rot_mats_fk)
+
+            gt_rot_fk_q = make_quaternions_continous(gt_rot_fk_q)
+            pred_rot_fk_q = make_quaternions_continous(pred_rot_fk_q)
 
             # --- METRICS ---
 

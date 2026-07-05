@@ -131,6 +131,17 @@ def standardize_quaternion(quaternions: torch.Tensor) -> torch.Tensor:
     return torch.where(quaternions[..., 0:1] < 0, -quaternions, quaternions)
 
 
+def make_quaternions_continous(quats: torch.Tensor) -> torch.Tensor:
+    quats_cont = quats.clone()
+    T = quats_cont.shape[1]
+
+    for t in range(1, T):
+        dot = (quats_cont[:, t] * quats_cont[:, t-1]).sum(dim=-1, keepdim=True)
+        quats_cont[:, t] = torch.where(dot < 0, -quats_cont[:, t], quats_cont[:, t])
+    
+    return quats_cont
+
+
 def mat_to_quat_torch(mat: torch.Tensor) -> torch.Tensor:
     """
     mat: (...,3,3)

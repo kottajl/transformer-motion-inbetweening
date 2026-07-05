@@ -10,7 +10,7 @@ from scipy.spatial.transform import Rotation as R
 from utils.dataset import BvhDataset
 from utils.interpolation import interpolate_positions, interpolate_rotations
 from utils.utils import forward_kinematics, load_params_from_json
-from utils.rotation_convertion import rot6d_to_mat_torch
+from utils.rotation_convertion import make_quaternions_continous, mat_to_quat_torch, rot6d_to_mat_torch
 from model.model import MotionTransformer
 
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -120,14 +120,20 @@ def test_and_get_scores(
             )
 
             # Compute gt global quaternions for L2Q metric
-            gt_rot_mats_fk_np = gt_rot_mats_fk.cpu().numpy().reshape(-1, 3, 3)
-            gt_rot_q_fk_np = R.from_matrix(gt_rot_mats_fk_np).as_quat()
-            gt_rot_fk_q = torch.tensor(gt_rot_q_fk_np, device=DEVICE).view(B, T, J, 4)
+            # gt_rot_mats_fk_np = gt_rot_mats_fk.cpu().numpy().reshape(-1, 3, 3)
+            # gt_rot_q_fk_np = R.from_matrix(gt_rot_mats_fk_np).as_quat()
+            # gt_rot_fk_q = torch.tensor(gt_rot_q_fk_np, device=DEVICE).view(B, T, J, 4)
 
             # Compute predicted global quaternions for L2Q metric
-            pred_rot_mats_fk_np = pred_rot_mats_fk.cpu().numpy().reshape(-1, 3, 3)
-            pred_rot_q_fk_np = R.from_matrix(pred_rot_mats_fk_np).as_quat()
-            pred_rot_fk_q = torch.tensor(pred_rot_q_fk_np, device=DEVICE).view(B, T, J, 4)
+            # pred_rot_mats_fk_np = pred_rot_mats_fk.cpu().numpy().reshape(-1, 3, 3)
+            # pred_rot_q_fk_np = R.from_matrix(pred_rot_mats_fk_np).as_quat()
+            # pred_rot_fk_q = torch.tensor(pred_rot_q_fk_np, device=DEVICE).view(B, T, J, 4)
+
+            gt_rot_fk_q = mat_to_quat_torch(gt_rot_mats_fk)
+            pred_rot_fk_q = mat_to_quat_torch(pred_rot_mats_fk)
+
+            gt_rot_fk_q = make_quaternions_continous(gt_rot_fk_q)
+            pred_rot_fk_q = make_quaternions_continous(pred_rot_fk_q)
 
             # --- METRICS ---
 
