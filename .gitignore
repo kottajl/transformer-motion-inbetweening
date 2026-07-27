@@ -30,8 +30,8 @@ __pycache__/
 .vscode/
 
 # Test configs & results
-configs/ae*.json
-generated_models/ae*.log
+configs/ae
+generated_models/ae
 
 # Some scripts, where editting doesn't change the general logic (only using files, etc.)
 scripts/plot_loss.py
