@@ -18,7 +18,7 @@ import time
 
 
 def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', **subset_kwargs):
-    CONFIG_NAME = params.get("config_name", "new_config")
+    CONFIG_NAME = params["config_name"]
 
     CONTEXT_FRAMES = params["context_frames"]
     TARGET_FRAMES = params["target_frames"]
@@ -391,7 +391,7 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
             log_epoch_str += "Val Loss Components:\n"
             for key, value in test_loss_coponents.items():
                 log_epoch_str += f"  |- {key}: {value:.5f}\n"
-            log_epoch_str += f"LR: {optimizer.param_groups[0]['lr']:.6f}\n"
+            log_epoch_str += f"LR: {optimizer.param_groups[0]['lr']:.3e}\n"
             log_epoch_str += f"Hole frames in this epoch: [{min_hole_frames}, {epoch_max_hole_frames}]\n"
             log_epoch_str += "\n"
 
@@ -447,8 +447,12 @@ if __name__ == "__main__":
         help='Output name, which will be used in the name of output files (default: None - using name from config file)'
     )
     parser.add_argument(
+        '--name_prefix', type=str, default=None, 
+        help='Output name prefix, which will be added at the beginning of the name of output files (default: None - no additional prefix)'
+    )
+    parser.add_argument(
         '--name_suffix', type=str, default=None, 
-        help='Output name suffix, which will be used added in the name of output files (default: None - no additional suffix)'
+        help='Output name suffix, which will be added at the end of the name of output files (default: None - no additional suffix)'
     )
     # parser.add_argument('--data_subset_type', type=str, default='all', help='Subset of data to use for training (e.g., "all", "selected-moves", etc.)')
     args = parser.parse_args()
@@ -470,11 +474,13 @@ if __name__ == "__main__":
     
     if args.name is not None:
         params['config_name'] = args.name
-    # Check if user is aware that file name happens to be 'the same' as config_name parameter (probably a nasty error)
+    # Check if user is aware that file name happens not to be 'the same' as config_name parameter (probably a nasty error)
     elif args.params != params["config_name"]:
         show_warning(f"The name of the config file ({args.params}) is not the same as the name written inside the config ({params.get("config_name", "new_config")}). This may result in overriding existing model weights file!")
     
-    # Add suffix to output files name (if exists)
+    # Add prefix/suffix to output files name (if they exist)
+    if args.name_prefix is not None:
+        params['config_name'] = f"{args.name_prefix}_{params['config_name']}"
     if args.name_suffix is not None:
         params['config_name'] += f"_{args.name_suffix}"
 

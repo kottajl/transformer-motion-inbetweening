@@ -1,3 +1,5 @@
+import sys
+
 import numpy as np
 import torch
 import os
@@ -91,7 +93,7 @@ class BvhDataset(Dataset):
         self.offsets = None
 
         data_paths = get_data_subset_paths(data_dir, subset_type, **subset_kwargs)
-        print(f"DATASET: Loading {len(data_paths)} animations from {data_dir}...")
+        print(f"DATASET: Loading {len(data_paths)} animations from {data_dir}...", file=sys.stderr)
 
         for path in data_paths:
             animation = load_anim_from_npz(path)

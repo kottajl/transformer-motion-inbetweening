@@ -1,4 +1,5 @@
 import argparse
+import sys
 import torch
 import numpy as np
 import utils.metrics as metrics
@@ -33,7 +34,7 @@ def fetch_model(model_file: str, params: dict, n_joints: int, window_size: int) 
             max_len=256
         )
     except KeyError as e:
-        print(f"Error: Missing key in parameters: {e}")
+        print(f"Error: Missing key in parameters: {e}", file=sys.stderr)
         exit(-1)
 
     ckpt = torch.load(model_file, map_location='cpu')
@@ -66,12 +67,12 @@ def test_and_get_scores(
         WINDOW_SIZE = CONTEXT_FRAMES + HOLE_FRAMES + TARGET_FRAMES
     
     except KeyError as e:
-        print(f"Error: Missing key in parameters: {e}")
+        print(f"Error: Missing key in parameters: {e}", file=sys.stderr)
         exit(-1)
     
     hole_start = CONTEXT_FRAMES
     hole_end = CONTEXT_FRAMES + HOLE_FRAMES
-    print(f"Operating on hole size: {hole_end - hole_start} frames (from {hole_start} to {hole_end-1} in the window)")
+    print(f"Operating on hole size: {hole_end - hole_start} frames (from {hole_start} to {hole_end-1} in the window)", file=sys.stderr)
     
     # List of context + target frames indices
     fixed_points = list(range(0, CONTEXT_FRAMES))
@@ -210,12 +211,13 @@ if __name__ == "__main__":
     parser.add_argument('--window_step', type=int, default=-1, help='Step size for sliding window over the data')
     parser.add_argument('--hole_size', type=int, default=-1, help='Hole size to test (overrides config if set)')
     parser.add_argument('--seed', type=int, default=None, help='Random seed for reproducibility (default: None)')
+    parser.add_argument('--unverbose', action='store_true', help='Print in a more parser-friendly format (model_name,hole_size,l2p,l2q,npss)')
     # parser.add_argument('--data_subset_type', type=str, default='all', help='Subset of data to use for training (e.g., "all", "selected-moves", etc.)')
     args = parser.parse_args()
 
     if args.seed is not None:
         set_seed(args.seed)
-        print(f"Random seed set to: {args.seed}")
+        print(f"Random seed set to: {args.seed}", file=sys.stderr)
 
     # v Literal['all', 'selected-subjects', 'selected-moves', 'selected-subjects-and-moves', 'selected-files'] v
     data_subset_type = 'all'
@@ -226,13 +228,13 @@ if __name__ == "__main__":
     try:
         params = load_params_from_json(args.config)
     except FileNotFoundError:
-        print(f"Error: The file '{args.config}' was not found.")
-        exit(1)
+        print(f"Error: The file '{args.config}' was not found.", file=sys.stderr)
+        exit(-1)
     
     window_step = args.window_step
     if window_step == -1:
         window_step = params["window_step"]
-        print(f"Using default window_step: {window_step}")
+        print(f"Using default window_step: {window_step}", file=sys.stderr)
     
     # Create dataset and extract number of joints for model initialization
     try:
@@ -245,7 +247,7 @@ if __name__ == "__main__":
                 HOLE_FRAMES = args.hole_size[1]
             else:
                 raise ValueError("Invalid hole_size argument. Must be an integer or a list of two integers.")
-            print(f"'hole_size' parameter not specified. Using hole_frames: {HOLE_FRAMES}")
+            print(f"'hole_size' parameter not specified. Using hole_frames: {HOLE_FRAMES}", file=sys.stderr)
         
         WINDOW_SIZE = params["context_frames"] + HOLE_FRAMES + params["target_frames"]
 
@@ -259,9 +261,9 @@ if __name__ == "__main__":
             # subjects_indices=subjects_indices
         )
         n_joints = dataset.get_num_of_joints()
-        print(f"Number of joints: {n_joints}")
+        print(f"Number of joints: {n_joints}", file=sys.stderr)
     except KeyError as e:
-        print(f"Error: Missing key in parameters: {e}")
+        print(f"Error: Missing key in parameters: {e}", file=sys.stderr)
         exit(-1)    
 
     # Get model
@@ -281,8 +283,16 @@ if __name__ == "__main__":
         hole_frames=HOLE_FRAMES
         # moves_names=moves_names
     )
-    print("Testing completed.")
+    print("Testing completed.", file=sys.stderr)
 
-    print(f"Test Results for model {args.weights} (window step: {window_step}):")
-    for metric_name, metric_value in scores.items():
-        print(f"  |- {metric_name}: {metric_value:.4f}")
+    if args.unverbose:
+        model_name = args.weights.split('/')[-1].split('\\')[-1].split('.')[0]  # Extract model name from path
+        # Print in a more parser-friendly format
+        output_str = f"{model_name},{HOLE_FRAMES}"
+        for metric_value in scores.values():
+            output_str += f",{metric_value:.6f}"
+        print(output_str)
+    else:
+        print(f"Test Results for model {args.weights} (hole size: {HOLE_FRAMES}):")
+        for metric_name, metric_value in scores.items():
+            print(f"  |- {metric_name}: {metric_value:.4f}")
