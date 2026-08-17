@@ -9,7 +9,7 @@ from torch.utils.data import DataLoader
 # from scipy.spatial.transform import Rotation as R
 
 from utils.dataset import BvhDataset
-from utils.interpolation import interpolate_positions, interpolate_rotations
+from utils.interpolation import fill_rotations_with_mean, fill_positions_with_mean, interpolate_positions, interpolate_rotations
 from utils.utils import forward_kinematics, load_params_from_json, set_seed
 from utils.rotation_convertion import make_quaternions_continous, mat_to_quat_torch, rot6d_to_mat_torch
 from model.model import MotionTransformer
@@ -64,6 +64,7 @@ def test_and_get_scores(
         TARGET_FRAMES = params["target_frames"]
         BATCH_SIZE = params["batch_size"]
         INTERPOLATE_BEFORE_PREDICTION = params.get("interpolate_before_prediction", False)
+        FILL_HOLE_TYPE = params.get("fill_hole_type", None)
         WINDOW_SIZE = CONTEXT_FRAMES + HOLE_FRAMES + TARGET_FRAMES
     
     except KeyError as e:
@@ -129,13 +130,38 @@ def test_and_get_scores(
                         hole_start,
                         hole_end
                     )
+            if INTERPOLATE_BEFORE_PREDICTION or FILL_HOLE_TYPE == "mean":
+                src_rot_q = batch["rotations_quat"].to(DEVICE)
+                src_rot_q[:, hole_start:hole_end, :, :] = 0.0
+                if INTERPOLATE_BEFORE_PREDICTION:
+                    fill_rotations_fn = interpolate_rotations
+                    fill_positions_fn = interpolate_positions
+                elif FILL_HOLE_TYPE == "mean":
+                    fill_rotations_fn = fill_rotations_with_mean
+                    fill_positions_fn = fill_positions_with_mean
+                src_rot, _ = fill_rotations_fn(
+                    src_rot,
+                    src_rot_q,
+                    hole_start,
+                    hole_end
+                )
+                src_pos = fill_positions_fn(
+                    src_pos,
+                    hole_start,
+                    hole_end
+                )
+            elif FILL_HOLE_TYPE == "before":
+                rot_fill_item = src_rot[:, hole_start-1:hole_start, :, :].clone()
+                pos_fill_item = src_pos[:, hole_start-1:hole_start, :].clone()
+                src_rot[:, hole_start:hole_end, :, :] = rot_fill_item.expand(-1, hole_end-hole_start, -1, -1)
+                src_pos[:, hole_start:hole_end, :] = pos_fill_item.expand(-1, hole_end-hole_start, -1)
             
             with torch.amp.autocast('cuda', dtype=torch.bfloat16):
                 pred_rot, pred_pos = model(
                     src_rot, src_pos,
-                    # src_rot.clone(), src_pos.clone(),
                     fixed_points=fixed_points
                 )
+            # pred_rot, pred_pos = src_rot.clone(), src_pos.clone()     # just interpolate
             
             # Return to original position space
             pos += root_offset
@@ -256,7 +282,7 @@ if __name__ == "__main__":
             window=WINDOW_SIZE,
             step=window_step,
             device=DEVICE,
-            interpolate_missing=params["interpolate_before_prediction"],
+            interpolate_missing=params["interpolate_before_prediction"] or params.get("fill_hole_type", None) == "mean",
             subset_type=data_subset_type,
             # subjects_indices=subjects_indices
         )

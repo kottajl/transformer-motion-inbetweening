@@ -2,8 +2,8 @@ from typing import List
 from scipy.spatial.transform import Rotation as R
 from bvh import Bvh
 from utils.bvh_parser import load_bvh
-from utils.interpolation import interpolate_positions, interpolate_rotations
-from utils.utils import load_params_from_json, set_seed
+from utils.interpolation import interpolate_positions, interpolate_rotations, fill_rotations_with_mean, fill_positions_with_mean
+from utils.utils import load_params_from_json, set_seed, show_warning
 from model.model import MotionTransformer
 from scripts.predict_bvh import sixd_to_matrix, stable_euler_from_matrix
 
@@ -29,7 +29,8 @@ def predict_bvh_loop(
     device: torch.device = None,
     context_frames: int = 10,
     target_frames: int = 1,
-    preinterpolate: bool = False
+    preinterpolate: bool = False,
+    fill_hole_type: str = None
 ):
     """
     Run inference on a BVH file and write result to another BVH.
@@ -107,6 +108,26 @@ def predict_bvh_loop(
                     hole_start_in_win,
                     hole_end_in_win
                 )
+            elif fill_hole_type == "mean":
+                win_rot_q = anim.rotations_quat[start_window:end_window]        # (T_win, J, 4)
+                src_rot_q = torch.from_numpy(win_rot_q).unsqueeze(0).to(device) # (1, T_win, J, 4)
+                src_rot_q[:, hole_start_in_win:hole_end_in_win, :, :] = 0.0
+                src_rot, _ = fill_rotations_with_mean(
+                    src_rot,
+                    src_rot_q,
+                    hole_start_in_win,
+                    hole_end_in_win
+                )
+                src_pos = fill_positions_with_mean(
+                    src_pos,
+                    hole_start_in_win,
+                    hole_end_in_win
+                )
+            elif FILL_HOLE_TYPE == "before":
+                rot_fill_item = src_rot[:, hole_start_in_win-1:hole_start_in_win, :, :].clone()
+                pos_fill_item = src_pos[:, hole_start_in_win-1:hole_start_in_win, :].clone()
+                src_rot[:, hole_start_in_win:hole_end_in_win, :, :] = rot_fill_item.expand(-1, hole_end_in_win-hole_start_in_win, -1, -1)
+                src_pos[:, hole_start_in_win:hole_end_in_win, :] = pos_fill_item.expand(-1, hole_end_in_win-hole_start_in_win, -1)
 
             # Fixed points (context_frames and target_frames indices)
             fixed_points: List[int] = list(range(0, context_frames)) + list(range(T_win - target_frames, T_win))
@@ -227,8 +248,9 @@ def predict_bvh_loop(
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--bvh-in', type=str, default="eval/jumps1_subject5.bvh")
-    parser.add_argument('--bvh-out', default="eval/jumps1_subject5_predicted_beta6_rot_nvel.bvh")
+    parser.add_argument('--bvh-in', type=str, default="eval/dance2_subject5.bvh")
+    # parser.add_argument('--bvh-out', default="C:\\Users\\kotta\\Desktop\\predictions\\dance2_bef_vel_rot_20.bvh")
+    parser.add_argument('--bvh-out', default="eval/dance2_int_vel_rot_15.bvh")
     parser.add_argument('--period', type=int, default=50)
     parser.add_argument('--weights', default="best_model.pt", help='Path to model weights (.pt)')
     parser.add_argument('--config', type=str, required=True, help='Path to JSON config file')
@@ -260,6 +282,9 @@ if __name__ == '__main__':
     velocity_included = params.get("velocity_included", False)
     max_len = 256
     INTERPOLATE_BEFORE_PREDICTION = params.get("interpolate_before_prediction", False)
+    FILL_HOLE_TYPE = params.get("fill_hole_type", None)
+    # if not INTERPOLATE_BEFORE_PREDICTION and params.get("fill_hole_type", None) == "mean":
+    #     show_warning("'interpolate_before_prediction' is False but 'fill_hole_type' is set to 'mean'. Mean filling is not supported in this scripts at the moment, so the model could produce unexpected results.")
 
     try:
         if args.hole_size != -1:
@@ -312,6 +337,7 @@ if __name__ == '__main__':
         period=args.period,
         context_frames=context_frames,
         target_frames=target_frames,
-        preinterpolate=INTERPOLATE_BEFORE_PREDICTION
+        preinterpolate=INTERPOLATE_BEFORE_PREDICTION,
+        fill_hole_type=FILL_HOLE_TYPE
     )
     print("\nPrediction completed.")

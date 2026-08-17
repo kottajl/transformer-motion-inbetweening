@@ -2,7 +2,7 @@ from typing import List
 from scipy.spatial.transform import Rotation as R
 from bvh import Bvh
 from utils.bvh_parser import load_bvh
-from utils.interpolation import interpolate_positions, interpolate_rotations
+from utils.interpolation import interpolate_positions, interpolate_rotations, fill_rotations_with_mean, fill_positions_with_mean
 from utils.utils import load_params_from_json
 from model.model import MotionTransformer
 
@@ -63,7 +63,8 @@ def predict_bvh(
     device: torch.device = None,
     context_frames: int = 10,
     target_frames: int = 1,
-    preinterpolate: bool = False
+    preinterpolate: bool = False,
+    fill_hole_type: str = None
 ):
     """
     Run inference on a BVH file and write result to another BVH.
@@ -123,7 +124,22 @@ def predict_bvh(
                 hole_start_in_win,
                 hole_end_in_win
             )
-
+        elif fill_hole_type == "mean":
+            win_rot_q = anim.rotations_quat[start_window:end_window]        # (T_win, J, 4)
+            src_rot_q = torch.from_numpy(win_rot_q).unsqueeze(0).to(device) # (1, T_win, J, 4)
+            src_rot_q[:, hole_start_in_win:hole_end_in_win, :, :] = 0.0
+            src_rot, _ = fill_rotations_with_mean(
+                src_rot,
+                src_rot_q,
+                hole_start_in_win,
+                hole_end_in_win
+            )
+            src_pos = fill_positions_with_mean(
+                src_pos,
+                hole_start_in_win,
+                hole_end_in_win
+            )
+        
         # Fixed points (context_frames and target_frames indices)
         fixed_points: List[int] = list(range(0, context_frames)) + list(range(T_win - target_frames, T_win))
         
@@ -259,6 +275,7 @@ if __name__ == '__main__':
     WINDOW_SIZE = params["context_frames"] + params["hole_frames"] + params["target_frames"]
     max_len = max(64, WINDOW_SIZE)
     INTERPOLATE_BEFORE_PREDICTION = params.get("interpolate_before_prediction", False)
+    FILL_HOLE_TYPE = params.get("fill_hole_type", None)
     end_hole = args.start + (params["hole_frames"])
 
     # Load input BVH to get number of joints for model instantiation
@@ -290,6 +307,7 @@ if __name__ == '__main__':
         end_hole=end_hole,
         context_frames=context_frames,
         target_frames=target_frames,
-        preinterpolate=INTERPOLATE_BEFORE_PREDICTION
+        preinterpolate=INTERPOLATE_BEFORE_PREDICTION,
+        fill_hole_type=FILL_HOLE_TYPE
     )
     print(f"Written predicted BVH to '{args.bvh_out}'")

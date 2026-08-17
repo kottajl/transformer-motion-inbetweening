@@ -6,7 +6,7 @@ from model.loss.SmoothnessLoss import SmoothnessLoss
 from model.model import MotionTransformer
 from model.loss.FKLoss import FKLoss
 from utils.dataset import BvhDataset
-from utils.interpolation import interpolate_rotations, interpolate_positions
+from utils.interpolation import fill_positions_with_mean, fill_rotations_with_mean, interpolate_rotations, interpolate_positions
 from utils.utils import load_params_from_json, set_seed, show_warning
 
 import torch
@@ -56,6 +56,7 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
 
     PE_TYPE = params.get("pe_type", "sinusoidal")
     INTERPOLATE_BEFORE_PREDICTION = params.get("interpolate_before_prediction", False)
+    FILL_HOLE_TYPE = params.get("fill_hole_type", None)
 
     LOSS_WEIGHTS = params["loss_weights"]
     # assert abs(sum(LOSS_WEIGHTS.values()) - 1.0) < 1e-6, f"LOSS_WEIGHTS values must sum to 1.0: got {sum(LOSS_WEIGHTS.values())}"
@@ -77,7 +78,7 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
         step=WINDOW_STEP,
         # device=DEVICE,
         device='cpu',   # keep data on CPU, move to GPU in training loop
-        interpolate_missing=INTERPOLATE_BEFORE_PREDICTION,
+        interpolate_missing=INTERPOLATE_BEFORE_PREDICTION or FILL_HOLE_TYPE == "mean",
         subset_type=data_subset_type,
         **subset_kwargs
     )
@@ -182,28 +183,38 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
             src_rot[:, hole_start:hole_end, :, :] = 0.0
             src_pos[:, hole_start:hole_end, :] = 0.0
 
-            if INTERPOLATE_BEFORE_PREDICTION:
+            if INTERPOLATE_BEFORE_PREDICTION or FILL_HOLE_TYPE == "mean":
                 src_rot_q = batch["rotations_quat"][:, :BATCH_WINDOW_SIZE, :, :].to(DEVICE)
                 src_rot_q[:, hole_start:hole_end, :, :] = 0.0
+                if INTERPOLATE_BEFORE_PREDICTION:
+                    fill_rotations_fn = interpolate_rotations
+                    fill_positions_fn = interpolate_positions
+                elif FILL_HOLE_TYPE == "mean":
+                    fill_rotations_fn = fill_rotations_with_mean
+                    fill_positions_fn = fill_positions_with_mean
                 with torch.no_grad():
-                    src_rot, _ = interpolate_rotations(
+                    src_rot, _ = fill_rotations_fn(
                         src_rot,
                         src_rot_q,
                         hole_start,
                         hole_end
                     )
-                    src_pos = interpolate_positions(
+                    src_pos = fill_positions_fn(
                         src_pos,
                         hole_start,
                         hole_end
                     )
+            elif FILL_HOLE_TYPE == "before":
+                rot_fill_item = src_rot[:, hole_start-1:hole_start, :, :].clone()
+                pos_fill_item = src_pos[:, hole_start-1:hole_start, :].clone()
+                src_rot[:, hole_start:hole_end, :, :] = rot_fill_item.expand(-1, hole_end-hole_start, -1, -1)
+                src_pos[:, hole_start:hole_end, :] = pos_fill_item.expand(-1, hole_end-hole_start, -1)
 
             optimizer.zero_grad()
 
             with torch.amp.autocast('cuda', dtype=torch.bfloat16):
                 pred_rot, pred_pos = model(
                     src_rot, src_pos,
-                    # src_rot.clone(), src_pos.clone(),
                     fixed_points=fixed_points
                 )
 
@@ -228,20 +239,6 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
                 offsets=offsets_tensor
             )
 
-            # pos_vel_bnd_loss = root_pos_velocity_boundary_loss(
-            #     pos, pred_pos,
-            #     hole_start=hole_start,
-            #     hole_end=hole_end
-            # )
-
-            # fk_vel_bnd_loss = fk_vel_bnd_loss_fn(
-            #     rot, pos,
-            #     pred_rot, pred_pos,
-            #     offsets=offsets_tensor,
-            #     hole_start=hole_start,
-            #     hole_end=hole_end
-            # )
-
             loss = (
                 LOSS_WEIGHTS["rot_6d"] * loss_rot + 
                 LOSS_WEIGHTS["pos"] * loss_pos + 
@@ -256,12 +253,8 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
                 "loss_pos": loss_pos.item(),
                 "fk_loss": fk_loss.item(),
                 "smoothness_loss": smoothness_loss.item(),
-                # "pos_vel_bnd_loss": pos_vel_bnd_loss.item(),
-                # "fk_vel_bnd_loss": fk_vel_bnd_loss.item()
             }
             
-            # loss.backward()
-            # optimizer.step()
             scaler.scale(loss).backward()
             scaler.step(optimizer)
             scaler.update()
@@ -303,20 +296,32 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
                 src_rot[:, hole_start:hole_end, :, :] = 0.0
                 src_pos[:, hole_start:hole_end, :] = 0.0
 
-                if INTERPOLATE_BEFORE_PREDICTION:
+                if INTERPOLATE_BEFORE_PREDICTION or FILL_HOLE_TYPE == "mean":
                     src_rot_q = batch["rotations_quat"].to(DEVICE)
                     src_rot_q[:, hole_start:hole_end, :, :] = 0.0
-                    src_rot, _ = interpolate_rotations(
+                    if INTERPOLATE_BEFORE_PREDICTION:
+                        fill_rotations_fn = interpolate_rotations
+                        fill_positions_fn = interpolate_positions
+                    elif FILL_HOLE_TYPE == "mean":
+                        fill_rotations_fn = fill_rotations_with_mean
+                        fill_positions_fn = fill_positions_with_mean
+                    src_rot, _ = fill_rotations_fn(
                         src_rot,
                         src_rot_q,
                         hole_start,
                         hole_end
                     )
-                    src_pos = interpolate_positions(
+                    src_pos = fill_positions_fn(
                         src_pos,
                         hole_start,
                         hole_end
                     )
+                elif FILL_HOLE_TYPE == "before":
+                    rot_fill_item = src_rot[:, hole_start-1:hole_start, :, :].clone()
+                    pos_fill_item = src_pos[:, hole_start-1:hole_start, :].clone()
+                    src_rot[:, hole_start:hole_end, :, :] = rot_fill_item.expand(-1, hole_end-hole_start, -1, -1)
+                    src_pos[:, hole_start:hole_end, :] = pos_fill_item.expand(-1, hole_end-hole_start, -1)
+
                 with torch.amp.autocast('cuda', dtype=torch.bfloat16):
                     pred_rot, pred_pos = model(
                         src_rot, src_pos,

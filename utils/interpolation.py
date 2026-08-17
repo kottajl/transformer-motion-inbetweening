@@ -109,3 +109,66 @@ def interpolate_positions(
     positions_out[:, hole_start:hole_end, :] = p_interp
 
     return positions_out
+
+
+# Fill with average
+
+def fill_positions_with_mean(
+    positions: torch.Tensor,
+    hole_start: int,
+    hole_end: int
+) -> torch.Tensor:
+    assert 0 < hole_start < hole_end < positions.shape[1], "Invalid hole_start and hole_end"
+
+    B, T, _ = positions.shape
+    H = hole_end - hole_start       # H = hole length
+
+    pa = positions[:, hole_start - 1, :]    # [B, 3]
+    pb = positions[:, hole_end, :]          # [B, 3]
+
+    p_mean = (pa + pb) * 0.5
+    p_mean = p_mean.unsqueeze(1).expand(B, H, 3)    # [B, H, 3]
+
+    positions_out = positions.clone()
+    positions_out[:, hole_start:hole_end, :] = p_mean
+
+    return positions_out
+
+
+def fill_rotations_with_mean(
+    rot_6d: torch.Tensor,
+    rot_quat: torch.Tensor,
+    hole_start: int,
+    hole_end: int 
+) -> tuple[torch.Tensor, torch.Tensor]:
+    assert 0 < hole_start < hole_end < rot_6d.shape[1], "Invalid hole_start and hole_end"
+    
+    B, T, J, _ = rot_quat.shape
+    device = rot_quat.device
+    H = hole_end - hole_start       # H = hole length
+
+    qa = rot_quat[:, hole_start - 1, :, :]  # [B, J, 4]
+    qb = rot_quat[:, hole_end, :, :]        # [B, J, 4]
+
+    qa_flat = qa.reshape(-1, 4)  # [B*J, 4]
+    qb_flat = qb.reshape(-1, 4)  # [B*J, 4]
+
+    t_values = torch.full((B*J, 1), 0.5, device=device)  # [B*J, 1]
+
+    # t_values = torch.linspace(0.0, 1.0, steps=H+2, device=device)[1:-1]  # [H]
+
+    # qa = qa.unsqueeze(1).expand(B, H, J, 4).reshape(-1, 4)  # [B*H*J, 4]
+    # qb = qb.unsqueeze(1).expand(B, H, J, 4).reshape(-1, 4)  # [B*H*J, 4]
+    # t_values = t_values.view(1, H, 1).expand(B, H, J).reshape(-1, 1)  # [B*H*J, 1]
+
+    q_mean = slerp_torch(qa_flat, qb_flat, t_values)    # [B*J, 4]
+    q_mean = q_mean.reshape(B, 1, J, 4)                 # [B, 1, J, 4]
+    q_mean = q_mean.expand(B, H, J, 4)                  # [B, H, J, 4]
+
+    rot_quat_out = rot_quat.clone()
+    rot_quat_out[:, hole_start:hole_end, :, :] = q_mean
+
+    rot_6d_out = rot_6d.clone()
+    rot_6d_out[:, hole_start:hole_end, :, :] = quat_to_6d_torch(q_mean)
+
+    return rot_6d_out, rot_quat_out

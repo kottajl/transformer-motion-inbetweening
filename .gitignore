@@ -32,6 +32,7 @@ __pycache__/
 # Test configs & results
 configs/ae
 generated_models/ae
+results/old
 
 # Some scripts, where editting doesn't change the general logic (only using files, etc.)
 scripts/plot_loss.py
