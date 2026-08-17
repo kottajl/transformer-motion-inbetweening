@@ -18,7 +18,7 @@ def precompute_angles(
 
     # Positions [of frames]
     m = torch.arange(max_seq_len)
-    # -> [0, 1, ..., max_seq_len]
+    # -> [0, 1, ..., max_seq_len - 1]
 
     # Compute angles for every pair
     angles = torch.outer(m, theta)      # (max_seq_len, dim//2)
