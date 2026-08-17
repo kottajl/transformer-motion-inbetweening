@@ -238,6 +238,7 @@ if __name__ == "__main__":
     parser.add_argument('--hole_size', type=int, default=-1, help='Hole size to test (overrides config if set)')
     parser.add_argument('--seed', type=int, default=None, help='Random seed for reproducibility (default: None)')
     parser.add_argument('--unverbose', action='store_true', help='Print in a more parser-friendly format (model_name,hole_size,l2p,l2q,npss)')
+    parser.add_argument('--dataset', type=str, default='lafan1', help='Used dataset for training (default: lafan1)')
     # parser.add_argument('--data_subset_type', type=str, default='all', help='Subset of data to use for training (e.g., "all", "selected-moves", etc.)')
     args = parser.parse_args()
 
@@ -277,8 +278,21 @@ if __name__ == "__main__":
         
         WINDOW_SIZE = params["context_frames"] + HOLE_FRAMES + params["target_frames"]
 
+        # Generate dataset path:
+        if args.dataset == 'lafan1':
+            dataset_path = "datasets/lafan1/test_processed/"
+        elif args.dataset == 'pfnn':
+            dataset_path = "datasets/pfnn/test_processed/"
+        elif args.dataset == 'unoc':
+            dataset_path = "datasets/unoc/test_processed/"
+        elif args.dataset == 'unoc-cut':
+            dataset_path = "datasets/unoc/test_processed_cut/"
+        else:
+            print(f"Error: Unknown dataset '{args.dataset}'. Supported datasets are: 'lafan1', 'pfnn', 'unoc'.", file=sys.stderr)
+            exit(1)
+
         dataset = BvhDataset(
-            "datasets/lafan1/test_processed/",
+            dataset_path,
             window=WINDOW_SIZE,
             step=window_step,
             device=DEVICE,

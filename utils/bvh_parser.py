@@ -137,15 +137,17 @@ def parse_all_bvh_to_npz(bvh_dir, npz_dir, mode: Literal["all", "train", "test"]
     for fname in os.listdir(bvh_dir):
         if not fname.lower().endswith('.bvh'):
             continue
-        try:
-            subject_id = int(fname.split('.')[0].split('_')[-1][-1])
-        except ValueError:
-            print(f"Warning: cannot determine subject ID from filename '{fname}', skipping.")
-            continue
-        if mode == "train" and subject_id == 5:
-            continue
-        if mode == "test" and subject_id != 5:
-            continue
+
+        if mode != "all":
+            try:
+                subject_id = int(fname.split('.')[0].split('_')[-1][-1])
+            except ValueError:
+                print(f"Warning: cannot determine subject ID from filename '{fname}', skipping.")
+                continue
+            if mode == "train" and subject_id == 5:
+                continue
+            if mode == "test" and subject_id != 5:
+                continue
 
         in_bvh_path = os.path.join(bvh_dir, fname)
 

@@ -17,7 +17,13 @@ import datetime
 import time
 
 
-def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', **subset_kwargs):
+def train(
+    params: dict, 
+    full_log: bool = False, 
+    dataset_path: str = "datasets/lafan1/processed/", 
+    data_subset_type: str = 'all', 
+    **subset_kwargs
+):
     CONFIG_NAME = params["config_name"]
 
     CONTEXT_FRAMES = params["context_frames"]
@@ -73,7 +79,7 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
         file.write(f'Starting training with config: {CONFIG_NAME} at {datetime.datetime.now()}\n')
 
     dataset = BvhDataset(
-        "datasets/lafan1/processed/",
+        dataset_path,
         window=WINDOW_SIZE,
         step=WINDOW_STEP,
         # device=DEVICE,
@@ -244,9 +250,6 @@ def train(params: dict, full_log: bool = False, data_subset_type: str = 'all', *
                 LOSS_WEIGHTS["pos"] * loss_pos + 
                 LOSS_WEIGHTS["fk"] * fk_loss +
                 LOSS_WEIGHTS.get("smoothness", 0.0) * smoothness_loss
-
-                # LOSS_WEIGHTS["pos_vel_bnd"] * pos_vel_bnd_loss +
-                # LOSS_WEIGHTS["fk_vel_bnd"] * fk_vel_bnd_loss
             )
             train_loss_coponents = {
                 "loss_rot": loss_rot.item(),
@@ -459,6 +462,7 @@ if __name__ == "__main__":
         '--name_suffix', type=str, default=None, 
         help='Output name suffix, which will be added at the end of the name of output files (default: None - no additional suffix)'
     )
+    parser.add_argument('--dataset', type=str, default='lafan1', help='Used dataset for training (default: lafan1)')
     # parser.add_argument('--data_subset_type', type=str, default='all', help='Subset of data to use for training (e.g., "all", "selected-moves", etc.)')
     args = parser.parse_args()
 
@@ -493,4 +497,17 @@ if __name__ == "__main__":
     if not args.full_log:
         show_warning("Full logging is disabled! This means that detailed loss components and learning rate information will not be logged. Enable full logging with the --full_log flag for more insights during training.")
 
-    train(params, full_log=args.full_log, data_subset_type=data_subset_type)
+    # Generate dataset path:
+    if args.dataset == 'lafan1':
+        dataset_path = "datasets/lafan1/processed/"
+    elif args.dataset == 'pfnn':
+        dataset_path = "datasets/pfnn/processed/"
+    elif args.dataset == 'unoc':
+        dataset_path = "datasets/unoc/processed/"
+    elif args.dataset == 'unoc-cut':
+        dataset_path = "datasets/unoc/processed_cut/"
+    else:
+        print(f"Error: Unknown dataset '{args.dataset}'. Supported datasets are: 'lafan1', 'pfnn', 'unoc'.")
+        exit(1)
+
+    train(params, full_log=args.full_log, dataset_path=dataset_path, data_subset_type=data_subset_type)
